@@ -1,3 +1,3 @@
 enum _COLOR_PAIRS {
-    CP_DIRT=1
+    CP_TILE_DIRT=1
 };

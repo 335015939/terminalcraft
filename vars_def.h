@@ -1,3 +1,3 @@
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
-    {CP_DIRT,4,6}
+    {CP_TILE_DIRT,0x5e,0x5e}
 };
