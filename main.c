@@ -3,7 +3,9 @@
 
 int main(){
   myinit();
-  attron(COLOR_PAIR(CP_TILE_DIRT));
-  getch();
+  clear();
+  TILE x={'#',A_NORMAL,0,0};
+  mvdtiledata(1,1,TILES[0]);
+  wgetch(stdscr);
   endwin();
 };

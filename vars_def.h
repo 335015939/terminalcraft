@@ -1,10 +1,25 @@
 #ifndef VARS_DEF_H_INCLUDED
 #define VARS_DEF_H_INCLUDED
+#include <curses.h>
 #define VARS_H_INCLUDED
-#include "header.h"
+#include "defines.h"
+#include "structs.h"
 #include "enum.h"
 
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
-    {CP_TILE_DIRT,0x5e,0x5e}
+    {CP_TILE_DIRT,0x5e,0x5e},
+    {CP_TILE_AIR,0xff,0xff}
+};
+const TILEDATA TILES[TILE_NUM]={
+    {
+        0,1,0,0,//id,passable,minable,droppable
+        {' ',A_NORMAL,255,CP_TILE_AIR},//char,attribute,background,color pair
+        {//dropped items
+            {},//id
+            {},//low
+            {},//max
+            {}//chance
+        }
+    }
 };
 #endif
