@@ -10,6 +10,10 @@ void myinit(){
         printw("Warning:terminal recommended size:80x24 (currently %dx%d)",COLS,LINES);
     };
     if (!has_colors()){
-
-    }
+	    printw("Warning:colors not supported");
+    }else if(!can_change_color()){
+	    printw("Warning:colors may be incorrect");
+    };
+    initmycolors();
+    initmycolorpairs();
 };
