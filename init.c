@@ -6,7 +6,7 @@ void myinit(){
     start_color();
     curs_set(0);
     raw();
-    noeho();
+    noecho();
     keypad(stdscr, true);
     if(LINES<24 || COLS < 80){
         printw("Warning:terminal recommended size:80x24 (currently %dx%d)",COLS,LINES);
@@ -21,7 +21,7 @@ void myinit(){
 
 void initmycolorpairs(){
     int i;
-    for(i=0;i<(sizeof(*MY_COLOR_PAIRS)/sizeof(COLOR_PAIR_DEF));i++){
+    for(i=0;i<(sizeof(MY_COLOR_PAIRS)/sizeof(COLOR_PAIR_DEF));i++){
         init_pair(MY_COLOR_PAIRS[i].id,MY_COLOR_PAIRS[i].f,MY_COLOR_PAIRS[i].b);
     };
 

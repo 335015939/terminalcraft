@@ -1,0 +1,5 @@
+#ifndef DEFINES_H_INCLUDED
+#define DEFINES_H_INCLUDED
+#define COLOR_NUM 1
+
+#endif
