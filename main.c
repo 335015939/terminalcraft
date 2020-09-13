@@ -1,8 +1,9 @@
 #include "header.h"
+#include "vars_def.h"
 
 int main(){
   myinit();
-  getch();
   printw("123");
+  getch();
   endwin();
 };
