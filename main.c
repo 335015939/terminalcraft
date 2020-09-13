@@ -1,5 +1,8 @@
-#include <stdio.h>
+#include "header.h"
 
 int main(){
-  return 0;
+  myinit();
+  getch();
+  printw("123");
+  endwin();
 };
