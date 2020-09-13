@@ -3,7 +3,7 @@
 
 int main(){
   myinit();
-  printw("123");
+  attron(COLOR_PAIR(CP_TILE_DIRT));
   getch();
   endwin();
 };

@@ -11,7 +11,7 @@ int main(){
         mvaddch(0,i+1,s[0]);
         mvaddch(i+1,0,s[0]);
         for(j=0;j<16;j++){
-            init_pair(i+(16*j)+1,i+(16*j),i+(16*j));
+            init_pair(i+(16*j)+1,0,i+(16*j));
             attron(COLOR_PAIR(i+(16*j)+1));
             mvaddch(j+1,i+1,'#');
         };

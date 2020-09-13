@@ -10,11 +10,14 @@ void myinit(){
     keypad(stdscr, true);
     if(LINES<24 || COLS < 80){
         printw("Warning:terminal recommended size:80x24 (currently %dx%d)",COLS,LINES);
+        getch();
     };
     if (!has_colors()){
 	    printw("Warning:colors not supported");
+        getch();
     }else if(!can_change_color()){
 	    printw("Warning:colors may be incorrect");
+        getch();
     };
     initmycolorpairs();
 };
