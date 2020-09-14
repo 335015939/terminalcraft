@@ -17,7 +17,7 @@ _SETTINGS SETTINGS={
 const TILEDATA TILES[TILE_NUM]={
     {
         TILE_AIR,1,0,0,//id,passable,minable,droppable(falling down)
-        {' ',A_NORMAL,255,CP_TILE_AIR},//char,attribute,background,color pair
+        {96,A_NORMAL,0xff,CP_TILE_AIR},//char,attribute,background,color pair
         {//dropped items
             {},//id
             {},//low

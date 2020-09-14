@@ -4,6 +4,7 @@
 void myinit(){
     initscr();
     start_color();
+    init_color(0xff,0,0,0);
     curs_set(0);
     raw();
     noecho();
@@ -19,7 +20,6 @@ void myinit(){
 	    printw("Warning:colors may be incorrect");
         getch();
     };
-    init_color(0xff,0,0,0);
     initmycolorpairs();
 };
 
