@@ -19,7 +19,7 @@ void myinit(){
 	    printw("Warning:colors may be incorrect");
         getch();
     };
-    init_color(0xff,0,0,1000);
+    init_color(0xff,0,0,0);
     initmycolorpairs();
 };
 

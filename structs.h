@@ -29,4 +29,9 @@ typedef struct {
     TILE t;
     DROPITEMDATA drops;
 } TILEDATA;
+typedef struct {
+    unsigned int _MAP_H;
+    unsigned int _MAP_W;
+
+} _SETTINGS;
 #endif
