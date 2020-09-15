@@ -39,6 +39,14 @@ int main(){
             case 'D':
                 player.c.x++;
                 break;
+            case 's':
+            case 'S':
+                player.c.y++;
+                break;
+            case 'w':
+            case 'W':
+                player.c.y--;
+                break;
         };
     };
     lbl_end:
