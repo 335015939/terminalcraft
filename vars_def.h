@@ -15,7 +15,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
 const TILEDATA TILES[TILE_NUM]={
     {
         TILE_AIR,1,0,0,//id,passable,minable,droppable(falling down)
-        {96,A_NORMAL,0xff,CP_TILE_AIR},//char,attribute,background,color pair
+        {' ',A_NORMAL,0xff,CP_TILE_AIR},//char,attribute,background,color pair
         {//dropped items
             {},//id
             {},//low
