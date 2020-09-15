@@ -38,10 +38,11 @@ void init_map(){
 void initmycolorpairs(){
     int i,x;
     for(i=0;i<(sizeof(MY_COLOR_PAIRS)/sizeof(COLOR_PAIR_DEF));i++){
-        if ((x=MY_COLOR_PAIRS[i].b)==0xff){
-            x=SKYCOLOR;
-        };
-        init_pair(MY_COLOR_PAIRS[i].id,MY_COLOR_PAIRS[i].f,x);
+        if((x=MY_COLOR_PAIRS[i].b)){
+            init_pair(MY_COLOR_PAIRS[i].id,MY_COLOR_PAIRS[i].f,x);
+        }else{
+            init_pair(MY_COLOR_PAIRS[i].id,MY_COLOR_PAIRS[i].f,SKYCOLOR);
+        }
     };
 
 };

@@ -8,14 +8,15 @@
 
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
-    {CP_TILE_AIR,0xff,0xff},
+    {CP_TILE_AIR,0x0,0x0},
     {CP_TILE_STONE,0xf0,0xf0},
-    {CP_TILE_GRASS,0x2e,0xff}
+    {CP_TILE_GRASS,0x2e,0x00},
+    {CP_OLD_DEFAULT,0xfe,0xe8}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
         TILE_AIR,1,0,0,//id,passable,minable,droppable(falling down)
-        {' ',A_NORMAL,0xff,CP_TILE_AIR},//char,attribute,background,color pair
+        {' ',A_NORMAL,0x0,CP_TILE_AIR},//char,attribute,background,color pair
         {//dropped items
             {},//id
             {},//low
@@ -32,7 +33,7 @@ const TILEDATA TILES[TILE_NUM]={
         {}},
     {
         TILE_GRASS,1,1,0,
-        {'_',A_UNDERLINE,0xff,CP_TILE_GRASS},
+        {'_',A_UNDERLINE,0x0,CP_TILE_GRASS},
         {}
     }
 
