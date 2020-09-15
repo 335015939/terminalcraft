@@ -25,7 +25,7 @@ void myinit(){
 
 void init_map(MAPTILE *map){
     int i=0;
-    map=malloc_throw(MAP_W * MAP_H * sizeof(MAPTILE *));
+    map=(MAPTILE *)malloc_throw(sizeof(MAPTILE)*MAP_W*MAP_H);
 };
 
 void initmycolorpairs(){
@@ -33,8 +33,8 @@ void initmycolorpairs(){
     for(i=0;i<(sizeof(MY_COLOR_PAIRS)/sizeof(COLOR_PAIR_DEF));i++){
         if ((x=MY_COLOR_PAIRS[i].b)==0xff){
             x=SKYCOLOR;
-        }
+        };
         init_pair(MY_COLOR_PAIRS[i].id,MY_COLOR_PAIRS[i].f,x);
     };
 
-}
+};

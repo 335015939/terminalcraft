@@ -12,9 +12,6 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_STONE,0xf0,0xf0},
     {CP_TILE_GRASS,0x2e,0xff}
 };
-_SETTINGS SETTINGS={
-    3000,500,0x33
-};
 const TILEDATA TILES[TILE_NUM]={
     {
         TILE_AIR,1,0,0,//id,passable,minable,droppable(falling down)
@@ -40,5 +37,4 @@ const TILEDATA TILES[TILE_NUM]={
     }
 
 };
-MAPTILE *map=NULL;
 #endif
