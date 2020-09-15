@@ -1,6 +1,8 @@
 #include "header.h"
 #include <curses.h>
 
+
+MAPTILE *map=NULL;
 void myinit(){
     initscr();
     start_color();
@@ -25,7 +27,8 @@ void myinit(){
 
 void init_map(MAPTILE *map){
     int i=0;
-    map=(MAPTILE*)(malloc(2*(sizeof(MAPTILE) * MAP_W * MAP_H)));
+    map=(MAPTILE*)(malloc(10*(sizeof(MAPTILE) * MAP_W * MAP_H)));
+    WORLD.map=map;
 };
 
 void initmycolorpairs(){

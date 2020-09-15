@@ -1,11 +1,11 @@
 #include "header.h"
 #include "vars_def.h"
 
-MAPTILE *map=NULL;
+//MAPTILE *map=NULL;
 _SETTINGS SETTINGS={
     30,5,0x33
 };
-
+_WORLD WORLD={};
 int main(){
   myinit();
   clear();
@@ -16,8 +16,11 @@ int main(){
   getch();
   mvdtiledata(1,1,TILES[0]);
   getch();
-  mvdtiledata(0,0,TILES[map[0].id]);
   dtiledata(TILES[x[0].id]);
   getch();
+  mvdtiledata(0,0,TILES[getmapid(0,0)]);
+  
+  getch();
+  free(WORLD.map);
   endwin();
 };

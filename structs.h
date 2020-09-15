@@ -38,4 +38,8 @@ typedef struct {
     int id;
 
 } MAPTILE;
+typedef struct {
+    MAPTILE *map;
+    int time;
+} _WORLD;
 #endif

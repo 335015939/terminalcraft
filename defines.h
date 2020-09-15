@@ -6,4 +6,5 @@
 #define MAP_H (SETTINGS._MAP_H)
 #define SKYCOLOR SETTINGS.skycolor
 #define ERR_OUT_OF_MEM 3950
+#define MAP (WORLD.map)
 #endif
