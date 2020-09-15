@@ -2,8 +2,8 @@
 #include <curses.h>
 
 
-MAPTILE *map=NULL;
 void myinit(){
+    system("export TERM=xterm-256color");
     initscr();
     start_color();
     init_color(0xff,0,0,0);
@@ -22,12 +22,11 @@ void myinit(){
         getch();
     };
     initmycolorpairs();
-    init_map(map);
+    init_map();
 };
 
-void init_map(MAPTILE *map){
-    int i=0;
-    map=(MAPTILE*)(malloc(10*(sizeof(MAPTILE) * MAP_W * MAP_H)));
+void init_map(){
+    MAPTILE *map=(MAPTILE*)(malloc(10*(sizeof(MAPTILE) * MAP_W * MAP_H)));
     WORLD.map=map;
 };
 

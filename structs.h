@@ -42,4 +42,8 @@ typedef struct {
     MAPTILE *map;
     int time;
 } _WORLD;
+typedef struct{
+    int x;
+    int y;
+} COORDS;
 #endif
