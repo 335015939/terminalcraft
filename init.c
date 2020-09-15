@@ -12,8 +12,7 @@ void myinit(){
     if(LINES<24 || COLS < 80){
         printw("Warning:terminal recommended size:80x24 (currently %dx%d)",COLS,LINES);
         getch();
-    };
-    if (!has_colors()){
+    };    if (!has_colors()){
 	    printw("Warning:colors not supported");
         getch();
     }else if(!can_change_color()){
@@ -21,12 +20,21 @@ void myinit(){
         getch();
     };
     initmycolorpairs();
+    init_map(map);
+};
+
+void init_map(MAPTILE *map){
+    int i=0;
+    map=malloc_throw(MAP_W * MAP_H * sizeof(MAPTILE *));
 };
 
 void initmycolorpairs(){
-    int i;
+    int i,x;
     for(i=0;i<(sizeof(MY_COLOR_PAIRS)/sizeof(COLOR_PAIR_DEF));i++){
-        init_pair(MY_COLOR_PAIRS[i].id,MY_COLOR_PAIRS[i].f,MY_COLOR_PAIRS[i].b);
+        if ((x=MY_COLOR_PAIRS[i].b)==0xff){
+            x=SKYCOLOR;
+        }
+        init_pair(MY_COLOR_PAIRS[i].id,MY_COLOR_PAIRS[i].f,x);
     };
 
 }

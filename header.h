@@ -1,6 +1,7 @@
 #ifndef HEADER_H_INCLUDED
 #include <stdio.h>
 #include <ncurses.h>
+#include <stdlib.h>
 #define HEADER_H_INCLUDED
 
 #include "defines.h"

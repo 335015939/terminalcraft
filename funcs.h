@@ -7,4 +7,8 @@
 void myinit();
 void dtile(TILE t);
 void initmycolorpairs();
+void init_map(MAPTILE *map);
+void *malloc_throw(unsigned long size);
+int getmapid(int x,int y);
+void putmapid(int x,int y,int t);
 #endif

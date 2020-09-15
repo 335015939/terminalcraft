@@ -32,6 +32,10 @@ typedef struct {
 typedef struct {
     unsigned int _MAP_H;
     unsigned int _MAP_W;
-
+    int skycolor;
 } _SETTINGS;
+typedef struct {
+    int id;
+
+} MAPTILE;
 #endif

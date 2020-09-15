@@ -9,10 +9,11 @@
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
     {CP_TILE_AIR,0xff,0xff},
-    {CP_TILE_STONE,0xf0,0xf0}
+    {CP_TILE_STONE,0xf0,0xf0},
+    {CP_TILE_GRASS,0x2e,0xff}
 };
 _SETTINGS SETTINGS={
-    3000,500
+    3000,500,0x33
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -32,5 +33,12 @@ const TILEDATA TILES[TILE_NUM]={
         TILE_STONE,0,1,0,
         {' ',A_NORMAL,0xf0,CP_TILE_STONE},
         {}},
+    {
+        TILE_GRASS,1,1,0,
+        {'_',A_UNDERLINE,0xff,CP_TILE_GRASS},
+        {}
+    }
+
 };
+MAPTILE *map=NULL;
 #endif
