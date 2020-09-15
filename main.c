@@ -17,7 +17,7 @@ int main(){
   for(;getmapid(player.c.x,player.c.y);player.c.y++){
 
   };
-  drawmap(0,0);
+  drawmap(player.c.x-39,player.c.y-10);
   getch();
   free(WORLD.map);
   endwin();
