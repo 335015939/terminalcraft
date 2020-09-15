@@ -1,6 +1,9 @@
 #include "funcs.h"
 #include "header.h"
 
+struct {
+    int sealvl;
+} world;
 
 void mktree(){
 
@@ -18,7 +21,8 @@ COORDS genplains(COORDS c,int l){
 };
 
 void mapgen(){
-    COORDS c;
+    world.sealvl=MAP_H/4;
+    COORDS c={0,world.sealvl+(random()%10)-5};
     COORDS (*genfuncs[1])(COORDS c,int l)={genplains};
     for(c.x=0;c.x<MAP_W;c.x++){
         //c=(genfuncs[1])(c,random()%MAP_W);

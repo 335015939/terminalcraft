@@ -10,6 +10,7 @@ void drawmap(int startx,int starty){
                     dmaptile(i+startx,j+starty);
                 }else{
                     dtile(TILES[0].t);
+                    
                 };
             }else{
                 dtile(TILES[0].t);

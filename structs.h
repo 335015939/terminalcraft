@@ -46,4 +46,7 @@ typedef struct{
     int x;
     int y;
 } COORDS;
+typedef struct{
+    COORDS c;
+} PLAYER;
 #endif
