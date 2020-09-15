@@ -30,8 +30,8 @@ typedef struct {
     DROPITEMDATA drops;
 } TILEDATA;
 typedef struct {
-    unsigned int _MAP_H;
     unsigned int _MAP_W;
+    unsigned int _MAP_H;
     int skycolor;
 } _SETTINGS;
 typedef struct {

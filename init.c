@@ -4,6 +4,7 @@
 
 void myinit(){
     system("export TERM=xterm-256color");
+    srand(time(NULL));
     initscr();
     start_color();
     init_color(0xff,0,0,0);
