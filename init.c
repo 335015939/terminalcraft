@@ -25,7 +25,7 @@ void myinit(){
 
 void init_map(MAPTILE *map){
     int i=0;
-    map=(MAPTILE *)malloc_throw(sizeof(MAPTILE)*MAP_W*MAP_H);
+    map=(MAPTILE*)(malloc(2*(sizeof(MAPTILE) * MAP_W * MAP_H)));
 };
 
 void initmycolorpairs(){
