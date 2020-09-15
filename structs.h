@@ -39,7 +39,7 @@ typedef struct {
 
 } MAPTILE;
 typedef struct {
-    MAPTILE *map;
+    MAPTILE **map;
     int time;
 } _WORLD;
 typedef struct{
