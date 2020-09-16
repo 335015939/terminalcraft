@@ -7,7 +7,7 @@ struct {
 } world;
 
 void mktree(COORDS c,int type){
-    int height,trunk,leaf,i=0,j;
+    int height,trunk,leaf,i=0,j,x,y;
     switch(type){
         case TREE_OAK:
             trunk=TILE_OAK_TRUNK;
@@ -18,12 +18,24 @@ void mktree(COORDS c,int type){
     for(;i<height;i++){
         putmapid(c.x,c.y-i,trunk);
     };
-    for(j=-1;j<2;j++){
-        putmapid(c.x+j,c.y-i,leaf);
+    if(!(rand()%2)){
+        i++;
+        height ++;
     };
-    for(i=0;i<2+(rand()%3);i++){
-        for(j=-1;j<2;j++){
-            putmapid(c.x+j,c.y+i-height+1,leaf);
+    for(j=-1;j<2;j++){
+        x=c.x+j;
+        y=c.y-i;
+        if(x>0&&y>0&&x<MAP_W&&y<MAP_H){
+            if(!getmapid(x,y))putmapid(x,y,leaf);
+        };
+    };
+    for(i=1;i<2+(rand()%3);i++){
+        for(j=-2;j<3;j++){
+            x=c.x+j;
+            y=c.y+i-height;
+            if(x>0&&y>0&&x<MAP_W&&y<MAP_H){
+                if(!getmapid(x,y))putmapid(x,y,leaf);
+            };
         };
     };
 };
