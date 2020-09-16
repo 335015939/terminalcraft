@@ -55,9 +55,6 @@ int main(){
                     y--;
                     break;
             };
-            if(getmaptiledata(player.c.x, player.c.y+1).fallthrough){
-                y=1;
-            };
             moveplayer(x,y);
         };
         tick=TICK;
