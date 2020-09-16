@@ -16,14 +16,14 @@ void mktree(COORDS c,int type){
             break;
     };
     for(;i<height;i++){
-        putmapid(c.x,c.y+i,trunk);
+        putmapid(c.x,c.y-i,trunk);
     };
     for(j=-1;j<2;j++){
-        putmapid(c.x+j,c.y+i,trunk);
+        putmapid(c.x+j,c.y-i,leaf);
     };
-    for(i=0;i<2;i++){
+    for(i=0;i<2+(rand()%3);i++){
         for(j=-1;j<2;j++){
-            putmapid(c.x+j,c.y+i,trunk);
+            putmapid(c.x+j,c.y+i-height+1,leaf);
         };
     };
 };
@@ -72,6 +72,9 @@ COORDS genhills(COORDS c,int l){
             break;
         };
         putmapid(c.x, c.y, TILE_GRASS);
+        if(!(rand()%8)){
+            mktree(c,TREE_OAK);
+        };
         mkunder(c,5+(rand()%4));
         if (!(rand()%2)){
             if(direction){
