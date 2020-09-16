@@ -1,3 +1,4 @@
+#include "enum.h"
 #include "funcs.h"
 #include "header.h"
 
@@ -6,8 +7,25 @@ struct {
 } world;
 
 void mktree(COORDS c,int type){
-    int height,trunk,leaf;
-    switch(type)
+    int height,trunk,leaf,i=0,j;
+    switch(type){
+        case TREE_OAK:
+            trunk=TILE_OAK_TRUNK;
+            leaf=TILE_OAK_LEAF;
+            height=5+(rand()%5);
+            break;
+    };
+    for(;i<height;i++){
+        putmapid(c.x,c.y+i,trunk);
+    };
+    for(j=-1;j<2;j++){
+        putmapid(c.x+j,c.y+i,trunk);
+    };
+    for(i=0;i<2;i++){
+        for(j=-1;j<2;j++){
+            putmapid(c.x+j,c.y+i,trunk);
+        };
+    };
 };
 
 void mkunder(COORDS c,int dirt_len){
