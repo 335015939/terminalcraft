@@ -28,6 +28,7 @@ typedef struct {
     char droppable;
     TILE t;
     DROPITEMDATA drops;
+    char *name;
 } TILEDATA;
 typedef struct {
     unsigned int _MAP_W;

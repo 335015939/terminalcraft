@@ -19,7 +19,7 @@ int main(){
     for(;;){
         drawmap(player.c.x-38,player.c.y-10);
         attr_set(A_NORMAL,0,NULL);
-        mvprintw(0,0,"x:%d y:%d",player.c.x,player.c.y);
+        mvprintw(0,0,"x:%d y:%d  \n\r%s       ",player.c.x,player.c.y,TILES[getmapid(player.c.x,player.c.y)].name);
         if ((x=TILES[getmapid(player.c.x,player.c.y)].t.b)){
             init_pair(CP_PLAYER,0,x);
         }else{
@@ -33,19 +33,19 @@ int main(){
                 goto lbl_end;
             case 'a':
             case 'A':
-                player.c.x--;
+                if(player.c.x>0)player.c.x--;
                 break;
             case 'd':
             case 'D':
-                player.c.x++;
+                if(player.c.x<(MAP_W-1)) player.c.x++;
                 break;
             case 's':
             case 'S':
-                player.c.y++;
+                if(player.c.y<(MAP_H-1))player.c.y++;
                 break;
             case 'w':
             case 'W':
-                player.c.y--;
+                if(player.c.y>0)player.c.y--;
                 break;
         };
     };
