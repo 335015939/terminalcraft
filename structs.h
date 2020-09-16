@@ -26,6 +26,7 @@ typedef struct {
     char passable;
     char minable;
     char droppable;
+    char fallthrough;
     TILE t;
     DROPITEMDATA drops;
     char *name;

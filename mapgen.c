@@ -6,7 +6,8 @@ struct {
 } world;
 
 void mktree(COORDS c,int type){
-
+    int height,trunk,leaf;
+    switch(type)
 };
 
 void mkunder(COORDS c,int dirt_len){

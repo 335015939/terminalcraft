@@ -13,9 +13,11 @@ int main(){
     myinit();
     clear();
     mapgen();
-    putmapid(1500,200,TILE_STONE);
     player.c.x=MAP_W/2;
     for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
+
+    putmapid(player.c.x,player.c.y,TILE_OAK_TRUNK);
+
     for(;;){
         drawmap(player.c.x-38,player.c.y-10);
         attr_set(A_NORMAL,0,NULL);
