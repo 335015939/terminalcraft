@@ -41,12 +41,12 @@ const TILEDATA TILES[TILE_NUM]={
         {},
         "Grass"},
     {
-        TILE_OAK_LEAF,1,1,0,0,
+        TILE_OAK_LEAF,1,1,0,1,
         {'#',A_BOLD,0x22,CP_TILE_OAK_LEAF},
         {},
         "Oak leaves"},
     {
-        TILE_OAK_TRUNK,0,1,0,0,
+        TILE_OAK_TRUNK,1,1,0,0,
         {'|',A_BOLD,0x3a,CP_TILE_OAK_TRUNK},
         {},
         "Oak tree trunk"}

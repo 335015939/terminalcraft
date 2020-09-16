@@ -10,3 +10,12 @@ void *malloc_throw(size_t size){
     };
     return p;
 };
+void moveplayer(int x,int y){
+    if(isinmap(x+player.c.x,y+player.c.y) && (x || y)){
+        if(getmaptiledata(x+player.c.x,y+player.c.y).passable){
+            player.c.x+=x;
+            player.c.y+=y;
+            TICK++;
+        };
+    };
+};
