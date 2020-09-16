@@ -1,3 +1,4 @@
+#include "funcs.h"
 #include "header.h"
 
 void *malloc_throw(size_t size){
@@ -10,7 +11,15 @@ void *malloc_throw(size_t size){
     };
     return p;
 };
+void fall(){
+    if(isinmap(player.c.x,player.c.y+1)){
+        if(getmaptiledata(player.c.x,player.c.y+1).fallthrough){
+            player.c.y++;
+        };
+    };
+};
 void moveplayer(int x,int y){
+    if(!x){fall();}
     if(isinmap(x+player.c.x,y+player.c.y) && (x || y)){
         if(getmaptiledata(x+player.c.x,y+player.c.y).passable){
             player.c.x+=x;
@@ -18,4 +27,5 @@ void moveplayer(int x,int y){
             TICK++;
         };
     };
+    if(x){fall();};
 };
