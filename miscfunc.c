@@ -1,5 +1,6 @@
 #include "funcs.h"
 #include "header.h"
+#include <curses.h>
 
 void *malloc_throw(size_t size){
     void *p=malloc(size);
@@ -11,19 +12,19 @@ void *malloc_throw(size_t size){
     };
     return p;
 };
-void drawfacing(){
+int facing(){
     //attr_set(A_NORMAL,0,NULL);
     move(0,79);
     if(player.facingx==1){
-        addch('>');
+        return '>';
     }else if(player.facingx==-1){
-        addch('<');
+        return '<';
     }else if(player.facingy==1){
-        addch('V');
+        return 'V';
     }else if(player.facingy==-1){
-        addch('^');
+        return '^';
     }else{
-        addch(ACS_SSSS);
+        return ACS_SSSS;
     };
 }
 char fall(){
@@ -38,12 +39,14 @@ char fall(){
 void mineblock(){
     int k,x=player.facingx+player.c.x,y=player.facingy+player.c.y;
     if(!isinmap(x, y)) return;
+    if(fall()) return;
     TILEDATA t=getmaptiledata(x,y);
     attr_set(A_NORMAL,0,NULL);
     for(;;){
         if (!getmapid(x,y)) break;
         mvprintw(2,0,"Mining block...");
         putmapid(x, y, 0);
+        TICK++;
         getch();
         };
     mvprintw(2,0,"                   ");

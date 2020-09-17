@@ -23,8 +23,7 @@ int main(){
     for(;;){
         drawmap(player.c.x-38,player.c.y-10);
         attr_set(A_NORMAL,0,NULL);
-        drawfacing();
-        mvprintw(0,0,"x:%d y:%d tick:%d   \n\r%s          ",player.c.x,player.c.y,TICK,TILES[getmapid(player.c.x,player.c.y)].name);
+        mvprintw(0,0,"x:%d y:%d tick:%d %c   \n\r%s          ",player.c.x,player.c.y,TICK,facing(),TILES[getmapid(player.c.x,player.c.y)].name);
         
         while (TICK==tick){  
             x=y=0;
