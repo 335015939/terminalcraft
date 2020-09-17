@@ -17,5 +17,6 @@ void init_map();
 void *malloc_throw(unsigned long size);
 void mapgen();
 void drawmap(int x,int y);
+void drawfacing();
 void moveplayer(int x,int y);
 #endif

@@ -23,6 +23,7 @@ int main(){
     for(;;){
         drawmap(player.c.x-38,player.c.y-10);
         attr_set(A_NORMAL,0,NULL);
+        drawfacing();
         mvprintw(0,0,"x:%d y:%d tick:%d   \n\r%s          ",player.c.x,player.c.y,TICK,TILES[getmapid(player.c.x,player.c.y)].name);
         if ((x=TILES[getmapid(player.c.x,player.c.y)].t.b)){
             init_pair(CP_PLAYER,0,x);
@@ -39,20 +40,28 @@ int main(){
                 case 'q':
                     goto lbl_end;
                 case 'a':
-                case 'A':
                     x--;
+                case 'A':
+                    player.facingx=-1;
+                    player.facingy=0;
                     break;
                 case 'd':
-                case 'D':
                     x++;
+                case 'D':
+                    player.facingy=0;
+                    player.facingx=1;
                     break;
                 case 's':
-                case 'S':
                     y++;
+                case 'S':
+                    player.facingy=1;
+                    player.facingx=0;
                     break;
                 case 'w':
-                case 'W':
                     y--;
+                case 'W':
+                    player.facingy=-1;
+                    player.facingx=0;
                     break;
             };
             moveplayer(x,y);

@@ -50,5 +50,7 @@ typedef struct{
 } COORDS;
 typedef struct{
     COORDS c;
+    char facingx;
+    char facingy;
 } PLAYER;
 #endif
