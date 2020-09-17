@@ -13,7 +13,7 @@ void *malloc_throw(size_t size){
 };
 void drawfacing(){
     //attr_set(A_NORMAL,0,NULL);
-    move(2,0);
+    move(0,79);
     if(player.facingx==1){
         addch('>');
     }else if(player.facingx==-1){
@@ -26,11 +26,21 @@ void drawfacing(){
         addch(ACS_SSSS);
     };
 }
-void fall(){
+char fall(){
     if(isinmap(player.c.x,player.c.y+1)){
         if(getmaptiledata(player.c.x,player.c.y+1).fallthrough){
             player.c.y++;
+            return 1;
         };
+    };
+    return 0;
+};
+void mineblock(){
+    int k,x=player.facingx+player.c.x,y=player.facingy+player.c.y;
+    if(!isinmap(x, y)) return;
+    TILEDATA t=getmaptiledata(x,y);
+    for(;;){
+        
     };
 };
 void moveplayer(int x,int y){

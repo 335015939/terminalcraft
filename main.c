@@ -63,6 +63,13 @@ int main(){
                     player.facingy=-1;
                     player.facingx=0;
                     break;
+                case ' ':
+                    player.facingx=player.facingy=0;
+                    break;
+                case 'j':
+                case 'J':
+                    mineblock();
+                    break;
             };
             moveplayer(x,y);
         };
