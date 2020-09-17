@@ -12,7 +12,7 @@ void *malloc_throw(size_t size){
     };
     return p;
 };
-int facing(){
+unsigned int facing(){
     //attr_set(A_NORMAL,0,NULL);
     move(0,79);
     if(player.facingx==1){
@@ -47,13 +47,13 @@ void mineblock(){
         mvprintw(2,0,"Mining block...");
         putmapid(x, y, 0);
         TICK++;
-        getch();
-        };
+        k=getch();
+    };
     mvprintw(2,0,"                   ");
     drawmap(player.c.x-38,player.c.y-10);
 };
 void moveplayer(int x,int y){
-    if(!x){fall();};
+    if(y==-1){fall();};
     if(isinmap(x+player.c.x,y+player.c.y) && (x || y)){
         if(getmaptiledata(x+player.c.x,y+player.c.y).passable){
             player.c.x+=x;
@@ -61,5 +61,5 @@ void moveplayer(int x,int y){
             TICK++;
         };
     };
-    if(x){fall();};
+    if(y!=-1){fall();};
 };

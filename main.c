@@ -2,6 +2,7 @@
 #include "funcs.h"
 #include "header.h"
 #include "vars_def.h"
+#include <curses.h>
 
 //MAPTILE *map=NULL;
 _SETTINGS SETTINGS={
@@ -23,8 +24,7 @@ int main(){
     for(;;){
         drawmap(player.c.x-38,player.c.y-10);
         attr_set(A_NORMAL,0,NULL);
-        mvprintw(0,0,"x:%d y:%d tick:%d %c   \n\r%s          ",player.c.x,player.c.y,TICK,facing(),TILES[getmapid(player.c.x,player.c.y)].name);
-        
+        mvprintw(0,0,"x:%d y:%d tick:%d %c   \n\r%s          ",player.c.x,player.c.y,TICK,facing(),getmaptiledata(player.c.x, player.c.y).name);
         while (TICK==tick){  
             x=y=0;
             k=getch();

@@ -18,7 +18,7 @@ void init_map();
 void *malloc_throw(unsigned long size);
 void mapgen();
 void drawmap(int x,int y);
-int facing();
+unsigned int facing();
 void mineblock();
 void moveplayer(int x,int y);
 #endif

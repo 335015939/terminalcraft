@@ -12,7 +12,8 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_STONE,0xf0,0xf0},
     {CP_TILE_GRASS,0x2e,0x00},
     {CP_TILE_OAK_LEAF,0x22,0x2e},
-    {CP_TILE_OAK_TRUNK,0x5e,0x3a}
+    {CP_TILE_OAK_TRUNK,0x5e,0x3a},
+    
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -53,7 +54,12 @@ const TILEDATA TILES[TILE_NUM]={
 
 };
 const ITEMDATA ITEMS[ITEMNUM]={
-    0,0,//id,maxstack
-    {' '}//char,attribute,background,color pair
+    {
+        ITEM_NONE,0,//id,maxstack
+        {' ',0x0,CP_ITEM_NONE}},//char,attribute,background,color pair
+    {
+        ITEM_DIRT,999,
+        {164,0x0,CP_ITEM_DIRT}
+    }
 };
 #endif
