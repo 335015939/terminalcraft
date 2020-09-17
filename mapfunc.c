@@ -18,4 +18,11 @@ void drawmap(int startx,int starty){
         };
         addch('\n');
     };
+    if ((x=TILES[getmapid(player.c.x,player.c.y)].t.b)){
+        init_pair(CP_PLAYER,0,x);
+    }else{
+        init_pair(CP_PLAYER,0,SKYCOLOR);
+    };
+    attr_set(A_NORMAL,CP_PLAYER,NULL);
+    mvaddch(13,38,'@');
 };

@@ -39,9 +39,15 @@ void mineblock(){
     int k,x=player.facingx+player.c.x,y=player.facingy+player.c.y;
     if(!isinmap(x, y)) return;
     TILEDATA t=getmaptiledata(x,y);
+    attr_set(A_NORMAL,0,NULL);
     for(;;){
-        
-    };
+        if (!getmapid(x,y)) break;
+        mvprintw(2,0,"Mining block...");
+        putmapid(x, y, 0);
+        getch();
+        };
+    mvprintw(2,0,"                   ");
+    drawmap(player.c.x-38,player.c.y-10);
 };
 void moveplayer(int x,int y){
     if(!x){fall();};

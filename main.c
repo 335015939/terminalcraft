@@ -25,13 +25,7 @@ int main(){
         attr_set(A_NORMAL,0,NULL);
         drawfacing();
         mvprintw(0,0,"x:%d y:%d tick:%d   \n\r%s          ",player.c.x,player.c.y,TICK,TILES[getmapid(player.c.x,player.c.y)].name);
-        if ((x=TILES[getmapid(player.c.x,player.c.y)].t.b)){
-            init_pair(CP_PLAYER,0,x);
-        }else{
-            init_pair(CP_PLAYER,0,SKYCOLOR);
-        };
-        attr_set(A_NORMAL,CP_PLAYER,NULL);
-        mvaddch(13,38,'@');
+        
         while (TICK==tick){  
             x=y=0;
             k=getch();
