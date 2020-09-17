@@ -52,4 +52,8 @@ const TILEDATA TILES[TILE_NUM]={
         "Oak tree trunk"}
 
 };
+const ITEMDATA ITEMS[ITEMNUM]={
+    0,0,//id,maxstack
+    {' '}//char,attribute,background,color pair
+};
 #endif

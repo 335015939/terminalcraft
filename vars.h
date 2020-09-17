@@ -8,4 +8,5 @@ extern _SETTINGS SETTINGS;
 extern _WORLD WORLD;
 extern int TICK;
 extern PLAYER player;
+extern const ITEMDATA ITEMS[ITEMNUM];
 #endif

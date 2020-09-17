@@ -8,7 +8,7 @@ _SETTINGS SETTINGS={
     3000,500,0x33
 };
 int TICK=0;
-PLAYER player={{}};
+PLAYER player={};
 _WORLD WORLD={};
 int main(){
     int x,k,y,tick;

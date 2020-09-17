@@ -52,5 +52,11 @@ typedef struct{
     COORDS c;
     char facingx;
     char facingy;
+    ITEM i[10][10];
 } PLAYER;
+typedef struct {
+    int id;
+    int maxstack;
+    TILE t;
+}ITEMDATA;
 #endif

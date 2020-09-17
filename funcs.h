@@ -11,6 +11,7 @@
 #define getmaptiledata(x,y) (TILES[WORLD.map[(x)][(y)].id])
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
 void myinit();
+void inventory();
 void dtile(TILE t);
 void initmycolorpairs();
 void init_map();
