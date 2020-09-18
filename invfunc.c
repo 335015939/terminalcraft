@@ -3,9 +3,8 @@
 void drawitem(ITEMDATA i){
     dtile(i.t);
 };
-void inventory(){
-    int k,i,j;
-    static COORDS c;
+void drawinv(COORDS c){
+    int i,j;
     clear();
     attr_set(A_BOLD,0,NULL);
     addstr("Inventory\n");
@@ -24,13 +23,36 @@ void inventory(){
     for(i=0;i<12;i++){
         addch('-');
     };
+    attr_set(A_REVERSE,ITEMS[player.i[i][j].id].t.cp,NULL);
+    mvaddch(c.y+2,c.x+1,ITEMS[player.i[i][j].id].t.c);
+};
+void inventory(){
+    int k,i,j;
+    static COORDS c;
     do{
+        drawinv(c);
         k=getch();
         switch(k){
             case 'a':
             case 'A':
             case KEY_LEFT:
-            break;
+                c.x--;
+                break;
+            case 'd':
+            case 'D':
+            case KEY_RIGHT:
+                c.x++;
+                break;
+            case 'w':
+            case 'W':
+            case KEY_UP:
+                c.y--;
+                break;
+            case 'S':
+            case 's':
+            case KEY_DOWN:
+                c.y++;
+                break;
         };
     }while((k!='q')&&(k!='Q'));
     clear();
