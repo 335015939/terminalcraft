@@ -16,12 +16,13 @@ char invadditem(ITEM item){
     if(!freespace) return 0;
     for(j=0;j<10;j++){
         for(i=0;i<10;i++){
-            if (getinvitem(i,j).id){
+            if (!getinvitem(i,j).id){
                 player.i[i][j]=item;
+                return 1;
             };
         };
     };
-    return 1;
+    return 0;
 };
 void drawitem(ITEMDATA i){
     dtile(i.t);

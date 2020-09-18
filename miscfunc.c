@@ -37,17 +37,32 @@ char fall(){
     return 0;
 };
 void mineblock(){
-    int x=player.facingx+player.c.x,y=player.facingy+player.c.y;
+    ITEM item;
+    int x=player.facingx+player.c.x,y=player.facingy+player.c.y,z;
     if(!isinmap(x, y)) return;
     if(fall()) return;
-    //TILEDATA t=getmaptiledata(x,y);
+    TILEDATA t=getmaptiledata(x,y);
     attr_set(A_NORMAL,0,NULL);
     for(;;){
         if (!getmapid(x,y)) break;
         mvprintw(2,0,"Mining block...");
-        putmapid(x, y, 0);
         TICK++;
         getch();
+        putmapid(x, y, 0);
+    };
+    
+    for(x=0;x<5;x++){
+        if(!t.drops.id[x]) break;
+        if((z=((t.drops.max[x])-(t.drops.low[x])))){
+            y=(rand()% z ) + (t.drops.low[x]);
+        }else {
+            y=t.drops.low[x];
+        }
+        if((rand()%100)<=t.drops.chance[x]){
+            item.id=t.drops.id[x];
+            item.num=y;
+            invadditem(item);
+        };
     };
     mvprintw(2,0,"                   ");
     drawmap(player.c.x-38,player.c.y-10);

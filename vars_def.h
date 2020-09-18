@@ -30,7 +30,12 @@ const TILEDATA TILES[TILE_NUM]={
     {
         TILE_DIRT,0,1,0,0,
         {' ',A_NORMAL,0x5e,CP_TILE_DIRT},
-        {},
+        {
+            {ITEM_DIRT,},
+            {1},
+            {1},
+            {100}
+        },
         "Dirt"},
     {
         TILE_STONE,0,1,0,0,
