@@ -23,12 +23,14 @@ void drawinv(COORDS c){
     for(i=0;i<12;i++){
         addch('-');
     };
+    printw("\n%s",ITEMS[player.i[c.x][c.y].id].name);
     attr_set(A_REVERSE,ITEMS[player.i[i][j].id].t.cp,NULL);
-    mvaddch(c.y+2,c.x+1,ITEMS[player.i[i][j].id].t.c);
+    mvaddch(c.y+2,c.x+1,ITEMS[player.i[c.x][c.y].id].t.c);
+
 };
 void inventory(){
     int k,i,j;
-    static COORDS c;
+    static COORDS c={};
     do{
         drawinv(c);
         k=getch();
@@ -54,6 +56,8 @@ void inventory(){
                 c.y++;
                 break;
         };
+        c.x+=(c.x<0)-(c.x>9);
+        c.y+=(c.y<0)-(c.y>9);
     }while((k!='q')&&(k!='Q'));
     clear();
 };
