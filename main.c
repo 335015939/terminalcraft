@@ -20,7 +20,7 @@ int main(){
     for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
 
     //putmapid(player.c.x,player.c.y,TILE_OAK_TRUNK);
-    player.i[0][0].id=TILE_DIRT;
+    player.i[9][0].id=TILE_DIRT;
     for(;;){
         
         while (TICK==tick){  
