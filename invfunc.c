@@ -5,6 +5,7 @@ void drawitem(ITEMDATA i){
 };
 void inventory(){
     int k,i,j;
+    static COORDS c;
     clear();
     attr_set(A_BOLD,0,NULL);
     addstr("Inventory\n");
@@ -25,6 +26,12 @@ void inventory(){
     };
     do{
         k=getch();
+        switch(k){
+            case 'a':
+            case 'A':
+            case KEY_LEFT:
+            break;
+        };
     }while((k!='q')&&(k!='Q'));
     clear();
 };

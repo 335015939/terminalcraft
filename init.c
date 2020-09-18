@@ -9,6 +9,7 @@ void myinit(){
     start_color();
     init_color(0xff,0,0,0);
     curs_set(0);
+    keypad(stdscr,TRUE);
     raw();
     noecho();
     keypad(stdscr, true);
