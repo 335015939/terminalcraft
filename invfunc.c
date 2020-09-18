@@ -1,5 +1,28 @@
 #include "header.h"
 #include <curses.h>
+char invadditem(ITEM item){
+    int j=0,i;
+    unsigned char freespace=0;
+    for(;j<10;j++){
+        for(i=0;i<10;i++){
+            if (!getinvitem(i,j).id){
+                freespace++;
+            }else if(getinvitem(i,j).id==item.id){
+                player.i[i][j].num+=item.num;
+                return 1;
+            };
+        };
+    };
+    if(!freespace) return 0;
+    for(j=0;j<10;j++){
+        for(i=0;i<10;i++){
+            if (getinvitem(i,j).id){
+                player.i[i][j]=item;
+            };
+        };
+    };
+    return 1;
+};
 void drawitem(ITEMDATA i){
     dtile(i.t);
 };

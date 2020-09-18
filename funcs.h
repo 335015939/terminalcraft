@@ -10,6 +10,7 @@
 #define putmapid(x,y,z) (WORLD.map[(x)][(y)].id=(z))
 #define getmaptiledata(x,y) (TILES[WORLD.map[(x)][(y)].id])
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
+#define getinvitem(x,y) (player.i[(x)][(y)])
 void myinit();
 void inventory();
 void dtile(TILE t);
@@ -20,5 +21,6 @@ void mapgen();
 void drawmap(int x,int y);
 unsigned int facing();
 void mineblock();
+char invadditem(ITEM item);
 void moveplayer(int x,int y);
 #endif

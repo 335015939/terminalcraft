@@ -19,8 +19,11 @@ int main(){
     player.c.x=MAP_W/2;
     for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
 
-    //putmapid(player.c.x,player.c.y,TILE_OAK_TRUNK);
-    player.i[9][0].id=TILE_DIRT;
+
+ITEM temp={ITEM_DIRT,99};
+invadditem(temp);
+
+
     for(;;){
         
         while (TICK==tick){  
