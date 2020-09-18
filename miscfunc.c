@@ -24,12 +24,12 @@ unsigned int facing(){
     }else if(player.facingy==-1){
         return '^';
     }else{
-        return ACS_SSSS;
+        return '+';
     };
 }
 char fall(){
     if(isinmap(player.c.x,player.c.y+1)){
-        if(getmaptiledata(player.c.x,player.c.y+1).fallthrough){
+        if(getmaptiledata(player.c.x,player.c.y+1).fallthrough && getmaptiledata(player.c.x,player.c.y).fallthrough){
             player.c.y++;
             return 1;
         };
@@ -58,8 +58,7 @@ void moveplayer(int x,int y){
         if(getmaptiledata(x+player.c.x,y+player.c.y).passable){
             player.c.x+=x;
             player.c.y+=y;
-            TICK++;
-        };
-    };
+        }else TICK--;
+    }else TICK --;
     if(y!=-1){fall();};
 };

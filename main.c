@@ -23,9 +23,10 @@ int main(){
 
     for(;;){
         drawmap(player.c.x-38,player.c.y-10);
-        attr_set(A_NORMAL,0,NULL);
-        mvprintw(0,0,"x:%d y:%d tick:%d %c   \n\r%s          ",player.c.x,player.c.y,TICK,facing(),getmaptiledata(player.c.x, player.c.y).name);
         while (TICK==tick){  
+            attr_set(A_NORMAL,0,NULL);
+            mvprintw(0,0,"x:%d y:%d tick:%d %c   \n\r%s          ",
+            player.c.x,player.c.y,TICK,facing(),getmaptiledata(player.c.x, player.c.y).name);
             x=y=0;
             k=getch();
             switch(k){
@@ -33,6 +34,7 @@ int main(){
                 case 'q':
                     goto lbl_end;
                 case 'a':
+                    TICK++;
                     x--;
                 case 'A':
                     player.facingx=-1;
@@ -40,18 +42,21 @@ int main(){
                     break;
                 case 'd':
                     x++;
+                    TICK++;
                 case 'D':
                     player.facingy=0;
                     player.facingx=1;
                     break;
                 case 's':
                     y++;
+                    TICK++;
                 case 'S':
                     player.facingy=1;
                     player.facingx=0;
                     break;
                 case 'w':
                     y--;
+                    TICK++;
                 case 'W':
                     player.facingy=-1;
                     player.facingx=0;
@@ -63,9 +68,13 @@ int main(){
                 case 'J':
                     mineblock();
                     break;
+                case 'i':
+                case 'I':
+                    inventory();
+                    break;
             };
-            moveplayer(x,y);
         };
+        moveplayer(x,y);
         tick=TICK;
     };
     lbl_end:
