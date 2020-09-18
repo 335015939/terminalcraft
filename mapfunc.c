@@ -25,4 +25,7 @@ void drawmap(int startx,int starty){
     };
     attr_set(A_NORMAL,CP_PLAYER,NULL);
     mvaddch(13,38,'@');
+    attr_set(A_NORMAL,0,NULL);
+    mvprintw(0,0,"x:%d y:%d tick:%d %c   \n\r%s          ",
+    player.c.x,player.c.y,TICK,facing(),getmaptiledata(player.c.x, player.c.y).name);
 };

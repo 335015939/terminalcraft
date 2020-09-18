@@ -13,6 +13,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_GRASS,0x2e,0x00},
     {CP_TILE_OAK_LEAF,0x22,0x2e},
     {CP_TILE_OAK_TRUNK,0x5e,0x3a},
+    {CP_ITEM_DIRT,0x5e,0x0}
     
 };
 const TILEDATA TILES[TILE_NUM]={
@@ -56,10 +57,11 @@ const TILEDATA TILES[TILE_NUM]={
 const ITEMDATA ITEMS[ITEMNUM]={
     {
         ITEM_NONE,0,//id,maxstack
-        {' ',0x0,CP_ITEM_NONE}},//char,attribute,background,color pair
+        {' ',0x0,CP_ITEM_NONE},//char,attribute,background,color pair
+        "Nothing"},//name
     {
         ITEM_DIRT,999,
-        {164,0x0,CP_ITEM_DIRT}
-    }
+        {164,0x0,CP_ITEM_DIRT},
+        "Dirt"},
 };
 #endif

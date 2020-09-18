@@ -20,13 +20,12 @@ int main(){
     for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
 
     //putmapid(player.c.x,player.c.y,TILE_OAK_TRUNK);
-
+    player.i[0][0].id=TILE_DIRT;
     for(;;){
-        drawmap(player.c.x-38,player.c.y-10);
+        
         while (TICK==tick){  
-            attr_set(A_NORMAL,0,NULL);
-            mvprintw(0,0,"x:%d y:%d tick:%d %c   \n\r%s          ",
-            player.c.x,player.c.y,TICK,facing(),getmaptiledata(player.c.x, player.c.y).name);
+            
+            drawmap(player.c.x-38,player.c.y-10);
             x=y=0;
             k=getch();
             switch(k){

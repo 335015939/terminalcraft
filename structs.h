@@ -58,5 +58,6 @@ typedef struct {
     int id;
     int maxstack;
     TILE t;
+    char *name;
 }ITEMDATA;
 #endif
