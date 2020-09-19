@@ -78,7 +78,7 @@ void craft(){
             case 'J':
             case '\n':
                 clear();
-                if(CRAFT_RECIPIE[selected].station!=TILE_TYPE_NONE ||
+                if(CRAFT_RECIPIE[selected].station==TILE_TYPE_NONE ||
                 (CRAFT_RECIPIE[selected].station==CURRENT_STATION)){
                     if(invremovemultipleitembyid(CRAFT_RECIPIE[selected].ingredient_num,
                 CRAFT_RECIPIE[selected].ingredients)){

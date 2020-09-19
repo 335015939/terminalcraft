@@ -49,7 +49,6 @@ void myinit(){
 };
 
 void init_map(){
-    int i;
     MAPTILE *map=(MAPTILE*)(malloc_throw((sizeof(MAPTILE) * MAP_W * MAP_H)));
     WORLD.map=map;
 };
