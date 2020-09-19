@@ -60,6 +60,7 @@ int main(){
                 case ' ':
                     player.facingx=player.facingy=0;
                     saveworld();
+                    saveplayer();
                     break;
                 case 'j':
                 case 'J':

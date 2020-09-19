@@ -16,6 +16,8 @@
 void myinit();
 void inventory();
 char saveworld();
+char loadplayer();
+char saveplayer();
 char invremovemultipleitembyid(int num,const ITEM item[5]);
 char invremoveitembyid(ITEM item);
 char invitemcanberemoved(ITEM item,INV_SEARCH c);

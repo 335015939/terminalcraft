@@ -3,6 +3,61 @@
 int CHOSEN_WORLD=0;
 int CHOSEN_PLAYER=0;
 int _titlescr();
+char isplayersaved(int i){
+    char *fname=malloc_throw(26);
+    sprintf(fname,"./terminal_craft/player%d",i);
+    FILE *f=fopen(fname,"r");
+    if(f!=NULL){
+        fclose(f);
+        return 1;
+    }else{
+        return 0;
+    };
+    free(fname);
+};
+void _playprintplayer(int i){
+    if(i==10){
+        addstr("Back");
+    }else {
+        if(isplayersaved(i)){
+            printw("Player %d(Load)\n",i);
+        }else{
+            printw("Player %d(New)\n",i);
+        };
+    };
+}
+int playchooseplayer(){
+    static int p_selection=0;
+    int i;
+    clear();
+    printw("Choose Player\n\n");
+    for(;;){
+        attr_set(A_NORMAL,0,NULL);        
+        move(2,0);
+        for(i=0;i<11;i++){
+            _playprintplayer(i);
+        };
+        move(p_selection+2,0);
+        attron(A_REVERSE);
+        _playprintplayer(p_selection);
+        switch(getch()){
+            case 'j':
+            case 'J':
+            case '\n':
+                return p_selection;
+            case 's':
+            case 'S':
+            case KEY_DOWN:
+                p_selection +=(p_selection<10);
+                break;
+            case 'w':
+            case 'W':
+            case KEY_UP:
+                p_selection -=(p_selection>0);
+                break;
+            };
+    };
+};
 char isworldsaved(int i){
     char *fname=malloc_throw(25);
     sprintf(fname,"./terminal_craft/world%d",i);
@@ -57,13 +112,18 @@ int playchooseworld(){
                 break;
             };
     };
-}
+};
 int play(){
     clear();
+    if((CHOSEN_PLAYER=playchooseplayer())==10) return 0;
     if((CHOSEN_WORLD=playchooseworld())==10) return 0;
+    if(!isplayersaved(CHOSEN_PLAYER)){
+        invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
+    }else{
+        loadplayer();
+    }
     if(!isworldsaved(CHOSEN_WORLD)){
         mapgen();
-        invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
     }else {
         loadworld(CHOSEN_WORLD);
     };
