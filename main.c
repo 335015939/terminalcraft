@@ -13,6 +13,8 @@ _WORLD WORLD={NULL,6*60,3000,500};
 int main(){
     int x,k,y,tick=TICK;
     myinit();
+    lbl_start:
+    titlescr();
     clear();
     mapgen();
     player.c.x=MAP_W/2;
@@ -30,7 +32,7 @@ int main(){
             switch(k){
                 case 'Q':
                 case 'q':
-                    goto lbl_end;
+                    goto lbl_start;
                 case 'a':
                     TICK++;
                     x--;
@@ -96,7 +98,7 @@ int main(){
         moveplayer(x,y);
         tick=TICK;
     };
-    lbl_end:
+    //lbl_end:
     for(x=0;x<MAP_W;x++){
         free(MAP[x]);
     };

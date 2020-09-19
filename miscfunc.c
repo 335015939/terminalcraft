@@ -3,7 +3,6 @@
 #include "header.h"
 #include <curses.h>
 void pause(){
-    int k;
     clear();
     printw("Paused\n\nQ:quit\nJ or [ENTER]:continue");
     for(;;){

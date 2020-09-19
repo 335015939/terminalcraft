@@ -20,6 +20,7 @@ char invremoveitembyid(ITEM item);
 char invitemcanberemoved(ITEM item,INV_SEARCH c);
 void dtile(TILE t);
 void pause();
+int titlescr();
 void initmycolorpairs();
 char *tiletypetostationname(int type);
 void init_map();

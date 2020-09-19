@@ -92,7 +92,7 @@ void drawinv(COORDS c,COORDS s,char f){
     mvaddch(c.y+2,c.x+1,ITEMS[player.i[c.x][c.y].id].t.c);
     
     if(f){
-        attr_set(A_BLINK | A_REVERSE,ITEMS[player.i[s.x][s.y].id].t.cp,NULL);
+        attr_set(A_REVERSE,ITEMS[player.i[s.x][s.y].id].t.cp,NULL);
         mvaddch(s.y+2,s.x+1,ITEMS[player.i[s.x][s.y].id].t.c);
     };
 
