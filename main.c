@@ -20,8 +20,6 @@ int main(){
     for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
 
 
-ITEM temp={ITEM_DIRT,99};
-invadditem(temp);
 
 
     for(;;){
