@@ -22,7 +22,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
 };
 const TILEDATA TILES[TILE_NUM]={
     {
-        TILE_AIR,1,0,0,1,//id,passable,minable,droppable(falling down),playerwill fall through
+        TILE_AIR,1,0,0,1,1,//id,passable,minable,droppable(falling down),playerwill fall through, can be placed over
         {' ',A_NORMAL,0x0,CP_TILE_AIR},//char,attribute,background,color pair
         {//dropped items
             {},//id
@@ -32,7 +32,7 @@ const TILEDATA TILES[TILE_NUM]={
         },
         "Air"},
     {
-        TILE_DIRT,0,1,0,0,
+        TILE_DIRT,0,1,0,0,0,
         {' ',A_NORMAL,0x5e,CP_TILE_DIRT},
         {
             {ITEM_DIRT,},
@@ -42,7 +42,7 @@ const TILEDATA TILES[TILE_NUM]={
         },
         "Dirt"},
     {
-        TILE_STONE,0,1,0,0,
+        TILE_STONE,0,1,0,0,0,
         {' ',A_NORMAL,0xf0,CP_TILE_STONE},
         {
             {ITEM_STONE},
@@ -52,12 +52,12 @@ const TILEDATA TILES[TILE_NUM]={
         },
         "Stone"},
     {
-        TILE_GRASS,1,1,0,1,
+        TILE_GRASS,1,1,0,1,1,
         {'_',A_UNDERLINE,0x0,CP_TILE_GRASS},
         {},
         "Grass"},
     {
-        TILE_OAK_LEAF,1,1,0,1,
+        TILE_OAK_LEAF,1,1,0,1,1,
         {'#',A_BOLD,0x2e,CP_TILE_OAK_LEAF},
         {
             {ITEM_APPLE},
@@ -67,7 +67,7 @@ const TILEDATA TILES[TILE_NUM]={
         },
         "Oak leaves"},
     {
-        TILE_OAK_TRUNK,1,1,0,0,
+        TILE_OAK_TRUNK,1,1,0,0,0,
         {'|',A_BOLD,0x3a,CP_TILE_OAK_TRUNK},
         {
             {ITEM_OAK_WOOD},

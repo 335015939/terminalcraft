@@ -8,7 +8,7 @@ char placeblock(){
     };
     TILEDATA t=TILES[gethelditemdata().placetileid];
     if(!isinmap(x, y)) return 0;
-    if(getmapid(x, y)|| (
+    if(!getmaptiledata(x, y).placeover|| (
         x==player.c.x && y==player.c.y &&
         !t.passable
     ))return 0;

@@ -42,6 +42,7 @@ void mineblock(){
     if(!isinmap(x, y)) return;
     if(fall()) return;
     TILEDATA t=getmaptiledata(x,y);
+    if(!t.minable) return;
     attr_set(A_NORMAL,0,NULL);
     for(;;){
         if (!getmapid(x,y)) break;

@@ -3,6 +3,7 @@
 
 
 void myinit(){
+    int i;
     system("export TERM=xterm-256color");
     srand(time(NULL));
     initscr();
@@ -14,17 +15,33 @@ void myinit(){
     noecho();
     keypad(stdscr, true);
     if(LINES<24 || COLS < 80){
-        printw("Warning:terminal recommended size:80x24 (currently %dx%d)",COLS,LINES);
+        printw("Warning:terminal recommended size:80x24 (currently %dx%d)\n",COLS,LINES);
         getch();
     };    if (!has_colors()){
-	    printw("Warning:colors not supported");
+	    printw("Warning:colors not supported\n");
         getch();
     }else if(!can_change_color()){
-	    printw("Warning:colors may be incorrect");
+	    printw("Warning:colors may be incorrect\n");
         getch();
     };
     initmycolorpairs();
     init_map();
+    for(i=0;i<TILE_NUM;i++){
+        if(TILES[i].id){
+            if(TILES[i].id!=i){
+                printw("Warning:tile id mismatch(%d->%d)\n",i,TILES[i].id);
+                getch();
+            };
+        };
+    };
+    for(i=0;i<TILE_NUM;i++){
+        if(ITEMS[i].id){
+            if(ITEMS[i].id!=i){
+                printw("Warning:tile id mismatch(%d->%d)\n",i,ITEMS[i].id);
+                getch();
+            };
+        };
+    };
 };
 
 void init_map(){

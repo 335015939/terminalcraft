@@ -62,7 +62,36 @@ COORDS genplains(COORDS c,int l){
         };
         putmapid(c.x, c.y, TILE_GRASS);
         mkunder(c,5+(rand()%4));
+        if(!(rand()%32)){
+            mktree(c,TREE_OAK);
+        };
         if (!(rand()%7)){
+            if(rand()%2){
+                c.y++;
+            }else{
+                c.y--;
+            };
+            c.y+=(c.y<=(world.sealvl-2))-(c.y>=(world.sealvl+2));
+        };
+    };
+    return c;
+};
+
+COORDS genforest(COORDS c,int l){
+    int x=c.x+l;
+    if (x>MAP_W){
+        x=MAP_W;
+    };
+    for(;c.x<x;c.x++){
+        if(c.x>=MAP_W){
+            break;
+        };
+        putmapid(c.x, c.y, TILE_GRASS);
+        mkunder(c,5+(rand()%4));
+        if(!(rand()%3)){
+            mktree(c,TREE_OAK);
+        };
+        if (!(rand()%4)){
             if(rand()%2){
                 c.y++;
             }else{
@@ -84,7 +113,7 @@ COORDS genhills(COORDS c,int l){
             break;
         };
         putmapid(c.x, c.y, TILE_GRASS);
-        if(!(rand()%8)){
+        if(!(rand()%11)){
             mktree(c,TREE_OAK);
         };
         mkunder(c,5+(rand()%4));
@@ -108,8 +137,8 @@ COORDS genhills(COORDS c,int l){
 void mapgen(){
     world.sealvl=MAP_H/4;
     COORDS c={0,world.sealvl+(random()%11)-6};
-    COORDS (*genfuncs[2])(COORDS c,int l)={genplains,genhills};
+    COORDS (*genfuncs[3])(COORDS c,int l)={genplains,genhills,genforest};
     for(c.x=0;c.x<MAP_W;){
-        c=(*genfuncs[rand()%2])(c,(MAP_W/100)+(rand()%10));
+        c=(*genfuncs[rand()%3])(c,(MAP_W/50)+(rand()%10));
     };
 };
