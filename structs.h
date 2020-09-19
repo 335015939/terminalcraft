@@ -1,5 +1,6 @@
 #ifndef STRUCTS_H_INCLUDED
 #define STRUCTS_H_INCLUDED
+#include "defines.h"
 typedef struct {
     int id;
     int f;
@@ -30,6 +31,7 @@ typedef struct {
     char placeover;
     int hardlvl;
     int hardness;
+    int type;
     TILE t;
     DROPITEMDATA drops;
     char *name;
@@ -58,6 +60,7 @@ typedef struct{
     char facingy;
     ITEM i[10][10];
     int holding;
+    int recipies_found[CRAFT_RECIPIE_NUM];
 } PLAYER;
 typedef struct {
     int id;
@@ -70,4 +73,15 @@ typedef struct {
     TILE t;
     char *name;
 }ITEMDATA;
+typedef struct {
+    ITEM result;
+    int ingredient_num;
+    ITEM ingredients[5];
+    int station;
+} _CRAFT_RECIPIE;
+typedef struct {
+    int x;
+    int y;
+    char found;
+} INV_SEARCH;
 #endif

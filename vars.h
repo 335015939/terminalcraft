@@ -9,4 +9,6 @@ extern _WORLD WORLD;
 extern PLAYER player;
 extern const ITEMDATA ITEMS[ITEMNUM];
 extern const unsigned char SPIN[4];
+extern int CURRENT_STATION;
+extern const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM];
 #endif

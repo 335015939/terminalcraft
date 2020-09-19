@@ -12,10 +12,15 @@
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
 #define getinvitem(x,y) (player.i[(x)][(y)])
 #define gethelditemdata() (ITEMS[player.i[0][player.holding].id])
+#define tiledatatostationname(x) (tiledatatostationname((x).type))
 void myinit();
 void inventory();
+char invremovemultipleitembyid(int num,ITEM item[5]);
+char invremoveitembyid(ITEM item);
+char invitemcanberemoved(ITEM item,INV_SEARCH c);
 void dtile(TILE t);
 void initmycolorpairs();
+char *tiletypetostationname(int type);
 void init_map();
 void *malloc_throw(unsigned long size);
 void mapgen();
@@ -26,5 +31,8 @@ char invadditem(ITEM item);
 void moveplayer(int x,int y);
 void dhotbar();
 char placeblock();
+int max(int x,int y);
+int min(int x,int y);
 void craft();
+INV_SEARCH searchinv(int id);
 #endif

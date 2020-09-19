@@ -5,7 +5,25 @@
 #include "defines.h"
 #include "structs.h"
 #include "enum.h"
-const unsigned char SPIN[4]={'|','/','-','\''};
+const unsigned char SPIN[4]={'|','/','-','\\'};
+const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
+    {
+        {ITEM_COPPER,1},//result after crafting
+        2,//number of different items needed
+        {//list of items (less than 5)
+            {ITEM_COPPER_ORE,2},
+            {ITEM_COAL,2},
+        },
+        TILE_TYPE_FURNACE},//crafting station needed
+    {
+        {ITEM_IRON,1},
+        2,
+        {
+            {ITEM_IRON_ORE,2},
+            {ITEM_COAL,2},
+        },
+        TILE_TYPE_NONE},
+};
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
     {CP_TILE_AIR,0x0,0x0},
@@ -32,13 +50,14 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_DIAMOND_ORE,0x06,0x10},
     {CP_TILE_DIAMOND_ORE,0x06,0xf0},
     {CP_ITEM_COPPER_ORE,0x82,0x10},
-    {CP_TILE_COPPER_ORE,0x82,0xf0}
+    {CP_TILE_COPPER_ORE,0x82,0xf0},
+    {CP_ITEM_IRON,0xdf,0x10}
 
 };
 const TILEDATA TILES[TILE_NUM]={
     {
         TILE_AIR,1,0,0,1,1,//id,passable,minable,droppable(falling down),playerwill fall through, can be placed over
-        0,0,//hardness level, hardness
+        0,0,TILE_TYPE_NONE,//hardness level, hardness//tile type
         {' ',A_NORMAL,0x0,CP_TILE_AIR},//char,attribute,background,color pair
         {//dropped items
             {},//id
@@ -49,7 +68,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Air"},
     {
         TILE_DIRT,0,1,0,0,0,
-        1,3,
+        1,3,TILE_TYPE_NONE,
         {' ',A_NORMAL,0x5e,CP_TILE_DIRT},
         {
             {ITEM_DIRT,},
@@ -60,7 +79,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Dirt"},
     {
         TILE_STONE,0,1,0,0,0,
-        1,10,
+        1,10,TILE_TYPE_NONE,
         {' ',A_NORMAL,0xf0,CP_TILE_STONE},
         {
             {ITEM_STONE},
@@ -71,13 +90,13 @@ const TILEDATA TILES[TILE_NUM]={
         "Stone"},
     {
         TILE_GRASS,1,1,0,1,1,
-        1,1,
+        1,1,TILE_TYPE_NONE,
         {'_',A_UNDERLINE,0x0,CP_TILE_GRASS},
         {},
         "Grass"},
     {
         TILE_OAK_LEAF,1,1,0,1,1,
-        1,1,
+        1,1,TILE_TYPE_NONE,
         {'#',A_BOLD,0x2e,CP_TILE_OAK_LEAF},
         {
             {ITEM_APPLE},
@@ -88,7 +107,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Oak leaves"},
     {
         TILE_OAK_TRUNK,1,1,0,0,0,
-        1,4,
+        1,4,TILE_TYPE_NONE,
         {'|',A_BOLD,0x3a,CP_TILE_OAK_TRUNK},
         {
             {ITEM_OAK_WOOD},
@@ -99,19 +118,19 @@ const TILEDATA TILES[TILE_NUM]={
         "Oak tree trunk"},
     {
         TILE_PINE_TRUNK,1,1,0,0,0,
-        1,4,
+        1,4,TILE_TYPE_NONE,
         {'|',A_BOLD,0x3a,CP_TILE_PINE_TRUNK},
         {},
         "Pine tree trunk"},
     {
         TILE_PINE_LEAF,1,1,0,1,1,
-        1,1,
+        1,1,TILE_TYPE_NONE,
         {'=',A_BOLD,0x1c,CP_TILE_PINE_LEAF},
         {},
         "Pine tree needles"},
     {
         TILE_COAL_ORE,0,1,0,0,0,
-        1,12,
+        1,12,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_COAL_ORE},
         {
             {ITEM_COAL},
@@ -122,7 +141,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Coal Ore"},
     {
         TILE_IRON_ORE,0,1,0,0,0,
-        2,16,
+        2,16,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_IRON_ORE},
         {
             {ITEM_IRON_ORE},
@@ -133,7 +152,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Iron Ore"},
     {
         TILE_SILVER_ORE,0,1,0,0,0,
-        2,20,
+        2,20,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_SILVER_ORE},
         {
             {ITEM_SILVER_ORE},
@@ -144,7 +163,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Silver Ore"},
     {
         TILE_GOLD_ORE,0,1,0,0,0,
-        2,19,
+        2,19,TILE_TYPE_NONE,
         {'~',A_BOLD,0xf0,CP_TILE_GOLD_ORE},
         {
             {ITEM_GOLD_ORE},
@@ -155,7 +174,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Gold Ore"},
     {
         TILE_DIAMOND_ORE,0,1,0,0,0,
-        3,30,
+        3,30,TILE_TYPE_NONE,
         {':',A_BOLD,0xf0,CP_TILE_DIAMOND_ORE},
         {
             {ITEM_DIAMOND_ORE},
@@ -166,7 +185,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Diamond Ore"},
     {
         TILE_COPPER_ORE,0,1,0,0,0,
-        1,14,
+        1,14,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_COPPER_ORE},
         {
             {ITEM_COPPER_ORE},
@@ -204,7 +223,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
         "Stone"},
     {  
         ITEM_WOOD_PICKAXE,1,ITEM_TYPE_PICKAXE,
-        TILE_AIR,999,999,0,
+        TILE_AIR,1,1,0,
         {'T',A_BOLD,0x0,CP_ITEM_WOOD_PICKAXE},
         "Wood Pickaxe"},
     {
@@ -237,5 +256,15 @@ const ITEMDATA ITEMS[ITEMNUM]={
         TILE_COPPER_ORE,0,0,0,
         {'#',0x0,CP_ITEM_COPPER_ORE},
         "Copper Ore"},
+    {
+        ITEM_COPPER,99,ITEM_TYPE_OTHER,
+        TILE_AIR,0,0,0,
+        {'-',A_BOLD,0x0,CP_ITEM_COPPER},
+        "Copper Bar"},
+    {
+        ITEM_IRON,99,ITEM_TYPE_OTHER,
+        TILE_AIR,0,0,0,
+        {'-',A_BOLD,0x0,CP_ITEM_IRON},
+        "Iron Bar"}
 };
 #endif

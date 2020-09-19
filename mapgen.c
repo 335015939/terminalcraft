@@ -59,10 +59,12 @@ void mkunder(COORDS c,int dirt_len){
     };
     for(;c.y<MAP_H;c.y++){
         putmapid(c.x,c.y,TILE_STONE);
-        for(i=0;i<6;i++){
-            if(c.y<oremindepth[i]) continue;
-            if((rand()%1000)>orechance[i]) continue;
-            putmapid(c.x,c.y,ores[i]);
+        if(rand()%2){
+            for(i=0;i<6;i++){
+                if(c.y<oremindepth[i]) continue;
+                if((rand()%1000)>orechance[i]) continue;
+                putmapid(c.x,c.y,ores[i]);
+            };
         };
     };
 };

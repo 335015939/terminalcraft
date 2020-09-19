@@ -1,5 +1,39 @@
 #include "header.h"
+#include "structs.h"
 #include <curses.h>
+INV_SEARCH searchinv(int id){
+    int i=0,j;
+    for(;i<10;i++){
+        for(j=0;j<10;j++){
+            if(player.i[i][j].id==id){
+                return (INV_SEARCH){i,j,1};
+            };
+        };
+    };
+    return (INV_SEARCH){0,0,0};
+};
+char invitemcanberemoved(ITEM item,INV_SEARCH c){
+    if(!c.found) return 0;
+    if(player.i[c.x][c.y].num<item.num) return 0;
+    return 1;
+};
+char invremoveitembyid(ITEM item){
+    INV_SEARCH s=searchinv(item.id);
+    if(!invitemcanberemoved(item,s)) return 0;
+    player.i[s.x][s.y].num-=item.num;
+    if(player.i[s.x][s.y].num==0) player.i[s.x][s.y].id=0;
+    return 1;
+};
+char invremovemultipleitembyid(int num,ITEM item[5]){
+    int i;
+    for(i=0;i<num;i++){
+        if(!invitemcanberemoved(item[i],searchinv(item[i].id))) return 0;
+    };
+    for(i=0;i<num;i++){
+        invremoveitembyid(item[i]);
+    };
+    return 1;
+};
 char invadditem(ITEM item){
     int j,i=0,x,maxstack;
     unsigned char freespace=0;

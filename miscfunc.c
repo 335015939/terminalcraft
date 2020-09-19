@@ -1,7 +1,29 @@
+#include "enum.h"
 #include "funcs.h"
 #include "header.h"
 #include <curses.h>
-
+char *tiletypetostationname(int type){
+    switch(type){
+        case TILE_TYPE_NONE:
+            return "None";
+        case TILE_TYPE_CHEST:
+            return "Chest";
+        case TILE_TYPE_FURNACE:
+            return "Furnace";
+        case TILE_TYPE_WORKBENCH:
+            return "Workbench";
+        default:
+            return "Unknown";
+    };
+};
+int max(int x,int y){
+    if(x>y) return x;
+    return y;
+};
+int min(int x,int y){
+    if(x<y) return x;
+    return y;
+};
 void *malloc_throw(size_t size){
     void *p=malloc(size);
     if (!p){

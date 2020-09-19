@@ -1,1 +1,1 @@
-clang ./main.c ./craft.c ./init.c ./draw.c ./mapgen.c ./miscfunc.c ./mapfunc.c ./invfunc.c -o./terminalcraft -lncurses -Wall
+gcc ./main.c ./craft.c ./init.c ./draw.c ./mapgen.c ./miscfunc.c ./mapfunc.c ./invfunc.c -o./terminalcraft -lncurses -Wall
