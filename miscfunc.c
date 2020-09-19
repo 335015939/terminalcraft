@@ -4,14 +4,18 @@
 #include <curses.h>
 void pause(){
     clear();
-    printw("Paused\n\nQ:quit\nJ or [ENTER]:continue");
+    printw("Paused\n\nS:Save\nQ:quit\nJ or [ENTER]:continue");
     for(;;){
-        refresh();
+        refresh()
         switch(getch()){
             case 'q':
             case '\e':
             case 'Q':
                 exit(0);
+            case 's':
+            case 'S':
+                saveworld();
+                saveplayer();
             case 'j':
             case 'J':
             case '\n':
