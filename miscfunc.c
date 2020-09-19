@@ -6,7 +6,7 @@ void pause(){
     clear();
     printw("Paused\n\nS:Save\nQ:quit\nJ or [ENTER]:continue");
     for(;;){
-        refresh()
+        refresh();
         switch(getch()){
             case 'q':
             case '\e':
@@ -16,6 +16,7 @@ void pause(){
             case 'S':
                 saveworld();
                 saveplayer();
+                break;
             case 'j':
             case 'J':
             case '\n':
