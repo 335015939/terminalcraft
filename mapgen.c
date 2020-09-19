@@ -7,13 +7,21 @@ struct {
 } world;
 
 void mktree(COORDS c,int type){
-    int height,trunk,leaf,i=0,j,x,y;
+    int height,trunk,leaf,i=0,j,x,y,leafheight;
     switch(type){
         case TREE_OAK:
             trunk=TILE_OAK_TRUNK;
             leaf=TILE_OAK_LEAF;
-            height=5+(rand()%5);
+            height=4+(rand()%4);
+            leafheight=3+(rand()%3);
             break;
+        case TREE_PINE:
+            trunk=TILE_PINE_TRUNK;
+            leaf=TILE_PINE_LEAF;
+            height=6+(rand()%5);
+            leafheight=(height-1-(rand()%3));
+            break;
+
     };
     for(;i<height;i++){
         putmapid(c.x,c.y-i,trunk);
@@ -29,7 +37,7 @@ void mktree(COORDS c,int type){
             if(!getmapid(x,y))putmapid(x,y,leaf);
         };
     };
-    for(i=1;i<2+(rand()%3);i++){
+    for(i=1;i<leafheight;i++){
         for(j=-2;j<3;j++){
             x=c.x+j;
             y=c.y+i-height;
@@ -89,7 +97,7 @@ COORDS genforest(COORDS c,int l){
         putmapid(c.x, c.y, TILE_GRASS);
         mkunder(c,5+(rand()%4));
         if(!(rand()%3)){
-            mktree(c,TREE_OAK);
+            mktree(c,TREE_OAK+(rand()%2));
         };
         if (!(rand()%4)){
             if(rand()%2){

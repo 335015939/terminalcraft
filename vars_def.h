@@ -18,7 +18,9 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_OAK_WOOD,0x5e,0x10},
     {CP_ITEM_APPLE,0xc4,0x10},
     {CP_ITEM_STONE,0xf0,0x10},
-    {CP_ITEM_WOOD_PICKAXE,0x5e,0x10}
+    {CP_ITEM_WOOD_PICKAXE,0x5e,0x10},
+    {CP_TILE_PINE_LEAF,0x16,0x0},
+    {CP_TILE_PINE_TRUNK,0x3a,0x3a}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -75,7 +77,17 @@ const TILEDATA TILES[TILE_NUM]={
             {1},
             {100}
         },
-        "Oak tree trunk"}
+        "Oak tree trunk"},
+    {
+        TILE_PINE_TRUNK,1,1,0,0,0,
+        {'|',A_BOLD,0x3a,CP_TILE_PINE_TRUNK},
+        {},
+        "Pine tree trunk"},
+    {
+        TILE_PINE_LEAF,1,1,0,1,1,
+        {'=',A_BOLD,0x0,CP_TILE_PINE_LEAF},
+        {},
+        "Pine tree needles"},
 
 };
 const ITEMDATA ITEMS[ITEMNUM]={
