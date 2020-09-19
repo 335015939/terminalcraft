@@ -40,6 +40,7 @@ typedef struct {
     unsigned int _MAP_W;
     unsigned int _MAP_H;
     int skycolor;
+    int oldskycolor;
 } _SETTINGS;
 typedef struct {
     int id;
@@ -47,7 +48,6 @@ typedef struct {
 } MAPTILE;
 typedef struct {
     MAPTILE **map;
-    int time;
     int tick;
 } _WORLD;
 typedef struct{

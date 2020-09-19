@@ -15,7 +15,7 @@
 #define tiledatatostationname(x) (tiledatatostationname((x).type))
 void myinit();
 void inventory();
-char invremovemultipleitembyid(int num,ITEM item[5]);
+char invremovemultipleitembyid(int num,const ITEM item[5]);
 char invremoveitembyid(ITEM item);
 char invitemcanberemoved(ITEM item,INV_SEARCH c);
 void dtile(TILE t);

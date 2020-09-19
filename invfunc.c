@@ -24,7 +24,7 @@ char invremoveitembyid(ITEM item){
     if(player.i[s.x][s.y].num==0) player.i[s.x][s.y].id=0;
     return 1;
 };
-char invremovemultipleitembyid(int num,ITEM item[5]){
+char invremovemultipleitembyid(int num,const ITEM item[5]){
     int i;
     for(i=0;i<num;i++){
         if(!invitemcanberemoved(item[i],searchinv(item[i].id))) return 0;

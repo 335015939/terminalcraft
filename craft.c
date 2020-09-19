@@ -1,13 +1,17 @@
 #include "defines.h"
+#include "enum.h"
+#include "funcs.h"
 #include "header.h"
 #include "structs.h"
 #include "vars.h"
 #include <curses.h>
-int CURRENT_STATION=0;
+int CURRENT_STATION=TILE_TYPE_NONE;
 void recipiescan(){
     int i=0,j,yes;
     for(;i<CRAFT_RECIPIE_NUM;i++){
+        yes=1;
         for(j=0;j<CRAFT_RECIPIE[i].ingredient_num;j++){
+            if(!CRAFT_RECIPIE[i].ingredients[j].id) continue;
             if (searchinv(CRAFT_RECIPIE[i].ingredients[j].id).found) continue;
             yes=0;
             break;
@@ -37,7 +41,7 @@ void print_require(_CRAFT_RECIPIE r,int f){
         move(i+1,20);
         printw("Makes:%s(%d)",ITEMS[r.result.id].name,r.result.num);
         move (i+2,20);
-        printw("station:%s",tiletypetostationname(r.station));
+        printw("station:%s(at %s right now)",tiletypetostationname(r.station),tiletypetostationname(CURRENT_STATION));
     }else{
         printw("???");
         move(1,20);
@@ -61,21 +65,33 @@ void printcraft(int s,int so){
 };
 void craft(){
     clear();
-    static int selected=0;
-    int selected_onscreen=0,k;
+    static int selected=0,selected_onscreen=0;
+    int k;
     printw("scanning...");
     recipiescan();
     clear();
-    
+    CURRENT_STATION=getmaptiledata(player.c.x+player.facingx, player.c.y+player.facingy).type;
     for(;;){
         printcraft(selected,selected_onscreen);
         switch((k=getch())){
             case 'j':
             case 'J':
             case '\n':
-                if(invremovemultipleitembyid(CRAFT_RECIPIE[selected].ingredient_num,
-                CRAFT_RECIPIE[selected].ingredients));
-                invadditem(CRAFT_RECIPIE[selected].result);
+                clear();
+                if(CRAFT_RECIPIE[selected].station!=TILE_TYPE_NONE ||
+                (CRAFT_RECIPIE[selected].station==CURRENT_STATION)){
+                    if(invremovemultipleitembyid(CRAFT_RECIPIE[selected].ingredient_num,
+                CRAFT_RECIPIE[selected].ingredients)){
+                        invadditem(CRAFT_RECIPIE[selected].result);
+                        printw("Done!");
+                    }else{
+                        printw("Not enough materials!");
+                    };
+                }else{
+                    printw("Wrong station!");
+                };
+                getch();
+                break;
             case 's':
             case 'S':
             case KEY_DOWN:

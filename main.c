@@ -6,10 +6,10 @@
 
 //MAPTILE *map=NULL;
 _SETTINGS SETTINGS={
-    3000,500,0x33
+    3000,500,0x21,0x21
 };
 PLAYER player={};
-_WORLD WORLD={};
+_WORLD WORLD={NULL,6*60};
 int main(){
     int x,k,y,tick=TICK;
     myinit();

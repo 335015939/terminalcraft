@@ -23,6 +23,13 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_COAL,2},
         },
         TILE_TYPE_NONE},
+    {
+        {ITEM_WORKBENCH,1},
+        1,
+        {
+            {ITEM_WOOD,4}
+        },
+        TILE_TYPE_NONE},
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
@@ -33,7 +40,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_OAK_TRUNK,0x5e,0x3a},
     {CP_ITEM_DIRT,0x5e,0x10},
     {CP_ITEM_NONE,0x10,0x10},
-    {CP_ITEM_OAK_WOOD,0x5e,0x10},
+    {CP_ITEM_WOOD,0x5e,0x10},
     {CP_ITEM_APPLE,0xc4,0x10},
     {CP_ITEM_STONE,0xf0,0x10},
     {CP_ITEM_WOOD_PICKAXE,0x5e,0x10},
@@ -51,13 +58,16 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIAMOND_ORE,0x06,0xf0},
     {CP_ITEM_COPPER_ORE,0x82,0x10},
     {CP_TILE_COPPER_ORE,0x82,0xf0},
-    {CP_ITEM_IRON,0xdf,0x10}
+    {CP_ITEM_IRON,0xdf,0x10},
+    {CP_TILE_WORKBENCH,0x5e,0x0},
+    {CP_ITEM_WORKBENCH,0x5e,0x10},
+    {TILE_WOOD,0x5e,0x3a}
 
 };
 const TILEDATA TILES[TILE_NUM]={
     {
         TILE_AIR,1,0,0,1,1,//id,passable,minable,droppable(falling down),playerwill fall through, can be placed over
-        0,0,TILE_TYPE_NONE,//hardness level, hardness//tile type
+        0,0,TILE_TYPE_NONE,//hardness level, hardness, tile type
         {' ',A_NORMAL,0x0,CP_TILE_AIR},//char,attribute,background,color pair
         {//dropped items
             {},//id
@@ -110,7 +120,7 @@ const TILEDATA TILES[TILE_NUM]={
         1,4,TILE_TYPE_NONE,
         {'|',A_BOLD,0x3a,CP_TILE_OAK_TRUNK},
         {
-            {ITEM_OAK_WOOD},
+            {ITEM_WOOD},
             {1},
             {1},
             {100}
@@ -120,7 +130,12 @@ const TILEDATA TILES[TILE_NUM]={
         TILE_PINE_TRUNK,1,1,0,0,0,
         1,4,TILE_TYPE_NONE,
         {'|',A_BOLD,0x3a,CP_TILE_PINE_TRUNK},
-        {},
+        {
+            {ITEM_WOOD},
+            {1},
+            {1},
+            {100}
+        },
         "Pine tree trunk"},
     {
         TILE_PINE_LEAF,1,1,0,1,1,
@@ -194,6 +209,28 @@ const TILEDATA TILES[TILE_NUM]={
             {100}
         },
         "Copper Ore"},
+    {
+        TILE_WORKBENCH,1,1,0,0,0,
+        1,2,TILE_TYPE_WORKBENCH,
+        {'n',A_BOLD,0x0,CP_TILE_WORKBENCH},
+        {
+            {ITEM_WORKBENCH},
+            {1},
+            {1},
+            {100}
+        },
+        "Workbench"},
+    {
+        TILE_WOOD,0,1,0,0,0,
+        1,4,TILE_TYPE_NONE,
+        {'=',A_BOLD,0x5e,CP_TILE_WOOD},
+        {
+            {ITEM_WOOD},
+            {1},
+            {1},
+            {100}
+        },
+        "Wood block"},
 };
 const ITEMDATA ITEMS[ITEMNUM]={
     {
@@ -207,10 +244,10 @@ const ITEMDATA ITEMS[ITEMNUM]={
         {'O',A_BOLD,0x0,CP_ITEM_DIRT},
         "Dirt"},
     {
-        ITEM_OAK_WOOD,99,ITEM_TYPE_PLACABLE,
-        TILE_OAK_TRUNK,0,0,0,
-        {'=',A_BOLD,0x0,CP_ITEM_OAK_WOOD},
-        "Oak wood"},
+        ITEM_WOOD,99,ITEM_TYPE_PLACABLE,
+        TILE_WOOD,0,0,0,
+        {'=',A_BOLD,0x0,CP_ITEM_WOOD},
+        "Wood"},
     {
         ITEM_APPLE,99,ITEM_TYPE_FOOD,
         TILE_AIR,0,0,0,
@@ -265,6 +302,11 @@ const ITEMDATA ITEMS[ITEMNUM]={
         ITEM_IRON,99,ITEM_TYPE_OTHER,
         TILE_AIR,0,0,0,
         {'-',A_BOLD,0x0,CP_ITEM_IRON},
-        "Iron Bar"}
+        "Iron Bar"},
+    {
+        ITEM_WORKBENCH,9,ITEM_TYPE_PLACABLE,
+        TILE_WORKBENCH,0,0,0,
+        {'n',A_BOLD,0x0,CP_ITEM_WORKBENCH},
+        "Workbench"},
 };
 #endif
