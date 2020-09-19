@@ -16,11 +16,7 @@ int main(){
     lbl_start:
     titlescr();
     clear();
-    mapgen();
-    player.c.x=MAP_W/2;
-    for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
-
-    invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
+    
 
     for(;;){
         
