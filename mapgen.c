@@ -49,13 +49,21 @@ void mktree(COORDS c,int type){
 };
 
 void mkunder(COORDS c,int dirt_len){
-    int l=c.y+dirt_len;
+    const int ores[]={TILE_COPPER_ORE,TILE_COAL_ORE,TILE_IRON_ORE,TILE_SILVER_ORE,TILE_GOLD_ORE,TILE_DIAMOND_ORE};
+    const int oremindepth[]={0,0,world.sealvl+(75),((2*MAP_H)/5),((3*MAP_H)/5),((MAP_H*4)/5)};
+    const unsigned char orechance[]={64,62,51,44,32,4};//out of 1000
+    int l=c.y+dirt_len,i;
     c.y++;
     for(;c.y<l;c.y++){
         putmapid(c.x,c.y,TILE_DIRT);
     };
     for(;c.y<MAP_H;c.y++){
         putmapid(c.x,c.y,TILE_STONE);
+        for(i=0;i<6;i++){
+            if(c.y<oremindepth[i]) continue;
+            if((rand()%1000)>orechance[i]) continue;
+            putmapid(c.x,c.y,ores[i]);
+        };
     };
 };
 

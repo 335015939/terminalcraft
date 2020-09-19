@@ -11,7 +11,7 @@ _SETTINGS SETTINGS={
 PLAYER player={};
 _WORLD WORLD={};
 int main(){
-    int x,k,y,tick;
+    int x,k,y,tick=TICK;
     myinit();
     clear();
     mapgen();
@@ -82,6 +82,10 @@ int main(){
                         k='9'+1;
                     };
                     player.holding=k-'1';
+                    break;
+                case 'c':
+                case 'C':
+                    craft();
                     break;
             };
         };

@@ -38,18 +38,26 @@ char fall(){
 };
 void mineblock(){
     ITEM item;
-    int x=player.facingx+player.c.x,y=player.facingy+player.c.y,z;
+    int x=player.facingx+player.c.x,y=player.facingy+player.c.y,z,health,i,k;
     if(!isinmap(x, y)) return;
     if(fall()) return;
     TILEDATA t=getmaptiledata(x,y);
     if(!t.minable) return;
+    if(t.hardlvl>gethelditemdata().minelvl) return;
+    health=t.hardness;
     attr_set(A_NORMAL,0,NULL);
-    for(;;){
+    for(i=(rand()%4);;i++){
+        if(i==4) i=0;
         if (!getmapid(x,y)) break;
-        mvprintw(2,0,"Mining block...");
+        mvprintw(2,0,"Mining block...%c",SPIN[i]);
+        health-=gethelditemdata().minepower;
         TICK++;
-        getch();
-        putmapid(x, y, 0);
+        k=getch();
+        if(k!='j' && k!='J') {
+            mvprintw(2,0,"                   ");
+            return;
+        };
+        if(health<=0)putmapid(x, y, 0);
     };
     
     for(x=0;x<5;x++){

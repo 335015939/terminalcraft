@@ -28,6 +28,8 @@ typedef struct {
     char droppable;
     char fallthrough;
     char placeover;
+    int hardlvl;
+    int hardness;
     TILE t;
     DROPITEMDATA drops;
     char *name;
@@ -62,6 +64,9 @@ typedef struct {
     int maxstack;
     int type;
     int placetileid;
+    int minepower;
+    int minelvl;
+    int damage;
     TILE t;
     char *name;
 }ITEMDATA;

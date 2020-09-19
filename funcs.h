@@ -26,4 +26,5 @@ char invadditem(ITEM item);
 void moveplayer(int x,int y);
 void dhotbar();
 char placeblock();
+void craft();
 #endif

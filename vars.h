@@ -8,4 +8,5 @@ extern _SETTINGS SETTINGS;
 extern _WORLD WORLD;
 extern PLAYER player;
 extern const ITEMDATA ITEMS[ITEMNUM];
+extern const unsigned char SPIN[4];
 #endif
