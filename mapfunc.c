@@ -56,37 +56,27 @@ void drawmap(int startx,int starty){
             SETTINGS.skycolor=0x10;
             break;
         case 4:
+        case 21:
             SETTINGS.skycolor=0x11;
             break;
         case 5:
+        case 20:
             SETTINGS.skycolor=0x12;
             break;
         case 6:
+        case 19:
             SETTINGS.skycolor=0x13;
             break;
         case 7:
+        case 18:
             SETTINGS.skycolor=0x14;
             break;
         case 8:
+        case 17:
             SETTINGS.skycolor=0x15;
             break;
         case 9 ... 16:
             SETTINGS.skycolor=0x21;
-            break;
-        case 17:
-            SETTINGS.skycolor=0x15;
-            break;
-        case 18:
-            SETTINGS.skycolor=0x14;
-            break;
-        case 19:
-            SETTINGS.skycolor=0x13;
-            break;
-        case 20:
-            SETTINGS.skycolor=0x12;
-            break;
-        case 21:
-            SETTINGS.skycolor=0x11;
             break;
     };
     if(SETTINGS.oldskycolor!=SETTINGS.skycolor){

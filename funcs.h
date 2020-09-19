@@ -19,6 +19,7 @@ char invremovemultipleitembyid(int num,const ITEM item[5]);
 char invremoveitembyid(ITEM item);
 char invitemcanberemoved(ITEM item,INV_SEARCH c);
 void dtile(TILE t);
+void pause();
 void initmycolorpairs();
 char *tiletypetostationname(int type);
 void init_map();

@@ -30,6 +30,13 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_WOOD,4}
         },
         TILE_TYPE_NONE},
+    {
+        {ITEM_FURNACE,1},
+        1,
+        {
+            {ITEM_STONE,10},
+        },
+        TILE_TYPE_WORKBENCH},
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
@@ -38,30 +45,32 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_GRASS,0x2e,0x00},
     {CP_TILE_OAK_LEAF,0x22,0x2e},
     {CP_TILE_OAK_TRUNK,0x5e,0x3a},
-    {CP_ITEM_DIRT,0x5e,0x10},
-    {CP_ITEM_NONE,0x10,0x10},
+    {CP_ITEM_DIRT,0x5e,0xe8},
+    {CP_ITEM_NONE,-1,-1},
     {CP_ITEM_WOOD,0x5e,0x10},
-    {CP_ITEM_APPLE,0xc4,0x10},
-    {CP_ITEM_STONE,0xf0,0x10},
-    {CP_ITEM_WOOD_PICKAXE,0x5e,0x10},
+    {CP_ITEM_APPLE,0xc4,0xe8},
+    {CP_ITEM_STONE,0xf0,0xe8},
+    {CP_ITEM_WOOD_PICKAXE,0x5e,0x04},
     {CP_TILE_PINE_LEAF,0x16,0x1c},
     {CP_TILE_PINE_TRUNK,0x5f,0x3a},
-    {CP_ITEM_COAL,0xe9,0x10},
+    {CP_ITEM_COAL,0xe9,0xe8},
     {CP_TILE_COAL_ORE,0x10,0xf0},
-    {CP_ITEM_IRON_ORE,0xdf,0x10},
+    {CP_ITEM_IRON_ORE,0xdf,0xe8},
     {CP_TILE_IRON_ORE,0xdf,0xf0},
-    {CP_ITEM_SILVER_ORE,0xfe,0x10},
+    {CP_ITEM_SILVER_ORE,0xfe,0xe8},
     {CP_TILE_SILVER_ORE,0xfe,0xf0},
-    {CP_ITEM_GOLD_ORE,0x03,0x10},
+    {CP_ITEM_GOLD_ORE,0x03,0xe8},
     {CP_TILE_GOLD_ORE,0x03,0xf0},
-    {CP_ITEM_DIAMOND_ORE,0x06,0x10},
+    {CP_ITEM_DIAMOND_ORE,0x06,0xe8},
     {CP_TILE_DIAMOND_ORE,0x06,0xf0},
-    {CP_ITEM_COPPER_ORE,0x82,0x10},
-    {CP_TILE_COPPER_ORE,0x82,0xf0},
-    {CP_ITEM_IRON,0xdf,0x10},
+    {CP_ITEM_COPPER_ORE,0xca,0xe8},
+    {CP_TILE_COPPER_ORE,0xca,0xf0},
+    {CP_ITEM_IRON,0xdf,0xe8},
     {CP_TILE_WORKBENCH,0x5e,0x0},
-    {CP_ITEM_WORKBENCH,0x5e,0x10},
-    {TILE_WOOD,0x5e,0x3a}
+    {CP_ITEM_WORKBENCH,0x5e,0xe8},
+    {CP_TILE_WOOD,0x5e,0x3a},
+    {CP_TILE_FURNACE,0x01,0xf0},
+    {CP_ITEM_FURNACE,0xf0,0xe8}
 
 };
 const TILEDATA TILES[TILE_NUM]={
@@ -231,6 +240,17 @@ const TILEDATA TILES[TILE_NUM]={
             {100}
         },
         "Wood block"},
+    {
+        TILE_FURNACE,1,1,0,0,0,
+        1,6,TILE_TYPE_FURNACE,
+        {'o',A_BOLD,0xf0,CP_TILE_FURNACE},
+        {
+            {ITEM_FURNACE},
+            {1},
+            {1},
+            {100}
+        },
+        "Furnace"},
 };
 const ITEMDATA ITEMS[ITEMNUM]={
     {
@@ -241,7 +261,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
     {
         ITEM_DIRT,99,ITEM_TYPE_PLACABLE,
         TILE_DIRT,0,0,0,
-        {'O',A_BOLD,0x0,CP_ITEM_DIRT},
+        {224,A_BOLD,0x0,CP_ITEM_DIRT},
         "Dirt"},
     {
         ITEM_WOOD,99,ITEM_TYPE_PLACABLE,
@@ -256,7 +276,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
     {
         ITEM_STONE,99,ITEM_TYPE_PLACABLE,
         TILE_STONE,0,0,0,
-        {'O',A_BOLD,0x0,CP_ITEM_STONE},
+        {224,A_BOLD,0x0,CP_ITEM_STONE},
         "Stone"},
     {  
         ITEM_WOOD_PICKAXE,1,ITEM_TYPE_PICKAXE,
@@ -308,5 +328,10 @@ const ITEMDATA ITEMS[ITEMNUM]={
         TILE_WORKBENCH,0,0,0,
         {'n',A_BOLD,0x0,CP_ITEM_WORKBENCH},
         "Workbench"},
+    {
+        ITEM_FURNACE,9,ITEM_TYPE_PLACABLE,
+        TILE_FURNACE,0,0,0,
+        {'o',0x0,CP_ITEM_FURNACE},
+        "Furnace"},
 };
 #endif

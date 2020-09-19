@@ -2,6 +2,24 @@
 #include "funcs.h"
 #include "header.h"
 #include <curses.h>
+void pause(){
+    int k;
+    clear();
+    printw("Paused\n\nQ:quit\nJ or [ENTER]:continue");
+    for(;;){
+        refresh();
+        switch(getch()){
+            case 'q':
+            case '\e':
+            case 'Q':
+                exit(0);
+            case 'j':
+            case 'J':
+            case '\n':
+                return;
+        };
+    };
+};
 char *tiletypetostationname(int type){
     switch(type){
         case TILE_TYPE_NONE:

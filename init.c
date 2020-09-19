@@ -1,9 +1,13 @@
 #include "header.h"
 #include <curses.h>
 
-
+void _myexit(){
+    free(MAP);
+    endwin();
+};
 void myinit(){
     int i;
+    atexit(_myexit);
     system("export TERM=xterm-256color");
     srand(time(NULL));
     initscr();

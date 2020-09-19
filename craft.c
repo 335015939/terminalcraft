@@ -47,7 +47,7 @@ void print_require(_CRAFT_RECIPIE r,int f){
         move(1,20);
         printw("Makes:???");
         move(2,20);
-        printw("station:???");
+        printw("station:??? (at %s right now)",tiletypetostationname(CURRENT_STATION));
     };
 };
 void printcraft(int s,int so){

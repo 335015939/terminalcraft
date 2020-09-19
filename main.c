@@ -9,7 +9,7 @@ _SETTINGS SETTINGS={
     3000,500,0x21,0x21
 };
 PLAYER player={};
-_WORLD WORLD={NULL,6*60};
+_WORLD WORLD={NULL,6*60,3000,500};
 int main(){
     int x,k,y,tick=TICK;
     myinit();
@@ -87,6 +87,10 @@ int main(){
                 case 'C':
                     craft();
                     break;
+                case '\e':
+                    pause();
+                    clear();
+                    break;
             };
         };
         moveplayer(x,y);
@@ -96,6 +100,5 @@ int main(){
     for(x=0;x<MAP_W;x++){
         free(MAP[x]);
     };
-    free(WORLD.map);
-    endwin();
+
 };
