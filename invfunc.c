@@ -8,8 +8,11 @@ char invadditem(ITEM item){
             if (!getinvitem(i,j).id){
                 freespace++;
             }else if(getinvitem(i,j).id==item.id){
-                if((x=player.i[i][j].num+item.num)>ITEMS[getinvitem(i,j).id].maxstack)
-                ;
+                if((x=player.i[i][j].num+item.num)>ITEMS[getinvitem(i,j).id].maxstack){
+                    item.num-=player.i[i][j].num;
+                    player.i[i][j].num=ITEMS[getinvitem(i,j).id].maxstack;
+                    return invadditem(item);
+                };
                 return 1;
             };
         };
@@ -59,7 +62,7 @@ void drawinv(COORDS c,COORDS s,char f){
 
 };
 void inventory(){
-    int k,i,j;
+    int k;
     static COORDS c={};
     COORDS s={};
     ITEM item;
