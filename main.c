@@ -85,6 +85,8 @@ int main(){
                 case 'C':
                     craft();
                     break;
+                case 'p':
+                case 'P':
                 case '\e':
                     pause();
                     clear();
