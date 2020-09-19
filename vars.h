@@ -11,4 +11,6 @@ extern const ITEMDATA ITEMS[ITEMNUM];
 extern const unsigned char SPIN[4];
 extern int CURRENT_STATION;
 extern const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM];
+extern int CHOSEN_WORLD;
+extern int CHOSEN_PLAYER;
 #endif

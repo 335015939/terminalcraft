@@ -1,21 +1,29 @@
 #include "header.h"
 #include <curses.h>
-
+int CHOSEN_WORLD=0;
+int CHOSEN_PLAYER=0;
 int _titlescr();
+char isworldsaved(int i){
+    char *fname=malloc_throw(25);
+    sprintf(fname,"./terminalcraft/world%d",i);
+    FILE *f=fopen(fname,"r");
+    if(f!=NULL){
+        fclose(f);
+        return 1;
+    }else{
+        return 0;
+    };
+    free(fname);
+};
 void _playprintworld(int i){
     if(i==10){
         addstr("Back");
     }else {
-        char *fname=malloc_throw(25);
-        sprintf(fname,"./terminalcraft/world%d",i);
-        FILE *f=fopen(fname,"r");
-        if(f!=NULL){
+        if(isworldsaved(i)){
             printw("World %d(Load)\n",i);
-            fclose(f);
         }else{
             printw("World %d(New)\n",i);
         };
-        free(fname);
     };
 }
 int playchooseworld(){
@@ -51,25 +59,25 @@ int playchooseworld(){
     };
 }
 int play(){
-    int chosenworld;
-    int chosenplayer;
     clear();
-    if(playchooseworld()==10) return 10;
-    mapgen();
-    player.c.x=MAP_W/2;
-    for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
+    if((CHOSEN_WORLD=playchooseworld())==10) return 0;
+    if(!isworldsaved(CHOSEN_WORLD)){
+        mapgen();
+        player.c.x=MAP_W/2;
+        for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
 
-    invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
-    return 0;
+        invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
+    }else {
+        loadworld(CHOSEN_WORLD);
+    };
+    return 1;
 }
 int titlescr(){
     for(;;){
         switch(_titlescr()){
             case 0:
-                switch(play()){
-                    case 0 ... 9:
-                    return 0;
-                };
+                if(play()) return 0;
+                break;
             case 1:
                 clear();
                 printw("Not avalaible right now");
@@ -82,7 +90,8 @@ int titlescr(){
 };
 
 int _titlescr(){
-    int i,selection=0;
+    int i;
+    static int selection=0;
     const char *options[3]={"Play","Options","Quit"};
     clear();
     attr_set(A_BOLD,0,NULL);
