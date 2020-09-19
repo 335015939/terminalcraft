@@ -17,7 +17,8 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_NONE,0x10,0x10},
     {CP_ITEM_OAK_WOOD,0x5e,0x10},
     {CP_ITEM_APPLE,0xc4,0x10},
-    {CP_ITEM_STONE,0xf0,0x10}
+    {CP_ITEM_STONE,0xf0,0x10},
+    {CP_ITEM_WOOD_PICKAXE,0x5e,0x10}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -79,24 +80,28 @@ const TILEDATA TILES[TILE_NUM]={
 };
 const ITEMDATA ITEMS[ITEMNUM]={
     {
-        ITEM_NONE,0,//id,maxstack
+        ITEM_NONE,0,ITEM_TYPE_NONE,TILE_AIR,//id,maxstack,item type,tile when placed
         {' ',0x0,CP_ITEM_NONE},//char,attribute,background,color pair
         "Nothing"},//name
     {
-        ITEM_DIRT,99,
+        ITEM_DIRT,99,ITEM_TYPE_PLACABLE,TILE_DIRT,
         {'O',A_BOLD,0x0,CP_ITEM_DIRT},
         "Dirt"},
     {
-        ITEM_OAK_WOOD,99,
+        ITEM_OAK_WOOD,99,ITEM_TYPE_PLACABLE,TILE_OAK_TRUNK,
         {'=',A_BOLD,0x0,CP_ITEM_OAK_WOOD},
         "Oak wood"},
     {
-        ITEM_APPLE,99,
+        ITEM_APPLE,99,ITEM_TYPE_FOOD,TILE_AIR,
         {'o',A_BOLD,0x0,CP_ITEM_APPLE},
         "Apple"},
     {
-        ITEM_STONE,99,
+        ITEM_STONE,99,ITEM_TYPE_PLACABLE,TILE_STONE,
         {'O',A_BOLD,0x0,CP_ITEM_STONE},
-        "Stone"}
+        "Stone"},
+    {  
+        ITEM_WOOD_PICKAXE,1,ITEM_TYPE_PICKAXE,TILE_AIR,
+        {'T',A_BOLD,0x0,CP_ITEM_WOOD_PICKAXE},
+        "Wood Pickaxe"},
 };
 #endif

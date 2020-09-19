@@ -43,6 +43,7 @@ typedef struct {
 typedef struct {
     MAPTILE **map;
     int time;
+    int tick;
 } _WORLD;
 typedef struct{
     int x;
@@ -58,6 +59,8 @@ typedef struct{
 typedef struct {
     int id;
     int maxstack;
+    int type;
+    int placetileid;
     TILE t;
     char *name;
 }ITEMDATA;

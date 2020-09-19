@@ -1,4 +1,24 @@
+#include "funcs.h"
 #include "header.h"
+
+char placeblock(){
+    int x=player.facingx+player.c.x,y=player.facingy+player.c.y;
+    if (gethelditemdata().type != ITEM_TYPE_PLACABLE){
+        return 0;
+    };
+    TILEDATA t=TILES[gethelditemdata().placetileid];
+    if(!isinmap(x, y)) return 0;
+    if(getmapid(x, y)|| (
+        x==player.c.x && y==player.c.y &&
+        !t.passable
+    ))return 0;
+    putmapid(x,y,t.id);
+    player.i[0][player.holding].num--;
+    if(!player.i[0][player.holding].num){
+        player.i[0][player.holding].id=0;
+    };
+    return 1;
+};
 
 void drawmap(int startx,int starty){
     int i,j=0,x,y;

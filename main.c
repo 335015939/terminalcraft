@@ -8,7 +8,6 @@
 _SETTINGS SETTINGS={
     3000,500,0x33
 };
-int TICK=0;
 PLAYER player={};
 _WORLD WORLD={};
 int main(){
@@ -19,6 +18,7 @@ int main(){
     player.c.x=MAP_W/2;
     for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
 
+    invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
 
     for(;;){
         
@@ -64,7 +64,14 @@ int main(){
                     break;
                 case 'j':
                 case 'J':
-                    mineblock();
+                    switch(gethelditemdata().type){
+                        case ITEM_TYPE_PICKAXE:
+                            mineblock();
+                            break;
+                        case ITEM_TYPE_PLACABLE:
+                            placeblock();
+                            break;
+                    };
                     break;
                 case 'i':
                 case 'I':
