@@ -1,14 +1,15 @@
 #include "header.h"
 #include <curses.h>
 char invadditem(ITEM item){
-    int j=0,i;
+    int j=0,i,x;
     unsigned char freespace=0;
     for(;j<10;j++){
         for(i=0;i<10;i++){
             if (!getinvitem(i,j).id){
                 freespace++;
             }else if(getinvitem(i,j).id==item.id){
-                player.i[i][j].num+=item.num;
+                if((x=player.i[i][j].num+item.num)>ITEMS[getinvitem(i,j).id].maxstack)
+                ;
                 return 1;
             };
         };
