@@ -50,10 +50,7 @@ void myinit(){
 
 void init_map(){
     int i;
-    MAPTILE **map=(MAPTILE**)(malloc_throw((sizeof(MAPTILE*) * MAP_W)));
-    for (i=0;i<MAP_W;i++){
-        map[i]=malloc_throw(sizeof(MAPTILE)*MAP_H);
-    }
+    MAPTILE *map=(MAPTILE*)(malloc_throw((sizeof(MAPTILE) * MAP_W * MAP_H)));
     WORLD.map=map;
 };
 

@@ -5,7 +5,7 @@ int CHOSEN_PLAYER=0;
 int _titlescr();
 char isworldsaved(int i){
     char *fname=malloc_throw(25);
-    sprintf(fname,"./terminalcraft/world%d",i);
+    sprintf(fname,"./terminal_craft/world%d",i);
     FILE *f=fopen(fname,"r");
     if(f!=NULL){
         fclose(f);
@@ -63,13 +63,12 @@ int play(){
     if((CHOSEN_WORLD=playchooseworld())==10) return 0;
     if(!isworldsaved(CHOSEN_WORLD)){
         mapgen();
-        player.c.x=MAP_W/2;
-        for(;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
-
         invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
     }else {
         loadworld(CHOSEN_WORLD);
     };
+    player.c.x=MAP_W/2;
+    for(player.c.y=0;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
     return 1;
 }
 int titlescr(){

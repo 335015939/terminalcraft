@@ -59,6 +59,7 @@ int main(){
                     break;
                 case ' ':
                     player.facingx=player.facingy=0;
+                    saveworld();
                     break;
                 case 'j':
                 case 'J':
@@ -95,8 +96,4 @@ int main(){
         tick=TICK;
     };
     //lbl_end:
-    for(x=0;x<MAP_W;x++){
-        free(MAP[x]);
-    };
-
 };

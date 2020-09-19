@@ -47,7 +47,7 @@ typedef struct {
 
 } MAPTILE;
 typedef struct {
-    MAPTILE **map;
+    MAPTILE *map;
     int tick;
     int widht;
     int height;
