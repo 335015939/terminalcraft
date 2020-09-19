@@ -53,6 +53,7 @@ typedef struct{
     char facingx;
     char facingy;
     ITEM i[10][10];
+    int holding;
 } PLAYER;
 typedef struct {
     int id;

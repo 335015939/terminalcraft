@@ -1,11 +1,11 @@
 #ifndef DEFINES_H_INCLUDED
 #define DEFINES_H_INCLUDED
-#define COLOR_NUM 8
-#define TILE_NUM 6
+#define COLOR_NUM 40
+#define TILE_NUM 15
 #define MAP_W (SETTINGS._MAP_W)
 #define MAP_H (SETTINGS._MAP_H)
 #define SKYCOLOR SETTINGS.skycolor
 #define ERR_OUT_OF_MEM 3950
 #define MAP (WORLD.map)
-#define ITEMNUM 2
+#define ITEMNUM 15
 #endif

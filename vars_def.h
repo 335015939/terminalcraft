@@ -14,7 +14,10 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_OAK_LEAF,0x22,0x2e},
     {CP_TILE_OAK_TRUNK,0x5e,0x3a},
     {CP_ITEM_DIRT,0x5e,0x10},
-    {CP_ITEM_NONE,0x10,0x10}
+    {CP_ITEM_NONE,0x10,0x10},
+    {CP_ITEM_OAK_WOOD,0x5e,0x10},
+    {CP_ITEM_APPLE,0xc4,0x10},
+    {CP_ITEM_STONE,0xf0,0x10}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -40,7 +43,12 @@ const TILEDATA TILES[TILE_NUM]={
     {
         TILE_STONE,0,1,0,0,
         {' ',A_NORMAL,0xf0,CP_TILE_STONE},
-        {},
+        {
+            {ITEM_STONE},
+            {1},
+            {1},
+            {100}
+        },
         "Stone"},
     {
         TILE_GRASS,1,1,0,1,
@@ -50,12 +58,22 @@ const TILEDATA TILES[TILE_NUM]={
     {
         TILE_OAK_LEAF,1,1,0,1,
         {'#',A_BOLD,0x2e,CP_TILE_OAK_LEAF},
-        {},
+        {
+            {ITEM_APPLE},
+            {1},
+            {2},
+            {5}
+        },
         "Oak leaves"},
     {
         TILE_OAK_TRUNK,1,1,0,0,
         {'|',A_BOLD,0x3a,CP_TILE_OAK_TRUNK},
-        {},
+        {
+            {ITEM_OAK_WOOD},
+            {1},
+            {1},
+            {100}
+        },
         "Oak tree trunk"}
 
 };
@@ -66,7 +84,19 @@ const ITEMDATA ITEMS[ITEMNUM]={
         "Nothing"},//name
     {
         ITEM_DIRT,99,
-        {'o',A_BOLD,0x0,CP_ITEM_DIRT},
+        {'O',A_BOLD,0x0,CP_ITEM_DIRT},
         "Dirt"},
+    {
+        ITEM_OAK_WOOD,99,
+        {'=',A_BOLD,0x0,CP_ITEM_OAK_WOOD},
+        "Oak wood"},
+    {
+        ITEM_APPLE,99,
+        {'o',A_BOLD,0x0,CP_ITEM_APPLE},
+        "Apple"},
+    {
+        ITEM_STONE,99,
+        {'O',A_BOLD,0x0,CP_ITEM_STONE},
+        "Stone"}
 };
 #endif

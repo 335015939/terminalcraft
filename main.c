@@ -70,6 +70,12 @@ int main(){
                 case 'I':
                     inventory();
                     break;
+                case '0' ... '9':
+                    if (k=='0'){
+                        k='9'+1;
+                    };
+                    player.holding=k-'1';
+                    break;
             };
         };
         moveplayer(x,y);
