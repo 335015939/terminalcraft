@@ -65,7 +65,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
         {' ',0x0,CP_ITEM_NONE},//char,attribute,background,color pair
         "Nothing"},//name
     {
-        ITEM_DIRT,999,
+        ITEM_DIRT,99,
         {'o',A_BOLD,0x0,CP_ITEM_DIRT},
         "Dirt"},
 };

@@ -1,19 +1,21 @@
 #include "header.h"
 #include <curses.h>
 char invadditem(ITEM item){
-    int j=0,i,x;
+    int j=0,i,x,maxstack;
     unsigned char freespace=0;
     for(;j<10;j++){
         for(i=0;i<10;i++){
+            maxstack=ITEMS[getinvitem(i,j).id].maxstack;
             if (!getinvitem(i,j).id){
                 freespace++;
             }else if(getinvitem(i,j).id==item.id){
-                if((x=player.i[i][j].num+item.num)>ITEMS[getinvitem(i,j).id].maxstack){
-                    item.num-=player.i[i][j].num;
-                    player.i[i][j].num=ITEMS[getinvitem(i,j).id].maxstack;
-                    return invadditem(item);
+                if((x=player.i[i][j].num+item.num)>=maxstack){
+                    item.num-=(maxstack-player.i[i][j].num);
+                    player.i[i][j].num=maxstack;
+                }else{
+                    player.i[i][j].num+=item.num;
+                    return 1;
                 };
-                return 1;
             };
         };
     };
