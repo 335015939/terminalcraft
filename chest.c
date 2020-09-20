@@ -28,6 +28,9 @@ void drawchest(COORDS s,COORDS c,char f){
     ITEM item;
     clear();
     attr_set(A_NORMAL,0,NULL);
+    item=getchestitem(c);
+    mvprintw(13,0,"%s(%d)",ITEMS[item.id].name,item.num);
+    move(0,0);
     addstr("Inventory   Chest\n");
     for(i=0;i<23;i++){
         addch('=');
@@ -38,10 +41,12 @@ void drawchest(COORDS s,COORDS c,char f){
         for(i=0;i<10;i++){
             drawchestitem((COORDS){i,j},A_NORMAL);
         };
+        attr_set(A_NORMAL,0,NULL);
         addch('|');
         for(;i<20;i++){
             drawchestitem((COORDS){i,j},A_NORMAL);
         };
+        attr_set(A_NORMAL,0,NULL);
         addstr("|\n");
     };
     for(i=0;i<23;i++){
@@ -49,8 +54,6 @@ void drawchest(COORDS s,COORDS c,char f){
     };
     move(c.y+2,c.x+(c.x>=10)+1);
     drawchestitem(c,A_REVERSE);
-    item=getchestitem(c);
-    mvprintw(13,0,"%s(%d)",ITEMS[item.id].name,item.num);
     if(f){
         move(s.y+2,s.x+(s.x>=10)+1);
         drawchestitem(s,A_REVERSE);
@@ -72,7 +75,6 @@ void chest(int x,int y){
     cheststorage=&getmaptile(x,y).storage;
     for(;;){
         drawchest(oldselected,selected,isselected);
-        mvprintw(14,0,"%d %d   ",selected.x,selected.y);
         switch(getch()){
             case 'w':
             case 'W':

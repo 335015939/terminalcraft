@@ -101,7 +101,7 @@ void inventory(){
     int k;
     static COORDS c={};
     COORDS s={};
-    ITEM item;
+    ITEM item,item2;
     char f=0;
     do{
         drawinv(c,s,f);
@@ -135,8 +135,18 @@ void inventory(){
                     s=c;
                 }else{
                     item=player.i[c.x][c.y];
-                    player.i[c.x][c.y]=player.i[s.x][s.y];
-                    player.i[s.x][s.y]=item;
+                    if(item.id==(item2=player.i[s.x][s.y]).id){
+                        if((item.num+item2.num)<=ITEMS[item.id].maxstack){
+                            player.i[s.x][s.y].id=player.i[s.x][s.y].num=0;
+                            player.i[c.x][c.y].num+=item2.num;
+                        }else{
+                            player.i[s.x][s.y].num=(ITEMS[item.id].maxstack)-item2.num;
+                            player.i[c.x][c.y].num=ITEMS[item.id].maxstack;
+                        };
+                    }else{
+                        player.i[c.x][c.y]=item2;
+                        player.i[s.x][s.y]=item;
+                    };
                     f=0;
                 };
         };
