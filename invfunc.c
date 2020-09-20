@@ -37,13 +37,13 @@ char invremovemultipleitembyid(int num,const ITEM item[5]){
 char invadditem(ITEM item){
     int j,i=0,x,maxstack;
     unsigned char freespace=0;
+    maxstack=ITEMS[item.id].maxstack;
     for(;i<10;i++){
         for(j=0;j<10;j++){
-            maxstack=ITEMS[getinvitem(i,j).id].maxstack;
             if (!getinvitem(i,j).id){
                 freespace++;
             }else if(getinvitem(i,j).id==item.id){
-                if((x=player.i[i][j].num+item.num)>=maxstack){
+                if((x=player.i[i][j].num+item.num)>maxstack){
                     item.num-=(maxstack-player.i[i][j].num);
                     player.i[i][j].num=maxstack;
                 }else{
@@ -140,7 +140,7 @@ void inventory(){
                             player.i[s.x][s.y].id=player.i[s.x][s.y].num=0;
                             player.i[c.x][c.y].num+=item2.num;
                         }else{
-                            player.i[s.x][s.y].num=(ITEMS[item.id].maxstack)-item2.num;
+                            player.i[s.x][s.y].num-=(ITEMS[item.id].maxstack)-item.num;
                             player.i[c.x][c.y].num=ITEMS[item.id].maxstack;
                         };
                     }else{

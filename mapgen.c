@@ -1,7 +1,5 @@
-#include "enum.h"
 #include "funcs.h"
 #include "header.h"
-#include <curses.h>
 
 struct {
     int sealvl;
@@ -30,12 +28,14 @@ void mkcaves(){
             putmapid(c.x,c.y,TILE_AIR);
             x=y=0;
             do{
-                if(rand()%8){
-                    x=((rand()%2)*2)-1;
-                }else{
-                    y++;
-                };
-            }while(!isinmap(c.x+x,c.y+y));
+                do{
+                    if(rand()%8){
+                        x=((rand()%2)*2)-1;
+                    }else{
+                        y++;
+                    };
+                }while(!isinmap(c.x+x,c.y+y));
+            }while(getmapid(x+c.x, c.y+y-1)==TILE_GRASS);
             c.x+=x;
             c.y+=y;
         };
@@ -72,8 +72,8 @@ void mkores(){
     for(i=0;i<orenum;i++){
         maxchance=max(maxchance,orechance[i]);
     };
-    for(i=0;i<((MAP_W*MAP_H)/750);i++){
-        mvprintw(0,0,"Generating Ores:%d%%",(100*i)/((MAP_W*MAP_H)/750));
+    for(i=0;i<((MAP_W*MAP_H)/450);i++){
+        mvprintw(0,0,"Generating Ores:%d%%",(100*i)/((MAP_W*MAP_H)/450));
         refresh();
         lbl_redo:
         do{
@@ -149,12 +149,12 @@ void mkunder(COORDS c,int dirt_len){
 };
 
 COORDS genplains(COORDS c,int l){
-    int x=c.x+l;
+    int x=c.x+l,y;
     if (x>MAP_W){
         x=MAP_W;
     };
     for(;c.x<x;c.x++){
-        if(c.x>=MAP_W){
+        if(!isinmap(c.x,c.y)){
             break;
         };
         putmapid(c.x, c.y, TILE_GRASS);
@@ -163,12 +163,13 @@ COORDS genplains(COORDS c,int l){
             mktree(c,TREE_OAK);
         };
         if (!(rand()%7)){
-            if(rand()%2){
+            y=c.y;
+            c.y+=(c.y<=(world.sealvl-2))-(c.y>=(world.sealvl+2));
+            if(rand()%2 && y==c.y){
                 c.y++;
             }else{
                 c.y--;
             };
-            c.y+=(c.y<=(world.sealvl-2))-(c.y>=(world.sealvl+2));
         };
     };
     return c;
@@ -180,7 +181,7 @@ COORDS genforest(COORDS c,int l){
         x=MAP_W;
     };
     for(;c.x<x;c.x++){
-        if(c.x>=MAP_W){
+        if(!isinmap(c.x,c.y)){
             break;
         };
         putmapid(c.x, c.y, TILE_GRASS);
@@ -206,7 +207,7 @@ COORDS genhills(COORDS c,int l){
         x=MAP_W;
     };
     for(;c.x<x;c.x++){
-        if(c.x>=MAP_W){
+        if(!isinmap(c.x,c.y)){
             break;
         };
         putmapid(c.x, c.y, TILE_GRASS);
@@ -214,33 +215,66 @@ COORDS genhills(COORDS c,int l){
             mktree(c,TREE_OAK);
         };
         mkunder(c,5+(rand()%4));
-        if (!(rand()%2)){
+        if (rand()%2){
             if(direction){
                 c.y++;
             }else{
                 c.y--;
             };
-            if(c.y>=(world.sealvl+8)){
+            if(c.y>=(world.sealvl+7+(rand()%3))){
                 direction=!direction;
-            }else if(c.y<=(world.sealvl-4)){
+            }else if(c.y<=(world.sealvl-3-(rand()%3))){
                 direction=!direction;
             } ;
             c.y+=(c.y<=(world.sealvl-4))-(c.y>=(world.sealvl+8));
         };
     };
     return c;
-}
+};
+COORDS genmountains(COORDS c,int l){
+    int x=c.x+l,direction=rand()%2;
+    if (x>MAP_W){
+        x=MAP_W;
+    };
+    for(;c.x<x;c.x++){
+        if(!isinmap(c.x, c.y)){
+            break;
+        };
+        
+        if (rand()%(2+(rand()%3))){
+            c.x--;
+            if(direction){
+                c.y++;
+            }else{
+                c.y--;
+            };
+            if(c.y>=(world.sealvl+20+(rand()%4))){
+                direction=!direction;
+            }else if(c.y<=(world.sealvl-4-(rand()%4))){
+                direction=!direction;
+            };
+            //c.y+=(c.y<=(world.sealvl-4))-(c.y>=(world.sealvl+8));
+        }else{
+            putmapid(c.x, c.y, TILE_GRASS);
+            if(!(rand()%11)){
+                mktree(c,TREE_OAK);
+            };
+            mkunder(c,2+(rand()%3));
+        };
+    };
+    return c;
+};
 
 void mapgen(){
     world.sealvl=MAP_H/4;
     COORDS c={0,world.sealvl+(random()%11)-6};
-    COORDS (*genfuncs[3])(COORDS c,int l)={genplains,genhills,genforest};
+    COORDS (*genfuncs[4])(COORDS c,int l)={genplains,genhills,genforest,genmountains};
     clear();
     attr_set(A_NORMAL,0,NULL);
     for(c.x=0;c.x<MAP_W;){
         mvprintw(0,0,"Generating terrain:%d%% ",(100*c.x)/MAP_W);
         refresh();
-        c=(*genfuncs[rand()%3])(c,(MAP_W/50)+(rand()%10));
+        c=(*genfuncs[rand()%4])(c,(MAP_W/50)+(rand()%10));
     };
     clear();
     mkores();

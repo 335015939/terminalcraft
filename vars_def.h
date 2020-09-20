@@ -62,9 +62,9 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
         TILE_TYPE_WORKBENCH},
     {
         {ITEM_DOOR,1},
-        1,
+        0,
         {
-            {ITEM_WOOD,4}
+            {ITEM_WOOD,1}
         },
         TILE_TYPE_WORKBENCH},
     {

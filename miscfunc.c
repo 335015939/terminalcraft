@@ -96,6 +96,7 @@ void mineblock(){
     for(i=(rand()%4);;i++){
         if(i==4) i=0;
         if (!getmapid(x,y)) break;
+        drawmap(player.c.x-38,player.c.y-10);
         mvprintw(2,0,"Mining block...%c",SPIN[i]);
         health-=gethelditemdata().minepower;
         TICK++;

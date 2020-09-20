@@ -62,7 +62,6 @@ void drawchest(COORDS s,COORDS c,char f){
 void chestitemswap(COORDS a,COORDS b){
     ITEM item1;
     ITEM item2;
-    ITEM item;
     item1=getchestitem(a);
     item2=getchestitem(b);
     putchestitem(b,item1);
