@@ -6,6 +6,41 @@
 struct {
     int sealvl;
 } world;
+void mkcaves(){
+    clear();
+    int i,x,y,j;
+    COORDS c;
+    for(i=0;i<(MAP_W)/300;i++){
+        mvprintw(0,0,"Generating caves:%d%% ",(100*i)/(MAP_W/300));
+        refresh();
+        //getch();
+        do{
+            do{
+                x=rand()%MAP_W;
+                y=rand()%MAP_H;
+            }while(!isinmap(x,y));
+        }while(getmapid(x, y)!=TILE_GRASS);
+        putmapid(x, y, TILE_AIR);
+        c.x=x;
+        c.y=y+1;
+        //mvprintw(10,10,"%d %d",c.x,c.y);
+        for(j=0;j<(MAP_H+(rand()%(10*MAP_H)));j++){
+            if(!isinmap(c.x,c.y)) break;
+            //addch('e');
+            putmapid(c.x,c.y,TILE_AIR);
+            x=y=0;
+            do{
+                if(rand()%8){
+                    x=((rand()%2)*2)-1;
+                }else{
+                    y++;
+                };
+            }while(!isinmap(c.x+x,c.y+y));
+            c.x+=x;
+            c.y+=y;
+        };
+    };
+};
 void mkorevein(COORDS c,int len,int id){
     int _id=getmapid(c.x, c.y),i;
     char x,y;
@@ -31,8 +66,8 @@ void mkores(){
     int i,id,maxchance=0,orenum,temp,j;
     const int ores[]={TILE_COPPER_ORE,TILE_COAL_ORE,TILE_IRON_ORE,TILE_SILVER_ORE,TILE_GOLD_ORE,TILE_DIAMOND_ORE};
     const int oremindepth[]={0,0,world.sealvl+(75),((2*MAP_H)/5),((3*MAP_H)/5),((MAP_H*4)/5)};
-    const unsigned int orechance[]={10,22,30,36,39,41};
-    const unsigned int oreminchance[]={0,11,23,31,37,40};
+    const unsigned int orechance[]=   {20,44,64,80,89,94};
+    const unsigned int oreminchance[]={0 ,21,45,65,81,90};
     orenum=sizeof(ores)/sizeof(unsigned int);
     for(i=0;i<orenum;i++){
         maxchance=max(maxchance,orechance[i]);
@@ -103,7 +138,7 @@ void mktree(COORDS c,int type){
 };
 
 void mkunder(COORDS c,int dirt_len){
-    int l=c.y+dirt_len,i;
+    int l=c.y+dirt_len;
     c.y++;
     for(;c.y<l;c.y++){
         putmapid(c.x,c.y,TILE_DIRT);
@@ -209,4 +244,5 @@ void mapgen(){
     };
     clear();
     mkores();
+    mkcaves();
 };

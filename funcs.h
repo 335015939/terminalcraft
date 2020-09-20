@@ -22,7 +22,7 @@ char invremovemultipleitembyid(int num,const ITEM item[5]);
 char invremoveitembyid(ITEM item);
 char invitemcanberemoved(ITEM item,INV_SEARCH c);
 void dtile(TILE t);
-void pause();
+char pause();
 int titlescr();
 char loadworld();
 void initmycolorpairs();

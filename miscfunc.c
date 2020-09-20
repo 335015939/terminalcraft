@@ -2,25 +2,28 @@
 #include "funcs.h"
 #include "header.h"
 #include <curses.h>
-void pause(){
-    clear();
-    printw("Paused\n\nS:Save\nQ:quit\nJ or [ENTER]:continue");
+char pause(){
     for(;;){
+        clear();
+        printw("Paused\n\nS:Save\nQ:quit\nJ or [ENTER]:continue");
         refresh();
         switch(getch()){
             case 'q':
             case '\e':
             case 'Q':
-                exit(0);
+                return 1;
             case 's':
             case 'S':
                 saveworld();
                 saveplayer();
+                clear();
+                addstr("Saved!");
+                getch();
                 break;
             case 'j':
             case 'J':
             case '\n':
-                return;
+                return 0;
         };
     };
 };

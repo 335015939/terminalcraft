@@ -41,6 +41,7 @@ typedef struct {
     unsigned int _MAP_H;
     int skycolor;
     int oldskycolor;
+    char autosave;
 } _SETTINGS;
 typedef struct {
     int id;

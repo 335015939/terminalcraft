@@ -6,7 +6,7 @@
 
 //MAPTILE *map=NULL;
 _SETTINGS SETTINGS={
-    3000,500,0x21,0x21
+    3000,500,0x21,0x21,1
 };
 PLAYER player={};
 _WORLD WORLD={NULL,6*60,3000,500};
@@ -28,6 +28,10 @@ int main(){
             switch(k){
                 case 'Q':
                 case 'q':
+                    if(SETTINGS.autosave){
+                        saveplayer();
+                        saveworld();
+                    };
                     goto lbl_start;
                 case 'a':
                     TICK++;
@@ -88,7 +92,9 @@ int main(){
                 case 'p':
                 case 'P':
                 case '\e':
-                    pause();
+                    if(pause()){
+                        goto lbl_start;
+                    };
                     clear();
                     break;
             };

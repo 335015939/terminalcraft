@@ -117,18 +117,18 @@ int play(){
     clear();
     if((CHOSEN_PLAYER=playchooseplayer())==10) return 0;
     if((CHOSEN_WORLD=playchooseworld())==10) return 0;
-    if(!isplayersaved(CHOSEN_PLAYER)){
-        invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
-    }else{
-        loadplayer();
-    }
     if(!isworldsaved(CHOSEN_WORLD)){
         mapgen();
     }else {
         loadworld(CHOSEN_WORLD);
     };
-    player.c.x=MAP_W/2;
-    for(player.c.y=0;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
+    if(!isplayersaved(CHOSEN_PLAYER)){
+        player.c.x=MAP_W/2;
+        for(player.c.y=0;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
+        invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
+    }else{
+        loadplayer();
+    };
     return 1;
 }
 int titlescr(){
