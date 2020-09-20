@@ -91,8 +91,12 @@ void mineblock(){
     if(fall()) return;
     TILEDATA t=getmaptiledata(x,y);
     if(!t.minable) return;
-    if(t.hardlvl>gethelditemdata().minelvl) return;
-    health=t.hardness;
+    if((t.hardlvl>gethelditemdata().minelvl)&&!SETTINGS.debugmode) return;
+    if(SETTINGS.debugmode){
+        health=1;
+    }else{
+        health=t.hardness;
+    };
     attr_set(A_NORMAL,0,NULL);
     for(i=(rand()%4);;i++){
         if(i==4) i=0;
@@ -106,7 +110,7 @@ void mineblock(){
             mvprintw(2,0,"                   ");
             return;
         };
-        if(health<=0 || !SETTINGS.debugmode)putmapid(x, y, 0);
+        if(health<=0 || SETTINGS.debugmode)putmapid(x, y, 0);
     };
     emptystorage(&(getmaptile(x, y).storage));
     for(x=0;x<5;x++){
