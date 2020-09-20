@@ -9,5 +9,5 @@
 #define ERR_OUT_OF_MEM 3950
 #define MAP (WORLD.map)
 #define ITEMNUM 20
-#define CRAFT_RECIPIE_NUM 6
+#define CRAFT_RECIPIE_NUM 7
 #endif

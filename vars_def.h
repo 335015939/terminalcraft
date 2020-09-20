@@ -37,6 +37,29 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_STONE,10},
         },
         TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_COPPER_PICKAXE,1},
+        2,
+        {
+            {ITEM_COPPER,3},
+            {ITEM_WOOD,1}
+        },
+        TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_IRON_PICKAXE,1},
+        2,
+        {
+            {ITEM_IRON,3},
+            {ITEM_WOOD,1}
+        },
+        TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_LADDER,3},
+        1,
+        {
+            {ITEM_WOOD,2}
+        },
+        TILE_TYPE_WORKBENCH}
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
@@ -45,33 +68,36 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_GRASS,0x2e,0x00},
     {CP_TILE_OAK_LEAF,0x22,0x2e},
     {CP_TILE_OAK_TRUNK,0x5e,0x3a},
-    {CP_ITEM_DIRT,0x5e,0xe8},
+    {CP_ITEM_DIRT,0x5e,0xe9},
     {CP_ITEM_NONE,-1,-1},
-    {CP_ITEM_WOOD,0x5e,0x10},
-    {CP_ITEM_APPLE,0xc4,0xe8},
-    {CP_ITEM_STONE,0xf0,0xe8},
-    {CP_ITEM_WOOD_PICKAXE,0x5e,0xe8},
+    {CP_ITEM_WOOD,0x5e,0xe9},
+    {CP_ITEM_APPLE,0xc4,0xe9},
+    {CP_ITEM_STONE,0xf0,0xe9},
+    {CP_ITEM_WOOD_PICKAXE,0x5e,0xe9},
     {CP_TILE_PINE_LEAF,0x16,0x1c},
     {CP_TILE_PINE_TRUNK,0x5f,0x3a},
-    {CP_ITEM_COAL,0xe9,0xe8},
+    {CP_ITEM_COAL,0xe9,0xe9},
     {CP_TILE_COAL_ORE,0x10,0xf0},
-    {CP_ITEM_IRON_ORE,0xdf,0xe8},
-    {CP_TILE_IRON_ORE,0xdf,0xf0},
-    {CP_ITEM_SILVER_ORE,0xfe,0xe8},
+    {CP_ITEM_IRON_ORE,0xdd,0xe9},
+    {CP_TILE_IRON_ORE,0xdd,0xf0},
+    {CP_ITEM_SILVER_ORE,0xfe,0xe9},
     {CP_TILE_SILVER_ORE,0xfe,0xf0},
-    {CP_ITEM_GOLD_ORE,0x03,0xe8},
+    {CP_ITEM_GOLD_ORE,0x03,0xe9},
     {CP_TILE_GOLD_ORE,0x03,0xf0},
-    {CP_ITEM_DIAMOND_ORE,0x06,0xe8},
+    {CP_ITEM_DIAMOND_ORE,0x06,0xe9},
     {CP_TILE_DIAMOND_ORE,0x06,0xf0},
-    {CP_ITEM_COPPER_ORE,0xca,0xe8},
+    {CP_ITEM_COPPER_ORE,0xca,0xe9},
     {CP_TILE_COPPER_ORE,0xca,0xf0},
-    {CP_ITEM_IRON,0xdf,0xe8},
+    {CP_ITEM_IRON,0xdf,0xe9},
     {CP_TILE_WORKBENCH,0x5e,0x0},
-    {CP_ITEM_WORKBENCH,0x5e,0xe8},
+    {CP_ITEM_WORKBENCH,0x5e,0xe9},
     {CP_TILE_WOOD,0x5e,0x3a},
     {CP_TILE_FURNACE,0x01,0xf0},
-    {CP_ITEM_FURNACE,0xf0,0xe8}
-
+    {CP_ITEM_FURNACE,0xf0,0xe9},
+    {CP_ITEM_COPPER_PICKAXE,0xa6,0xe9},
+    {CP_ITEM_IRON_PICKAXE,0xfe,0xe9},
+    {CP_ITEM_LADDER,0x5e,0xe9},
+    {CP_TILE_LADDER,0x5e,0x0}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -251,12 +277,23 @@ const TILEDATA TILES[TILE_NUM]={
             {100}
         },
         "Furnace"},
+    {
+        TILE_LADDER,1,1,0,0,0,
+        1,1,TILE_TYPE_NONE,
+        {'#',A_BOLD,0x0,CP_TILE_LADDER},
+        {
+            {ITEM_LADDER},
+            {1},
+            {1},
+            {100},
+        },
+        "Ladders"}
 };
 const ITEMDATA ITEMS[ITEMNUM]={
     {
         ITEM_NONE,0,ITEM_TYPE_NONE,//id,maxstack,item type
         TILE_AIR,0,0,0,//tile when placed,mine power, mine level, damage
-        {' ',0x0,CP_ITEM_NONE},//char,attribute,background,color pair
+        {' ',A_BOLD,0x0,CP_ITEM_NONE},//char,attribute,background,color pair
         "Nothing"},//name
     {
         ITEM_DIRT,99,ITEM_TYPE_PLACABLE,
@@ -286,32 +323,32 @@ const ITEMDATA ITEMS[ITEMNUM]={
     {
         ITEM_COAL,99,ITEM_TYPE_OTHER,
         TILE_AIR,0,0,0,
-        {'o',0x0,CP_ITEM_COAL},
+        {'o',A_BOLD,0x0,CP_ITEM_COAL},
         "Coal"},
     {
         ITEM_IRON_ORE,99,ITEM_TYPE_PLACABLE,
         TILE_IRON_ORE,0,0,0,
-        {'#',0x0,CP_TILE_IRON_ORE},
+        {'#',A_NORMAL,0x0,CP_TILE_IRON_ORE},
         "Iron Ore"},
     {
         ITEM_SILVER_ORE,99,ITEM_TYPE_PLACABLE,
         TILE_SILVER_ORE,0,0,0,
-        {' ',0x0,CP_ITEM_SILVER_ORE},
+        {'#',A_NORMAL,0x0,CP_ITEM_SILVER_ORE},
         "Silver Ore"},
     {
         ITEM_GOLD_ORE,99,ITEM_GOLD_ORE,
         TILE_GOLD_ORE,0,0,0,
-        {'~',0x0,CP_ITEM_GOLD_ORE},
+        {'~',A_BOLD,0x0,CP_ITEM_GOLD_ORE},
         "Gold Ore"},
     {
         ITEM_DIAMOND_ORE,99,ITEM_TYPE_PLACABLE,
         TILE_DIAMOND_ORE,0,0,0,
-        {':',0x0,CP_ITEM_DIAMOND_ORE},
+        {':',A_BOLD,0x0,CP_ITEM_DIAMOND_ORE},
         "Diamond Ore"},
     {
         ITEM_COPPER_ORE,99,ITEM_TYPE_PLACABLE,
         TILE_COPPER_ORE,0,0,0,
-        {'#',0x0,CP_ITEM_COPPER_ORE},
+        {'#',A_BOLD,0x0,CP_ITEM_COPPER_ORE},
         "Copper Ore"},
     {
         ITEM_COPPER,99,ITEM_TYPE_OTHER,
@@ -331,7 +368,22 @@ const ITEMDATA ITEMS[ITEMNUM]={
     {
         ITEM_FURNACE,9,ITEM_TYPE_PLACABLE,
         TILE_FURNACE,0,0,0,
-        {'o',0x0,CP_ITEM_FURNACE},
+        {'o',A_BOLD,0x0,CP_ITEM_FURNACE},
         "Furnace"},
+    {
+        ITEM_COPPER_PICKAXE,1,ITEM_TYPE_PICKAXE,
+        TILE_AIR,3,2,0,
+        {'T',A_BOLD,0x0,CP_ITEM_COPPER_PICKAXE},
+        "Copper pickaxe"},
+    {
+        ITEM_IRON_PICKAXE,1,ITEM_TYPE_PICKAXE,
+        TILE_AIR,8,3,0,
+        {'T',A_BOLD,0x0,CP_ITEM_IRON_PICKAXE},
+        "Iron pckaxe"},
+    {
+        ITEM_LADDER,99,ITEM_TYPE_PLACABLE,
+        TILE_LADDER,0,0,0,
+        {'#',A_NORMAL,0x0,CP_ITEM_LADDER},
+        "Ladders"}
 };
 #endif

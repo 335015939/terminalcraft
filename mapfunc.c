@@ -23,6 +23,7 @@ char placeblock(){
 
 void drawmap(int startx,int starty){
     int i,j=0,x,y;
+    //clear();
     move(3,0);
     for(;j<21;j++){
         for(i=0;i<79;i++){

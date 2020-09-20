@@ -1,6 +1,7 @@
 #include "enum.h"
 #include "funcs.h"
 #include "header.h"
+#include <curses.h>
 
 struct {
     int sealvl;
@@ -27,7 +28,7 @@ void mkorevein(COORDS c,int len,int id){
 };
 void mkores(){
     COORDS c;
-    int i,id,maxchance=0,orenum,temp;
+    int i,id,maxchance=0,orenum,temp,j;
     const int ores[]={TILE_COPPER_ORE,TILE_COAL_ORE,TILE_IRON_ORE,TILE_SILVER_ORE,TILE_GOLD_ORE,TILE_DIAMOND_ORE};
     const int oremindepth[]={0,0,world.sealvl+(75),((2*MAP_H)/5),((3*MAP_H)/5),((MAP_H*4)/5)};
     const unsigned int orechance[]={10,22,30,36,39,41};
@@ -36,7 +37,9 @@ void mkores(){
     for(i=0;i<orenum;i++){
         maxchance=max(maxchance,orechance[i]);
     };
-    for(i=0;i<(MAP_W*MAP_H)/750;i++){
+    for(i=0;i<((MAP_W*MAP_H)/750);i++){
+        mvprintw(0,0,"Generating Ores:%d%%",(100*i)/((MAP_W*MAP_H)/750));
+        refresh();
         lbl_redo:
         do{
             do{
@@ -44,11 +47,12 @@ void mkores(){
                 c.y=rand()%MAP_H;
             }while(!isinmap(c.x,c.y));
         }while(getmapid(c.x, c.y)!=TILE_STONE);
-        for(i=0;i<orenum;i++){
+        id=0;
+        for(j=0;j<orenum;j++){
             temp=rand()%maxchance;
-            id=0;
-            if((temp>=oreminchance[i])&&(temp<orechance[i])&&(c.y>oremindepth[i])){
-                id=ores[i];
+            if((temp>=oreminchance[j])&&(temp<orechance[j])&&(c.y>=oremindepth[j])){
+                id=ores[j];
+                break;
             };
         };
         if(!id) goto lbl_redo;
@@ -196,8 +200,13 @@ void mapgen(){
     world.sealvl=MAP_H/4;
     COORDS c={0,world.sealvl+(random()%11)-6};
     COORDS (*genfuncs[3])(COORDS c,int l)={genplains,genhills,genforest};
+    clear();
+    attr_set(A_NORMAL,0,NULL);
     for(c.x=0;c.x<MAP_W;){
+        mvprintw(0,0,"Generating terrain:%d%% ",(100*c.x)/MAP_W);
+        refresh();
         c=(*genfuncs[rand()%3])(c,(MAP_W/50)+(rand()%10));
     };
+    clear();
     mkores();
 };
