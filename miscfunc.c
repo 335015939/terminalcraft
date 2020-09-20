@@ -128,7 +128,7 @@ void mineblock(){
 void moveplayer(int x,int y){
     if(y==-1){fall();};
     if(isinmap(x+player.c.x,y+player.c.y) && (x || y)){
-        if(getmaptiledata(x+player.c.x,y+player.c.y).passable || !SETTINGS.debugmode){
+        if(getmaptiledata(x+player.c.x,y+player.c.y).passable || SETTINGS.debugmode){
             player.c.x+=x;
             player.c.y+=y;
         }else TICK--;
