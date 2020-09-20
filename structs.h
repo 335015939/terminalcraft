@@ -42,6 +42,7 @@ typedef struct {
     int skycolor;
     int oldskycolor;
     char autosave;
+    char debugmode;
 } _SETTINGS;
 typedef struct {
     int id;
@@ -51,8 +52,10 @@ typedef struct {
 typedef struct {
     MAPTILE *map;
     int tick;
-    int widht;
+    int width;
     int height;
+    int spawnx;
+    int spawny;
 } _WORLD;
 typedef struct{
     int x;

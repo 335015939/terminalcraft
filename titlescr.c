@@ -123,12 +123,12 @@ int play(){
         loadworld(CHOSEN_WORLD);
     };
     if(!isplayersaved(CHOSEN_PLAYER)){
-        player.c.x=MAP_W/2;
-        for(player.c.y=0;!getmapid(player.c.x,player.c.y) && player.c.y<MAP_H;player.c.y++){};
         invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
     }else{
         loadplayer();
     };
+    player.c.x=WORLD.spawnx;
+    player.c.y=WORLD.spawny;
     return 1;
 }
 int titlescr(){

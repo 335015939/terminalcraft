@@ -1,5 +1,7 @@
+#include "enum.h"
 #include "funcs.h"
 #include "header.h"
+#include "vars.h"
 
 struct {
     int sealvl;
@@ -267,9 +269,12 @@ COORDS genmountains(COORDS c,int l){
 
 void mapgen(){
     world.sealvl=MAP_H/4;
+    int x,y;
     COORDS c={0,world.sealvl+(random()%11)-6};
     COORDS (*genfuncs[4])(COORDS c,int l)={genplains,genhills,genforest,genmountains};
     clear();
+    WORLD.height=MAP_H;
+    WORLD.width=MAP_W;
     attr_set(A_NORMAL,0,NULL);
     for(c.x=0;c.x<MAP_W;){
         mvprintw(0,0,"Generating terrain:%d%% ",(100*c.x)/MAP_W);
@@ -279,4 +284,11 @@ void mapgen(){
     clear();
     mkores();
     mkcaves();
+    x=MAP_W/2;
+    for(y=0;isinmap(x,y+1);y++){
+      if (!TILES[getmapid(x, y+1)].passable)
+        break;
+    };
+    WORLD.spawnx=x;
+    WORLD.spawny=y;
 };

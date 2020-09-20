@@ -76,7 +76,8 @@ unsigned int facing(){
 }
 char fall(){
     if(isinmap(player.c.x,player.c.y+1)){
-        if(getmaptiledata(player.c.x,player.c.y+1).fallthrough && getmaptiledata(player.c.x,player.c.y).fallthrough){
+        if(getmaptiledata(player.c.x,player.c.y+1).fallthrough && getmaptiledata(player.c.x,player.c.y).fallthrough
+         && !SETTINGS.debugmode){
             player.c.y++;
             return 1;
         };
@@ -96,16 +97,16 @@ void mineblock(){
     for(i=(rand()%4);;i++){
         if(i==4) i=0;
         if (!getmapid(x,y)) break;
+        TICK++;
         drawmap(player.c.x-38,player.c.y-10);
         mvprintw(2,0,"Mining block...%c",SPIN[i]);
         health-=gethelditemdata().minepower;
-        TICK++;
         k=getch();
         if(k!='j' && k!='J') {
             mvprintw(2,0,"                   ");
             return;
         };
-        if(health<=0)putmapid(x, y, 0);
+        if(health<=0 || !SETTINGS.debugmode)putmapid(x, y, 0);
     };
     emptystorage(&(getmaptile(x, y).storage));
     for(x=0;x<5;x++){
@@ -127,7 +128,7 @@ void mineblock(){
 void moveplayer(int x,int y){
     if(y==-1){fall();};
     if(isinmap(x+player.c.x,y+player.c.y) && (x || y)){
-        if(getmaptiledata(x+player.c.x,y+player.c.y).passable){
+        if(getmaptiledata(x+player.c.x,y+player.c.y).passable || !SETTINGS.debugmode){
             player.c.x+=x;
             player.c.y+=y;
         }else TICK--;
