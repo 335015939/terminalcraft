@@ -1,19 +1,33 @@
 #include "header.h"
+#include <string.h>
+#include <curses.h>
 #define ditem(x) dtile(ITEMS[(x).id].t)
 ITEM (*cheststorage)[10][10]=NULL;
+ITEM getchestitem(COORDS c){
+    if(c.x<10){
+        return player.i[c.x][c.y];
+    }else{
+        return (*cheststorage)[c.x-10][c.y];
+    };
+}
 void drawchestitem(COORDS c,int attr){
     ITEM item;
-    if(c.x<10){
-        item=player.i[c.x][c.y];
-    }else{
-        item=(*cheststorage)[c.x-10][c.y-10];
-    };
+    item=getchestitem(c);
     attr_set(attr | ITEMS[(item).id].t.a,ITEMS[item.id].t.cp,NULL);
     addch(ITEMS[(item).id].t.c);
 };
+void putchestitem(COORDS c,ITEM i){
+    if(c.x<10){
+        player.i[c.x][c.y]=i;
+    }else{
+        (*cheststorage)[c.x-10][c.y]=i;
+    };
+};
 void drawchest(COORDS s,COORDS c,char f){
     int i,j;
+    ITEM item;
     clear();
+    attr_set(A_NORMAL,0,NULL);
     addstr("Inventory   Chest\n");
     for(i=0;i<23;i++){
         addch('=');
@@ -35,37 +49,67 @@ void drawchest(COORDS s,COORDS c,char f){
     };
     move(c.y+2,c.x+(c.x>=10)+1);
     drawchestitem(c,A_REVERSE);
+    item=getchestitem(c);
+    mvprintw(13,0,"%s(%d)",ITEMS[item.id].name,item.num);
     if(f){
         move(s.y+2,s.x+(s.x>=10)+1);
         drawchestitem(s,A_REVERSE);
-    }
+    };
 };
 void chestitemswap(COORDS a,COORDS b){
-    ITEM (*item1);
-    ITEM (*item2);
-    ITEM (*item)=malloc_throw(sizeof(ITEM));
-    if(a.x>10){
-        item1=cheststorage[a.x-10][a.y];
-    }else{
-        item1=&(player.i[a.x][a.y]);
-    };
-    if(b.x>=10){
-        item2=cheststorage[b.x-10][b.y];
-    }else{
-        item2=&(player.i[b.x][b.y]);
-    };
-    *item=*item2;
-    *item2=*item1;
-    *item1=*item;
-    free(item);
-    clear();
-    printw("%s %s",ITEMS[(*item1).id].name,ITEMS[(*item2).id].name);
-    getch();
+    ITEM item1;
+    ITEM item2;
+    ITEM item;
+    item1=getchestitem(a);
+    item2=getchestitem(b);
+    putchestitem(b,item1);
+    putchestitem(a,item2);
 };
 void chest(int x,int y){
-    int selected=1;
+    char isselected=0;
+    static COORDS selected={};
+    COORDS oldselected={};
     cheststorage=&getmaptile(x,y).storage;
-    chestitemswap((COORDS){0,0},(COORDS){10,0});
-    drawchest((COORDS){0,0},(COORDS){0,0},selected);
+    for(;;){
+        drawchest(oldselected,selected,isselected);
+        mvprintw(14,0,"%d %d   ",selected.x,selected.y);
+        switch(getch()){
+            case 'w':
+            case 'W':
+            case KEY_UP:
+                selected.y-=(selected.y>0);
+                break;
+            case 's':
+            case 'S':
+            case KEY_DOWN:
+                selected.y+=(selected.y<9);
+                break;
+            case 'd':
+            case 'D':
+            case KEY_RIGHT:
+                selected.x+=(selected.x<19);
+                break;
+            case 'a':
+            case 'A':
+            case KEY_LEFT:
+                selected.x-=(selected.x>0);
+                break;
+            case 'j':
+            case 'J':
+            case '\n':
+                if(isselected){
+                    chestitemswap(selected,oldselected);
+                    isselected=0;
+                }else{
+                    oldselected=selected;
+                    isselected=1;
+                };
+                break;
+            case 'q':
+            case 'Q':
+                clear();
+                return;
+        };
+    };
     getch();
 };
