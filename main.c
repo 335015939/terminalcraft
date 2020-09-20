@@ -26,6 +26,16 @@ int main(){
             x=y=0;
             k=getch();
             switch(k){
+                case 'k':
+                case 'K':
+                    if(isinmap(player.c.x+player.facingx,player.c.y+player.facingy)){
+                        switch(getmaptiledata(player.c.x+player.facingx, player.c.y+player.facingy).type){
+                            case TILE_TYPE_CHEST:
+                                chest(player.c.x+player.facingx,player.c.y+player.facingy);
+                                break;
+                        };
+                    }
+                    break;
                 case 'Q':
                 case 'q':
                     if(SETTINGS.autosave){

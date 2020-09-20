@@ -45,7 +45,8 @@ typedef struct {
 } _SETTINGS;
 typedef struct {
     int id;
-
+    ITEM storage[10][10];
+    ITEM dropped[5];
 } MAPTILE;
 typedef struct {
     MAPTILE *map;

@@ -54,12 +54,33 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
         },
         TILE_TYPE_WORKBENCH},
     {
-        {ITEM_LADDER,3},
+        {ITEM_LADDER,2},
         1,
         {
-            {ITEM_WOOD,2}
+            {ITEM_WOOD,3}
         },
-        TILE_TYPE_WORKBENCH}
+        TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_DOOR,1},
+        1,
+        {
+            {ITEM_WOOD,4}
+        },
+        TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_WOOD_WALL,2},
+        1,
+        {
+            {ITEM_WOOD,1}
+        },
+        TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_CHEST,1},
+        1,
+        {
+            {ITEM_WOOD,10}
+        },
+        TILE_TYPE_WORKBENCH},
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
@@ -76,7 +97,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_WOOD_PICKAXE,0x5e,0xe9},
     {CP_TILE_PINE_LEAF,0x16,0x1c},
     {CP_TILE_PINE_TRUNK,0x5f,0x3a},
-    {CP_ITEM_COAL,0xe9,0xe9},
+    {CP_ITEM_COAL,0xed,0xe9},
     {CP_TILE_COAL_ORE,0x10,0xf0},
     {CP_ITEM_IRON_ORE,0xdd,0xe9},
     {CP_TILE_IRON_ORE,0xdd,0xf0},
@@ -97,7 +118,13 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_COPPER_PICKAXE,0xa6,0xe9},
     {CP_ITEM_IRON_PICKAXE,0xfe,0xe9},
     {CP_ITEM_LADDER,0x5e,0xe9},
-    {CP_TILE_LADDER,0x5e,0x0}
+    {CP_TILE_LADDER,0x5e,0x0},
+    {CP_TILE_DOOR,0x5e,0x0},
+    {CP_ITEM_DOOR,0x5e,0xe9},
+    {CP_ITEM_WOOD_WALL,0x5e,0x3a},
+    {CP_TILE_WOOD_WALL,0x3a,0x3a},
+    {CP_TILE_CHEST,0x5e,0x3a},
+    {CP_ITEM_CHEST,0x82,0x5e}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -113,7 +140,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Air"},
     {
         TILE_DIRT,0,1,0,0,0,
-        1,3,TILE_TYPE_NONE,
+        1,12,TILE_TYPE_NONE,
         {' ',A_NORMAL,0x5e,CP_TILE_DIRT},
         {
             {ITEM_DIRT,},
@@ -124,7 +151,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Dirt"},
     {
         TILE_STONE,0,1,0,0,0,
-        1,10,TILE_TYPE_NONE,
+        1,20,TILE_TYPE_NONE,
         {' ',A_NORMAL,0xf0,CP_TILE_STONE},
         {
             {ITEM_STONE},
@@ -152,7 +179,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Oak leaves"},
     {
         TILE_OAK_TRUNK,1,1,0,0,0,
-        1,4,TILE_TYPE_NONE,
+        1,12,TILE_TYPE_NONE,
         {'|',A_BOLD,0x3a,CP_TILE_OAK_TRUNK},
         {
             {ITEM_WOOD},
@@ -163,7 +190,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Oak tree trunk"},
     {
         TILE_PINE_TRUNK,1,1,0,0,0,
-        1,4,TILE_TYPE_NONE,
+        1,12,TILE_TYPE_NONE,
         {'|',A_BOLD,0x3a,CP_TILE_PINE_TRUNK},
         {
             {ITEM_WOOD},
@@ -180,7 +207,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Pine tree needles"},
     {
         TILE_COAL_ORE,0,1,0,0,0,
-        1,12,TILE_TYPE_NONE,
+        1,22,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_COAL_ORE},
         {
             {ITEM_COAL},
@@ -191,7 +218,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Coal Ore"},
     {
         TILE_IRON_ORE,0,1,0,0,0,
-        2,16,TILE_TYPE_NONE,
+        2,32,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_IRON_ORE},
         {
             {ITEM_IRON_ORE},
@@ -202,7 +229,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Iron Ore"},
     {
         TILE_SILVER_ORE,0,1,0,0,0,
-        2,20,TILE_TYPE_NONE,
+        2,32,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_SILVER_ORE},
         {
             {ITEM_SILVER_ORE},
@@ -213,7 +240,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Silver Ore"},
     {
         TILE_GOLD_ORE,0,1,0,0,0,
-        2,19,TILE_TYPE_NONE,
+        2,40,TILE_TYPE_NONE,
         {'~',A_BOLD,0xf0,CP_TILE_GOLD_ORE},
         {
             {ITEM_GOLD_ORE},
@@ -224,7 +251,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Gold Ore"},
     {
         TILE_DIAMOND_ORE,0,1,0,0,0,
-        3,30,TILE_TYPE_NONE,
+        3,81,TILE_TYPE_NONE,
         {':',A_BOLD,0xf0,CP_TILE_DIAMOND_ORE},
         {
             {ITEM_DIAMOND_ORE},
@@ -235,7 +262,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Diamond Ore"},
     {
         TILE_COPPER_ORE,0,1,0,0,0,
-        1,14,TILE_TYPE_NONE,
+        1,24,TILE_TYPE_NONE,
         {'#',A_BOLD,0xf0,CP_TILE_COPPER_ORE},
         {
             {ITEM_COPPER_ORE},
@@ -246,7 +273,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Copper Ore"},
     {
         TILE_WORKBENCH,1,1,0,0,0,
-        1,2,TILE_TYPE_WORKBENCH,
+        1,6,TILE_TYPE_WORKBENCH,
         {'n',A_BOLD,0x0,CP_TILE_WORKBENCH},
         {
             {ITEM_WORKBENCH},
@@ -257,7 +284,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Workbench"},
     {
         TILE_WOOD,0,1,0,0,0,
-        1,4,TILE_TYPE_NONE,
+        1,11,TILE_TYPE_NONE,
         {'=',A_BOLD,0x5e,CP_TILE_WOOD},
         {
             {ITEM_WOOD},
@@ -268,7 +295,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Wood block"},
     {
         TILE_FURNACE,1,1,0,0,0,
-        1,6,TILE_TYPE_FURNACE,
+        1,21,TILE_TYPE_FURNACE,
         {'o',A_BOLD,0xf0,CP_TILE_FURNACE},
         {
             {ITEM_FURNACE},
@@ -279,7 +306,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Furnace"},
     {
         TILE_LADDER,1,1,0,0,0,
-        1,1,TILE_TYPE_NONE,
+        1,3,TILE_TYPE_NONE,
         {'#',A_BOLD,0x0,CP_TILE_LADDER},
         {
             {ITEM_LADDER},
@@ -287,7 +314,40 @@ const TILEDATA TILES[TILE_NUM]={
             {1},
             {100},
         },
-        "Ladders"}
+        "Ladders"},
+    {
+        TILE_DOOR,1,1,0,0,0,
+        1,6,TILE_TYPE_DOOR,
+        {'|',A_BOLD,0x0,CP_TILE_DOOR},
+        {
+            {ITEM_DOOR},
+            {1},
+            {1},
+            {100},
+        },
+        "Door"},
+    {
+        TILE_WOOD_WALL,1,1,0,1,0,
+        1,1,TILE_TYPE_BACKGROUND_WALL,
+        {' ',A_NORMAL,0x3a,CP_TILE_WOOD_WALL},
+        {
+            {ITEM_WOOD_WALL},
+            {1},
+            {1},
+            {100},
+        },
+        "Wall"},
+    {
+        TILE_CHEST,1,1,0,0,0,
+        1,12,TILE_TYPE_CHEST,
+        {'^',A_BOLD,0x5e,CP_TILE_CHEST},
+        {
+            {ITEM_CHEST},
+            {1},
+            {1},
+            {100},
+        },
+        "Chest"},
 };
 const ITEMDATA ITEMS[ITEMNUM]={
     {
@@ -384,6 +444,21 @@ const ITEMDATA ITEMS[ITEMNUM]={
         ITEM_LADDER,99,ITEM_TYPE_PLACABLE,
         TILE_LADDER,0,0,0,
         {'#',A_NORMAL,0x0,CP_ITEM_LADDER},
-        "Ladders"}
+        "Ladders"},
+    {
+        ITEM_DOOR,4,ITEM_TYPE_PLACABLE,
+        TILE_DOOR,0,0,0,
+        {'|',A_NORMAL,0x0,CP_ITEM_DOOR},
+        "Door"},
+    {
+        ITEM_WOOD_WALL,99,ITEM_TYPE_PLACABLE,
+        TILE_WOOD_WALL,0,0,0,
+        {'=',A_NORMAL,0x0,CP_ITEM_WOOD_WALL},
+        "Wooden walls"},
+    {
+        ITEM_CHEST,99,ITEM_TYPE_PLACABLE,
+        TILE_CHEST,0,0,0,
+        {'^',A_NORMAL,0x0,CP_ITEM_CHEST},
+        "Chest"},
 };
 #endif

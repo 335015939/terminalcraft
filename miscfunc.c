@@ -106,7 +106,7 @@ void mineblock(){
         };
         if(health<=0)putmapid(x, y, 0);
     };
-    
+    emptystorage(&(getmaptile(x, y).storage));
     for(x=0;x<5;x++){
         if(!t.drops.id[x]) break;
         if((z=((t.drops.max[x])-(t.drops.low[x])))){
@@ -120,7 +120,7 @@ void mineblock(){
             invadditem(item);
         };
     };
-    mvprintw(2,0,"                   ");
+    mvprintw(2,0,"                           ");
     drawmap(player.c.x-38,player.c.y-10);
 };
 void moveplayer(int x,int y){
@@ -132,4 +132,12 @@ void moveplayer(int x,int y){
         }else TICK--;
     }else TICK --;
     if(y!=-1){fall();};
+};
+void emptystorage(ITEM (*items)[10][10]){
+    int i,j;
+    for(i=0;i<10;i++){
+        for(j=0;j<10;j++){
+            (*items)[i][j]=(ITEM){0,0};
+        };
+    };
 };

@@ -7,6 +7,7 @@
 #define dmaptile(x,y) dtile(TILES[getmapid(x,y)].t)
 #define mvdmaptile(y,x,mx,my) move((y),(x));dtile(TILES[getmapid(x,y)].t)
 #define getmapid(x,y) (WORLD.map[(x)+(MAP_W*(y))].id)
+#define getmaptile(x,y) (WORLD.map[(x)+(MAP_W*(y))])
 #define putmapid(x,y,z) (WORLD.map[(x)+(MAP_W*(y))].id=(z))
 #define getmaptiledata(x,y) (TILES[getmapid(x,y)])
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
@@ -17,6 +18,8 @@ void myinit();
 void inventory();
 char saveworld();
 char loadplayer();
+void chest(int x,int y);
+void emptystorage(ITEM (*items)[10][10]);
 char saveplayer();
 char invremovemultipleitembyid(int num,const ITEM item[5]);
 char invremoveitembyid(ITEM item);
