@@ -1,7 +1,19 @@
 #include "enum.h"
 #include "funcs.h"
 #include "header.h"
-
+char scanfortrunk(int x,int y){
+    int i,j;
+    for(i=0;i<5;i++){
+        for(j=0;j<5;j++){
+            if(isinmap(x+i-2, y+j-2)){
+                if(getmaptiledata(x+i-2, y+j-2).type==TILE_TYPE_TREE_TRUNK){
+                    return 1;
+                };
+            };
+        };
+    };
+    return 0;
+}
 void stuffpertick(){
     int x,y,i;
     TICK++;
@@ -27,6 +39,10 @@ void stuffpertick(){
                     };
                 };
                 break;
+            case TILE_TYPE_LEAF:
+                if(!scanfortrunk(x,y)){
+                    putmapid(x, y, TILE_AIR);
+                };
             case TILE_TYPE_OAK_SAPLING:
                 break;
             case TILE_TYPE_PINE_SAPLING:

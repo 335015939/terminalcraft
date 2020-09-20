@@ -140,7 +140,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Air"},
     {
         TILE_DIRT,0,1,0,0,0,
-        1,12,TILE_TYPE_NONE,
+        1,12,TILE_TYPE_DIRT,
         {' ',A_NORMAL,0x5e,CP_TILE_DIRT},
         {
             {ITEM_DIRT,},
@@ -162,13 +162,13 @@ const TILEDATA TILES[TILE_NUM]={
         "Stone"},
     {
         TILE_GRASS,1,1,0,1,1,
-        1,1,TILE_TYPE_NONE,
+        1,1,TILE_TYPE_GRASS,
         {'_',A_UNDERLINE,0x0,CP_TILE_GRASS},
         {},
         "Grass"},
     {
         TILE_OAK_LEAF,1,1,0,1,1,
-        1,1,TILE_TYPE_NONE,
+        1,1,TILE_TYPE_LEAF,
         {'#',A_BOLD,0x2e,CP_TILE_OAK_LEAF},
         {
             {ITEM_APPLE},
@@ -179,7 +179,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Oak leaves"},
     {
         TILE_OAK_TRUNK,1,1,0,0,0,
-        1,12,TILE_TYPE_NONE,
+        1,12,TILE_TYPE_TREE_TRUNK,
         {'|',A_BOLD,0x3a,CP_TILE_OAK_TRUNK},
         {
             {ITEM_WOOD},
@@ -190,7 +190,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Oak tree trunk"},
     {
         TILE_PINE_TRUNK,1,1,0,0,0,
-        1,12,TILE_TYPE_NONE,
+        1,12,TILE_TYPE_TREE_TRUNK,
         {'|',A_BOLD,0x3a,CP_TILE_PINE_TRUNK},
         {
             {ITEM_WOOD},
@@ -201,7 +201,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Pine tree trunk"},
     {
         TILE_PINE_LEAF,1,1,0,1,1,
-        1,1,TILE_TYPE_NONE,
+        1,1,TILE_TYPE_LEAF,
         {'=',A_BOLD,0x1c,CP_TILE_PINE_LEAF},
         {},
         "Pine tree needles"},
