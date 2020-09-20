@@ -101,7 +101,7 @@ void mineblock(){
     for(i=(rand()%4);;i++){
         if(i==4) i=0;
         if (!getmapid(x,y)) break;
-        TICK++;
+        stuffpertick();
         drawmap(player.c.x-38,player.c.y-10);
         mvprintw(2,0,"Mining block...%c",SPIN[i]);
         health-=gethelditemdata().minepower;
@@ -131,12 +131,14 @@ void mineblock(){
 };
 void moveplayer(int x,int y){
     if(y==-1){fall();};
+    TICK --;
     if(isinmap(x+player.c.x,y+player.c.y) && (x || y)){
         if(getmaptiledata(x+player.c.x,y+player.c.y).passable || SETTINGS.debugmode){
             player.c.x+=x;
             player.c.y+=y;
-        }else TICK--;
-    }else TICK --;
+            stuffpertick();
+        };
+    };
     if(y!=-1){fall();};
 };
 void emptystorage(ITEM (*items)[10][10]){

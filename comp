@@ -1,1 +1,1 @@
-clang ./chest.c ./main.c ./craft.c ./init.c ./draw.c ./mapgen.c ./miscfunc.c ./mapfunc.c ./invfunc.c ./saveload.c ./titlescr.c -o./terminalcraft -lncurses -Wall
+clang ./chest.c ./stuffpertick.c ./main.c ./craft.c ./init.c ./draw.c ./mapgen.c ./miscfunc.c ./mapfunc.c ./invfunc.c ./saveload.c ./titlescr.c -o./terminalcraft -lncurses -Wall

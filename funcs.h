@@ -16,6 +16,7 @@
 #define tiledatatostationname(x) (tiledatatostationname((x).type))
 void myinit();
 void inventory();
+void stuffpertick();
 char saveworld();
 char loadplayer();
 void chest(int x,int y);
