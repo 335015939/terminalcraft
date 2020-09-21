@@ -11,8 +11,8 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
         ENTITY_NONE,
         {' ',A_NORMAL,0x0,0}},
     {
-        
-    }
+        ENTITY_SNAKE,
+        {'s',A_BOLD,0x28,CP_ENTITY_SNAKE}}
 };
 const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
     {

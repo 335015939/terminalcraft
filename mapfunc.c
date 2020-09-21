@@ -21,8 +21,11 @@ char placeblock(){
     return 1;
 };
 char drawent(int x,int y){
-    if(!getmaptile(x, y).e.id) return 0;
-    addch('e');
+    int id;
+    if(!(id=getmaptile(x, y).e.id)) return 0;
+    init_pair(ENTITIES[id].t.cp,ENTITIES[id].t.b,getmaptiledata(x, y).t.b);
+    attr_set(ENTITIES[id].t.a,ENTITIES[id].t.cp,NULL);
+    addch(ENTITIES[id].t.c);
     return 1;
 };
 void drawmap(int startx,int starty){
