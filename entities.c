@@ -1,7 +1,7 @@
 #include "defines.h"
 #include "funcs.h"
 #include "header.h"
-
+#define entity_none ((ENTITY){})
 COORDS *entityxy=NULL;
 void ai_none(int x){
     invadditem((ITEM){ITEM_DIRT,1});
@@ -15,6 +15,14 @@ void ai_none(int x){
 };
 void ai_snake(int x){
     COORDS c=entityxy[x];
+    ENTITY e=getmaptile(c.x, c.y).e;
+    getmaptile(c.x, c.y).e=entity_none;
+    if(rand()%2){
+        c.x+=(c.x<player.c.x)-(c.x>player.c.x);
+    }else{
+        c.y+=(c.y<player.c.y)-(c.y>player.c.y);
+    };
+    getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
 };
 void entities(){

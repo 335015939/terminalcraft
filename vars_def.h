@@ -6,6 +6,14 @@
 #include "structs.h"
 #include "enum.h"
 const unsigned char SPIN[4]={'|','/','-','\\'};
+const ENTITY_DEF ENTITIES[ENTITY_NUM]={
+    {
+        ENTITY_NONE,
+        {' ',A_NORMAL,0x0,0}},
+    {
+        
+    }
+};
 const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
     {
         {ITEM_COPPER,1},//result after crafting

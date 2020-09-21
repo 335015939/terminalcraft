@@ -96,4 +96,8 @@ typedef struct {
     int y;
     char found;
 } INV_SEARCH;
+typedef struct {
+    int id;
+    TILE t;
+} ENTITY_DEF;
 #endif

@@ -14,4 +14,5 @@ extern const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM];
 extern int CHOSEN_WORLD;
 extern int CHOSEN_PLAYER;
 extern COORDS *entityxy;
+extern const ENTITY_DEF ENTITIES[ENTITY_NUM];
 #endif
