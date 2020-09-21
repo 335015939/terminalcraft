@@ -1,7 +1,76 @@
 #include "header.h"
+#include "vars.h"
 #include <curses.h>
 int CHOSEN_WORLD=0;
 int CHOSEN_PLAYER=0;
+#define OP_TYPE_INT 1
+#define OP_TYPE_BOOL 2
+int optionstatus[4]={};
+const int optiontype[4]={OP_TYPE_INT,             OP_TYPE_INT              ,OP_TYPE_BOOL  ,OP_TYPE_BOOL};
+void drawopt(int i){
+    const char *options[4]={"Map height(New maps only)","Map width(New maps only)","Autosave","Debug mode"};
+    const char*tf[2]={"Off","On"};
+    addstr(options[i]);
+    if(optiontype[i]==OP_TYPE_BOOL){
+        printw(":%s\n",tf[optionstatus[i]]);
+    }else{
+        printw(":%d\n",optionstatus[i]);
+    };
+};
+void options(){
+    int i,selected=0;
+    
+    for(;;){
+        optionstatus[0]=MAP_H;
+        optionstatus[1]=MAP_W;
+        optionstatus[2]=SETTINGS.autosave;
+        optionstatus[3]=SETTINGS.debugmode;
+        clear();
+        attr_set(A_NORMAL,0,NULL);
+        addstr("Options\n\n");
+        for(i=0;i<4;i++){
+            drawopt(i);
+        };
+        move(selected+2,0);
+        attron(A_REVERSE);
+        drawopt(selected);
+        i=0;
+        switch(getch()){
+            case 'q':
+            case 'Q':
+            case '\e':
+                return;
+            case 'w':
+            case 'W':
+            case KEY_UP:
+                selected -=(selected>0);
+                break;
+            case 's':
+            case 'S':
+            case KEY_DOWN:
+                selected +=(selected<3);
+                break;
+            case 'a':
+            case 'A':
+            case KEY_LEFT:
+                i=-2;
+            case 'd':
+            case 'D':
+            case KEY_RIGHT:
+                i++;
+                if(optiontype[selected]==OP_TYPE_BOOL){
+                    optionstatus[selected]=!optionstatus[selected];
+                }else{
+                    optionstatus[selected]+=((optionstatus[selected]>100 && optionstatus[selected]<25000)*i*100);
+                };
+                break;
+        };
+        MAP_H=optionstatus[0];
+        MAP_W=optionstatus[1];
+        SETTINGS.autosave=optionstatus[2];
+        SETTINGS.debugmode=optionstatus[3];
+    };
+};
 int _titlescr();
 char isplayersaved(int i){
     char *fname=malloc_throw(26);
@@ -138,9 +207,7 @@ int titlescr(){
                 if(play()) return 0;
                 break;
             case 1:
-                clear();
-                printw("Not avalaible right now");
-                getch();
+                options();
                 break;
             case 2:
                 exit(0);
