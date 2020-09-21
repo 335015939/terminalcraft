@@ -3,4 +3,4 @@ image:
 
 tasks:
   - init: ./comp
-    command: ./run
+    command: ./comp&&./run

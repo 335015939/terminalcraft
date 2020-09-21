@@ -303,12 +303,12 @@ COORDS genmountains(COORDS c,int l){
             break;
         };
         
-        if (!(rand()%3)){
+        if (!(rand()%2)){
             c.x--;
             if(direction){
-                c.y+=(rand()%12);
+                c.y+=1;
             }else{
-                c.y-=(rand()%12);
+                c.y-=1;
             };
             if(c.y>=(world.sealvl+20+(rand()%4))){
                 direction=!direction;

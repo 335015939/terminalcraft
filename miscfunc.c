@@ -2,6 +2,12 @@
 #include "funcs.h"
 #include "header.h"
 #include <curses.h>
+void die(){
+    clear();
+    attr_set(0,0,NULL);
+    addstr("You died!\nPress any key to continue");
+    getch();
+};
 void gotospawn(){
     player.c.x=WORLD.spawnx;
     player.c.y=WORLD.spawny;

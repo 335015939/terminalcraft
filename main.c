@@ -1,6 +1,7 @@
 #include "enum.h"
 #include "funcs.h"
 #include "header.h"
+#include "vars.h"
 #include "vars_def.h"
 #include <curses.h>
 
@@ -8,20 +9,22 @@
 _SETTINGS SETTINGS={
     3000,500,0x21,0x21,1,0
 };
-PLAYER player={};
+char *GOT_HIT_MSG=" ";
+char *HIT_MSG=" ";
+PLAYER player={{},0,0,{},0,{},20,20,15};
 _WORLD WORLD={NULL,6*60,3000,500};
 int main(){
     int x,k,y,tick=TICK;
+    ENTITY *ent;
     myinit();
     lbl_start:
     titlescr();
     clear();
     
     for(;;){
-        
         while (TICK==tick){  
-            
             drawmap(player.c.x-38,player.c.y-10);
+            HIT_MSG=GOT_HIT_MSG=" ";
             x=y=0;
             k=getch();
             switch(k){
@@ -83,6 +86,13 @@ int main(){
                             placeblock();
                             stuffpertick();
                             break;
+                        case ITEM_TYPE_WEAPON:
+                            if((ent=&getmaptile(player.c.x+player.facingx, player.c.y+player.facingy).e)->id!=0){
+                                HIT_MSG="You hit something";
+                                ent->hp-=gethelditemdata().damage;
+                            };
+                            stuffpertick();
+                            break;
                         case ITEM_TYPE_MAGIC_MIRROR:
                             gotospawn();
                             stuffpertick();
@@ -113,6 +123,10 @@ int main(){
                     break;
             };
             if(x || y) moveplayer(x,y);
+        };
+        if(player.hp<=0){
+            die();
+            goto lbl_start;
         };
         tick=TICK;
     };

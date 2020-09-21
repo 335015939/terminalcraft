@@ -1,3 +1,4 @@
+#include "defines.h"
 #include "funcs.h"
 #include "header.h"
 #include "vars.h"
@@ -23,14 +24,17 @@ char placeblock(){
 char drawent(int x,int y){
     int id;
     if(!(id=getmaptile(x, y).e.id)) return 0;
-    init_pair(ENTITIES[id].t.cp,ENTITIES[id].t.b,getmaptiledata(x, y).t.b);
+    if(getmaptiledata(x, y).t.b){
+        init_pair(ENTITIES[id].t.cp,ENTITIES[id].t.b,getmaptiledata(x, y).t.b);
+    }else{
+        init_pair(ENTITIES[id].t.cp,ENTITIES[id].t.b,SKYCOLOR);
+    };
     attr_set(ENTITIES[id].t.a,ENTITIES[id].t.cp,NULL);
     addch(ENTITIES[id].t.c);
     return 1;
 };
 void drawmap(int startx,int starty){
     int i,j=0,x,y;
-    //clear();
     move(3,0);
     for(;j<21;j++){
         for(i=0;i<79;i++){
@@ -55,8 +59,8 @@ void drawmap(int startx,int starty){
     attr_set(A_NORMAL,CP_PLAYER,NULL);
     mvaddch(13,38,'@');
     attr_set(A_NORMAL,0,NULL);
-    mvprintw(0,0,"x:%d y:%d %2d:%2d %c   \n\r%s          ",
-    player.c.x,player.c.y,(TICK/60)%24,TICK%60,facing(),getmaptiledata(player.c.x, player.c.y).name);
+    mvprintw(0,0,"x:%d y:%d %2d:%02d %c %d/%d       \n%s                          \n%s                         ",
+    player.c.x,player.c.y,(TICK/60)%24,TICK%60,facing(),player.hp,player.maxhp,HIT_MSG,GOT_HIT_MSG);
     switch((TICK/60)%24){
         case 22 ... 23:
         case 0 ... 3:

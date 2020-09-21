@@ -49,6 +49,7 @@ void stuffperticknofall(){
                 break;
         };
     };
+    if((rand()%100)<=player.regen && player.hp<player.maxhp) player.hp++; 
     entities();
 };
 void stuffpertick(){

@@ -195,6 +195,9 @@ int play(){
     if(!isplayersaved(CHOSEN_PLAYER)){
         invadditem((ITEM){ITEM_WOOD_SWORD,1});
         invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
+        player.hp=20;
+        player.maxhp=20;
+        player.regen=15;
     }else{
         loadplayer();
     };

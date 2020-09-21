@@ -15,4 +15,6 @@ extern int CHOSEN_WORLD;
 extern int CHOSEN_PLAYER;
 extern COORDS *entityxy;
 extern const ENTITY_DEF ENTITIES[ENTITY_NUM];
+extern char *GOT_HIT_MSG;
+extern char *HIT_MSG;
 #endif

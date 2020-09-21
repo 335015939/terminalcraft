@@ -6,6 +6,7 @@
 #include "structs.h"
 #include "enum.h"
 const unsigned char SPIN[4]={'|','/','-','\\'};
+
 const ENTITY_DEF ENTITIES[ENTITY_NUM]={
     {
         ENTITY_NONE,

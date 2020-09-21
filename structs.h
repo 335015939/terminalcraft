@@ -73,6 +73,9 @@ typedef struct{
     ITEM i[10][10];
     int holding;
     int recipies_found[CRAFT_RECIPIE_NUM];
+    int hp;
+    int maxhp;
+    int regen;
 } PLAYER;
 typedef struct {
     int id;

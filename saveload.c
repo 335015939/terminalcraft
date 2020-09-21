@@ -1,10 +1,9 @@
 #include "funcs.h"
 #include "header.h"
 #include "vars.h"
-#include <stdio.h>
-#include <string.h>
 void savesettings(){
     int i;
+    system("mkdir -p ./terminal_craft");
     FILE *f=fopen("./terminal_craft/settings","w");
     char *m=(char *)&SETTINGS;
     for(i=0;i<sizeof(SETTINGS);i++){
@@ -25,6 +24,7 @@ void loadsettings(){
     return;
 };
 char saveplayer(){
+    system("mkdir -p ./terminal_craft");
     char *fname=malloc_throw(26);
     int i;
     sprintf(fname,"./terminal_craft/player%d",CHOSEN_PLAYER);
@@ -88,6 +88,7 @@ char loadworld(){
 char saveworld(){
     int i;
     char *fname=malloc_throw(25);
+    system("mkdir -p ./terminal_craft");
     sprintf(fname,"./terminal_craft/world%d",CHOSEN_WORLD);
     FILE *f=fopen(fname,"w");
 
@@ -103,11 +104,8 @@ char saveworld(){
     };
 
     fwrite(entityxy,sizeof(COORDS)*MAX_ENTITY,1,f);
-    // printw("\ntick:%d\nwidth:%d\nheight:%d\nspawnx:%d\nspawny:%d\n",
-    // TICK,WORLD.width,WORLD.height,WORLD.spawnx,WORLD.spawny);
-    // getch();
 
     fclose(f);
     free(fname);
     return 1;
-}
+};
