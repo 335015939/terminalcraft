@@ -44,7 +44,6 @@ int main(){
                     };
                     goto lbl_start;
                 case 'a':
-                    TICK++;
                     x--;
                 case 'A':
                     player.facingx=-1;
@@ -52,21 +51,18 @@ int main(){
                     break;
                 case 'd':
                     x++;
-                    TICK++;
                 case 'D':
                     player.facingy=0;
                     player.facingx=1;
                     break;
                 case 's':
                     y++;
-                    TICK++;
                 case 'S':
                     player.facingy=1;
                     player.facingx=0;
                     break;
                 case 'w':
                     y--;
-                    TICK++;
                 case 'W':
                     player.facingy=-1;
                     player.facingx=0;
@@ -108,8 +104,8 @@ int main(){
                     clear();
                     break;
             };
+            moveplayer(x,y);
         };
-        moveplayer(x,y);
         tick=TICK;
     };
     //lbl_end:

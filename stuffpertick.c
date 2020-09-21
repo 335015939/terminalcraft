@@ -34,7 +34,7 @@ void stuffpertick(){
             case TILE_TYPE_GRASS:
                 y++;
                 if(isinmap(x, y)){
-                    if(!getmapid(x, y)){
+                    if(getmaptiledata(x, y).type!=TILE_TYPE_DIRT){
                         putmapid(x, y-1,TILE_AIR);
                     };
                 };

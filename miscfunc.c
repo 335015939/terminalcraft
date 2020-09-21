@@ -127,11 +127,9 @@ void mineblock(){
         };
     };
     mvprintw(2,0,"                           ");
-    drawmap(player.c.x-38,player.c.y-10);
 };
 void moveplayer(int x,int y){
     if(y==-1){fall();};
-    TICK --;
     if(isinmap(x+player.c.x,y+player.c.y) && (x || y)){
         if(getmaptiledata(x+player.c.x,y+player.c.y).passable || SETTINGS.debugmode){
             player.c.x+=x;
