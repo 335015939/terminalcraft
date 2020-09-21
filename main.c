@@ -78,6 +78,12 @@ int main(){
                             break;
                         case ITEM_TYPE_PLACABLE:
                             placeblock();
+                            stuffpertick();
+                            break;
+                        case ITEM_TYPE_MAGIC_MIRROR:
+                            player.c.x=WORLD.spawnx;
+                            player.c.y=WORLD.spawny;
+                            stuffpertick();
                             break;
                     };
                     break;

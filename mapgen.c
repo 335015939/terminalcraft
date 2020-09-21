@@ -6,6 +6,66 @@
 struct {
     int sealvl;
 } world;
+void mksinglechest(COORDS c){
+    const int itemsid[]={ITEM_MAGIC_MIRROR};
+    const int chance[]= {8};
+    const int low[]=    {1};
+    const int high[]=   {1};
+    int i,j,num=sizeof(itemsid)/(sizeof(int)),which;
+    if(!isinmap(c.x,c.y)) return;
+    putmapid(c.x, c.y,TILE_CHEST);
+    for(i=0;i<10;i++){
+        for(j=0;j<10;j++){
+            if((i+(10*j))>num) return;
+            which=rand()%num;
+            if((rand()%100)<=chance[which]){
+                getmaptile(c.x,c.y).storage[i][j].id=itemsid[which];
+                if(high[which]==low[which]){
+                    getmaptile(c.x,c.y).storage[i][j].num=low[which];
+                }else{
+                    getmaptile(c.x,c.y).storage[i][j].num=low[which]+(rand()%(high[which]-low[which]));
+                };
+            };
+        };
+    };
+};
+void mkchests(){
+    int i,x,y;
+    clear();
+    for(i=0;i<(MAP_W/300);i++){
+        mvprintw(0,0,"Generating Chests...1/3 %d%% ",(100*i)/(MAP_W/300));
+        refresh();
+        do{
+            do{
+                x=rand()%MAP_W;
+                y=rand()%MAP_H;
+            }while(!isinmap(x, y));
+        }while(getmapid(x, y)!=TILE_GRASS);
+        mksinglechest((COORDS){x,y});
+    };
+    for(i=0;i<(MAP_W/300);i++){
+        mvprintw(0,0,"Generating Chests...2/3 %d%% ",(100*i)/(MAP_W/300));
+        refresh();
+        do{
+            do{
+                x=rand()%MAP_W;
+                y=rand()%MAP_H;
+            }while(!isinmap(x, y));
+        }while(getmapid(x, y));
+        mksinglechest((COORDS){x,y});
+    };
+    for(i=0;i<(MAP_W/300);i++){
+        mvprintw(0,0,"Generating Chests...3/3 %d%% ",(100*i)/(MAP_W/300));
+        refresh();
+        do{
+            do{
+                x=rand()%MAP_W;
+                y=rand()%MAP_H;
+            }while(!isinmap(x, y));
+        }while(getmapid(x, y)!=TILE_STONE);
+        mksinglechest((COORDS){x,y});
+    };
+};
 void mkcaves(){
     clear();
     int i,x,y,j;
@@ -284,6 +344,7 @@ void mapgen(){
     clear();
     mkores();
     mkcaves();
+    mkchests();
     x=MAP_W/2;
     for(y=0;isinmap(x,y+1);y++){
       if (!TILES[getmapid(x, y+1)].passable)

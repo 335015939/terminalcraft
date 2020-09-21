@@ -124,7 +124,8 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_WOOD_WALL,0x5e,0x3a},
     {CP_TILE_WOOD_WALL,0x3a,0x3a},
     {CP_TILE_CHEST,0x5e,0x3a},
-    {CP_ITEM_CHEST,0x82,0x5e}
+    {CP_ITEM_CHEST,0x82,0x5e},
+    {CP_ITEM_MAGIC_MIRROR,0x33,0xe9}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -460,5 +461,10 @@ const ITEMDATA ITEMS[ITEMNUM]={
         TILE_CHEST,0,0,0,
         {'^',A_NORMAL,0x0,CP_ITEM_CHEST},
         "Chest"},
+    {
+        ITEM_MAGIC_MIRROR,1,ITEM_TYPE_MAGIC_MIRROR,
+        TILE_AIR,0,0,0,
+        {'0',A_BOLD,0x0,CP_ITEM_MAGIC_MIRROR},
+        "Magic Mirror"}
 };
 #endif
