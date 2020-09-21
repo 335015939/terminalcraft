@@ -7,18 +7,18 @@ struct {
     int sealvl;
 } world;
 void mksinglechest(COORDS c){
-    const int itemsid[]={ITEM_MAGIC_MIRROR};
-    const int chance[]= {8};
-    const int low[]=    {1};
-    const int high[]=   {1};
+    const int itemsid[]={ITEM_MAGIC_MIRROR,ITEM_DIRT,ITEM_STONE,ITEM_COAL,ITEM_DIAMOND_ORE,ITEM_WOOD};
+    const int chance[]= {3,36,23,9,1,45};
+    const int low[]=    {1,1,1,1,1,3};
+    const int high[]=   {1,6,5,2,1,8};
     int i,j,num=sizeof(itemsid)/(sizeof(int)),which;
     if(!isinmap(c.x,c.y)) return;
     putmapid(c.x, c.y,TILE_CHEST);
     for(i=0;i<10;i++){
         for(j=0;j<10;j++){
-            if((i+(10*j))>num) return;
+            //if((i+(10*j))>num) return;
             which=rand()%num;
-            if((rand()%100)<=chance[which]){
+            if((rand()%500)<=chance[which]){
                 getmaptile(c.x,c.y).storage[i][j].id=itemsid[which];
                 if(high[which]==low[which]){
                     getmaptile(c.x,c.y).storage[i][j].num=low[which];
