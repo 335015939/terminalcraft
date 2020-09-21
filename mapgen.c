@@ -304,6 +304,7 @@ COORDS genmountains(COORDS c,int l){
         };
         
         if (rand()%(2+(rand()%3))){
+            c.x--;
             if(direction){
                 c.y+=(rand()%12);
             }else{
@@ -315,13 +316,14 @@ COORDS genmountains(COORDS c,int l){
                 direction=!direction;
             };
             //c.y+=(c.y<=(world.sealvl-4))-(c.y>=(world.sealvl+8));
+        }else{
+            //c.x++;
+            putmapid(c.x, c.y, TILE_GRASS);
+            if(!(rand()%11)){
+                mktree(c,TREE_OAK);
+            };
+            mkunder(c,2+(rand()%3));
         };
-        c.x++;
-        putmapid(c.x, c.y, TILE_GRASS);
-        if(!(rand()%11)){
-            mktree(c,TREE_OAK);
-        };
-        mkunder(c,2+(rand()%3));
     };
     return c;
 };

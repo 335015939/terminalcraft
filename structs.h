@@ -46,8 +46,13 @@ typedef struct {
 } _SETTINGS;
 typedef struct {
     int id;
+    int hp;
+} ENTITY;
+typedef struct {
+    int id;
     ITEM storage[10][10];
     ITEM dropped[5];
+    ENTITY e;
 } MAPTILE;
 typedef struct {
     MAPTILE *map;

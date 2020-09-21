@@ -14,7 +14,7 @@ char scanfortrunk(int x,int y){
     };
     return 0;
 }
-void stuffpertick(){
+void stuffperticknofall(){
     int x,y,i;
     TICK++;
     for(i=0;i<((MAP_W*MAP_H)/1000);i++){
@@ -49,4 +49,9 @@ void stuffpertick(){
                 break;
         };
     };
+    entities();
+};
+void stuffpertick(){
+    fall();
+    stuffpertick();
 };

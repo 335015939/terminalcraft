@@ -140,7 +140,7 @@ void moveplayer(int x,int y){
         if(getmaptiledata(x+player.c.x,y+player.c.y).passable || SETTINGS.debugmode){
             player.c.x+=x;
             player.c.y+=y;
-            stuffpertick();
+            stuffperticknofall();
         };
     };
     if(y!=-1){fall();};

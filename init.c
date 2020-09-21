@@ -1,8 +1,10 @@
 #include "header.h"
+#include "vars.h"
 #include <curses.h>
 
 void _myexit(){
     free(MAP);
+    free(entityxy);
     endwin();
 };
 void myinit(){
@@ -29,6 +31,7 @@ void myinit(){
         getch();
     };
     initmycolorpairs();
+    entityxy=malloc_throw(sizeof(COORDS)*MAX_ENTITY);
     init_map();
     for(i=0;i<TILE_NUM;i++){
         if(TILES[i].id){
