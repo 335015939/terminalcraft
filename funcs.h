@@ -15,6 +15,8 @@
 #define gethelditemdata() (ITEMS[player.i[0][player.holding].id])
 #define tiledatatostationname(x) (tiledatatostationname((x).type))
 void myinit();
+void savesettings();
+void loadsettings();
 void inventory();
 void stuffpertick();
 char saveworld();

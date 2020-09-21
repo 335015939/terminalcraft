@@ -2,6 +2,27 @@
 #include "header.h"
 #include "vars.h"
 #include <string.h>
+void savesettings(){
+    int i;
+    FILE *f=fopen("./terminal_craft/settings","w");
+    char *m=(char *)&SETTINGS;
+    for(i=0;i<sizeof(SETTINGS);i++){
+        fputc(m[i],f);
+    };
+    fclose(f);
+    return;
+};
+void loadsettings(){
+    int i;
+    FILE *f=fopen("./terminal_craft/settings","r");
+    if(!f) return;
+    char *m=(char *)&SETTINGS;
+    for(i=0;i<sizeof(SETTINGS);i++){
+        m[i]=fgetc(f);
+    };
+    fclose(f);
+    return;
+};
 char saveplayer(){
     char *fname=malloc_throw(26);
     int i;
@@ -14,7 +35,7 @@ char saveplayer(){
     fclose(f);
     free(fname);
     return 1;
-}
+};
 char loadplayer(){
     int i;
     char *fname=malloc_throw(26);

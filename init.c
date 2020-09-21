@@ -46,6 +46,7 @@ void myinit(){
             };
         };
     };
+    loadsettings();
 };
 
 void init_map(){

@@ -61,7 +61,8 @@ void options(){
                 if(optiontype[selected]==OP_TYPE_BOOL){
                     optionstatus[selected]=!optionstatus[selected];
                 }else{
-                    optionstatus[selected]+=((optionstatus[selected]>100 && optionstatus[selected]<25000)*i*100);
+                    optionstatus[selected]+=((optionstatus[selected]<25000 && i>0)
+                    -(optionstatus[selected]>200 && i<0))*100;
                 };
                 break;
         };
@@ -208,6 +209,7 @@ int titlescr(){
                 break;
             case 1:
                 options();
+                savesettings();
                 break;
             case 2:
                 exit(0);
