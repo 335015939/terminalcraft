@@ -8,7 +8,7 @@ int CHOSEN_PLAYER=0;
 int optionstatus[4]={};
 const int optiontype[4]={OP_TYPE_INT,             OP_TYPE_INT              ,OP_TYPE_BOOL  ,OP_TYPE_BOOL};
 void drawopt(int i){
-    const char *options[4]={"Map height(New maps only)","Map width(New maps only)","Autosave","Debug mode"};
+    const char *options[4]={"Map height(Crashes if changed)","Map width(Crashes if changed)","Autosave","Debug mode"};
     const char*tf[2]={"Off","On"};
     addstr(options[i]);
     if(optiontype[i]==OP_TYPE_BOOL){
@@ -193,6 +193,7 @@ int play(){
         loadworld(CHOSEN_WORLD);
     };
     if(!isplayersaved(CHOSEN_PLAYER)){
+        invadditem((ITEM){ITEM_WOOD_SWORD,1});
         invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
     }else{
         loadplayer();

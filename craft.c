@@ -54,9 +54,9 @@ void printcraft(int s,int so){
     clear();
     attr_set(A_NORMAL,0,NULL);
     int i;
-    for(i=(s-so);i<min(CRAFT_RECIPIE_NUM,24);i++){
+    for(i=0;i<24;i++){
         move(i,0);
-        _printcraft(i);
+        _printcraft(i+(s-so));
     };
     print_require(CRAFT_RECIPIE[s],player.recipies_found[s]);
     move(so,0);
