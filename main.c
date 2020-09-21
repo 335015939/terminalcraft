@@ -104,7 +104,7 @@ int main(){
                     clear();
                     break;
             };
-            moveplayer(x,y);
+            if(tick != TICK) moveplayer(x,y);
         };
         tick=TICK;
     };
