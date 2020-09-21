@@ -303,7 +303,7 @@ COORDS genmountains(COORDS c,int l){
             break;
         };
         
-        if (rand()%(2+(rand()%3))){
+        if (!(rand()%3)){
             c.x--;
             if(direction){
                 c.y+=(rand()%12);

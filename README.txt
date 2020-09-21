@@ -14,4 +14,4 @@ controls:
     q:quit
     i:inventory
     c:craft
-    k:interact with block(currently only chests)
+    k:interact with block

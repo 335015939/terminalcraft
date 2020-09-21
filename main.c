@@ -33,6 +33,10 @@ int main(){
                             case TILE_TYPE_CHEST:
                                 chest(player.c.x+player.facingx,player.c.y+player.facingy);
                                 break;
+                            case TILE_TYPE_FURNACE:
+                            case TILE_TYPE_WORKBENCH:
+                                craft();
+                                break;
                         };
                     }
                     break;

@@ -53,5 +53,5 @@ void stuffperticknofall(){
 };
 void stuffpertick(){
     fall();
-    stuffpertick();
+    stuffperticknofall();
 };
