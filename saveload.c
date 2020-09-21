@@ -1,6 +1,7 @@
 #include "funcs.h"
 #include "header.h"
 #include "vars.h"
+#include <stdio.h>
 #include <string.h>
 void savesettings(){
     int i;
@@ -69,6 +70,9 @@ char loadworld(){
     };
 
     MAP=(MAPTILE *)m;
+
+    fread(entityxy,sizeof(COORDS)*MAX_ENTITY,1,f);
+
     fclose(f);
     free(fname);
 
@@ -98,6 +102,7 @@ char saveworld(){
         fputc(w[i],f);
     };
 
+    fwrite(entityxy,sizeof(COORDS)*MAX_ENTITY,1,f);
     // printw("\ntick:%d\nwidth:%d\nheight:%d\nspawnx:%d\nspawny:%d\n",
     // TICK,WORLD.width,WORLD.height,WORLD.spawnx,WORLD.spawny);
     // getch();

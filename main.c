@@ -17,7 +17,6 @@ int main(){
     titlescr();
     clear();
     
-
     for(;;){
         
         while (TICK==tick){  
