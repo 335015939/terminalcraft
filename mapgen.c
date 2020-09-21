@@ -298,13 +298,13 @@ COORDS genmountains(COORDS c,int l){
     if (x>MAP_W){
         x=MAP_W;
     };
-    for(;c.x<x;c.x++){
+    for(;c.x<x;){
         if(!isinmap(c.x, c.y)){
             break;
         };
         
         if (rand()%(2+(rand()%3))){
-            c.x--;
+            //c.x--;
             if(direction){
                 c.y++;
             }else{
@@ -317,6 +317,7 @@ COORDS genmountains(COORDS c,int l){
             };
             //c.y+=(c.y<=(world.sealvl-4))-(c.y>=(world.sealvl+8));
         }else{
+            c.x++;
             putmapid(c.x, c.y, TILE_GRASS);
             if(!(rand()%11)){
                 mktree(c,TREE_OAK);

@@ -81,8 +81,7 @@ int main(){
                             stuffpertick();
                             break;
                         case ITEM_TYPE_MAGIC_MIRROR:
-                            player.c.x=WORLD.spawnx;
-                            player.c.y=WORLD.spawny;
+                            gotospawn();
                             stuffpertick();
                             break;
                     };

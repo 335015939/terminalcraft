@@ -2,6 +2,12 @@
 #include "funcs.h"
 #include "header.h"
 #include <curses.h>
+void gotospawn(){
+    player.c.x=WORLD.spawnx;
+    player.c.y=WORLD.spawny;
+    for(;!getmaptiledata(player.c.x,player.c.y).passable;player.c.y--);
+    for(;getmaptiledata(player.c.x,player.c.y+1).fallthrough;player.c.y++);
+};
 char pause(){
     for(;;){
         clear();

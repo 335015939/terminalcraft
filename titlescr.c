@@ -197,8 +197,7 @@ int play(){
     }else{
         loadplayer();
     };
-    player.c.x=WORLD.spawnx;
-    player.c.y=WORLD.spawny;
+    gotospawn();
     return 1;
 }
 int titlescr(){

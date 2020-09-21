@@ -19,6 +19,7 @@ void savesettings();
 void loadsettings();
 void inventory();
 void stuffpertick();
+void gotospawn();
 char saveworld();
 char loadplayer();
 void chest(int x,int y);
