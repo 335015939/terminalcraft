@@ -43,9 +43,12 @@ void stuffperticknofall(){
                 if(!scanfortrunk(x,y)){
                     putmapid(x, y, TILE_AIR);
                 };
+                break;
             case TILE_TYPE_OAK_SAPLING:
+                mktree((COORDS){x,y},TREE_OAK);
                 break;
             case TILE_TYPE_PINE_SAPLING:
+                mktree((COORDS){x,y},TREE_PINE);
                 break;
         };
     };

@@ -118,6 +118,10 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_AIR,0x0,0x0},
     {CP_TILE_STONE,0xf0,0xf0},
     {CP_TILE_GRASS,0x2e,0x00},
+    {CP_TILE_OAK_SAPLING,0x2f,0x0},
+    {CP_ITEM_OAK_SAPLING,0x2f,0xe9},
+    {CP_TILE_PINE_SAPLING,0x17,0x0},
+    {CP_ITEM_PINE_SAPLING,0x17,0xe9},
     {CP_TILE_OAK_LEAF,0x22,0x2e},
     {CP_TILE_OAK_TRUNK,0x5e,0x3a},
     {CP_ITEM_DIRT,0x5e,0xe9},
@@ -207,10 +211,10 @@ const TILEDATA TILES[TILE_NUM]={
         1,1,TILE_TYPE_LEAF,
         {'#',A_BOLD,0x2e,CP_TILE_OAK_LEAF},
         {
-            {ITEM_APPLE},
-            {1},
-            {2},
-            {5}
+            {ITEM_APPLE,ITEM_OAK_SAPLING},
+            {1,1},
+            {2,2},
+            {5,25}
         },
         "Oak leaves"},
     {
@@ -239,7 +243,12 @@ const TILEDATA TILES[TILE_NUM]={
         TILE_PINE_LEAF,1,1,0,1,1,
         1,1,TILE_TYPE_LEAF,
         {'=',A_BOLD,0x1c,CP_TILE_PINE_LEAF},
-        {},
+        {
+            {ITEM_PINE_SAPLING},
+            {1},
+            {2},
+            {25}
+        },
         "Pine tree needles"},
     {
         TILE_COAL_ORE,0,1,0,0,0,
@@ -384,6 +393,26 @@ const TILEDATA TILES[TILE_NUM]={
             {100},
         },
         "Chest"},
+    {
+        TILE_OAK_SAPLING,1,1,0,1,0,
+        1,2,TILE_TYPE_OAK_SAPLING,
+        {'Y',A_BOLD,0x0,CP_TILE_OAK_SAPLING},
+        {
+            {ITEM_OAK_SAPLING},
+            {1},
+            {1},
+            {70}
+        },"Oak Sapling"},
+    {
+        TILE_PINE_SAPLING,1,1,0,1,0,
+        1,2,TILE_TYPE_PINE_SAPLING,
+        {'Y',A_BOLD,0x0,CP_TILE_PINE_SAPLING},
+        {
+            {ITEM_PINE_SAPLING},
+            {1},
+            {1},
+            {70}
+        },"Pine sapling"}
 };
 const ITEMDATA ITEMS[ITEMNUM]={
     {
@@ -516,5 +545,15 @@ const ITEMDATA ITEMS[ITEMNUM]={
         TILE_AIR,0,0,1,
         {'/',A_BOLD,0x0,CP_ITEM_WOOD_SWORD},
         "Wooden sword"},
+    {
+        ITEM_OAK_SAPLING,10,ITEM_TYPE_PLACABLE,
+        TILE_OAK_SAPLING,0,0,0,
+        {'Y',A_BOLD,0x0,CP_ITEM_OAK_SAPLING},
+        "Oak sapling"},
+    {
+        ITEM_PINE_SAPLING,10,ITEM_TYPE_PLACABLE,
+        TILE_PINE_SAPLING,0,0,0,
+        {'Y',A_BOLD,0x0,CP_ITEM_PINE_SAPLING},
+        "Pine sapling"}
 };
 #endif

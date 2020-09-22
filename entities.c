@@ -23,7 +23,7 @@ COORDS randc(){
 void entityfall(COORDS *c){
     if(isinmap(c->x, c->y+1)){
         if((getmaptiledata(c->x, c->y).fallthrough&&getmaptiledata(c->x, c->y+1).fallthrough&&
-        !getmaptile(c->x, c->y+1).e.id)||(!(rand()%3))){
+        !getmaptile(c->x, c->y+1).e.id)){
             c->y++;
         };
     };
@@ -32,7 +32,7 @@ COORDS spawnsnake(){
     COORDS c;
     c=randc();
     if (c.y>=(MAP_H-1)) c.y--;
-    if(getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough) return c;
+    if((getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough)||(rand()%3)) return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
     return c;
 };

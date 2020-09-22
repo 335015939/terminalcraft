@@ -54,4 +54,5 @@ int max(int x,int y);
 int min(int x,int y);
 void craft();
 INV_SEARCH searchinv(int id);
+void mktree(COORDS c,int type);
 #endif
