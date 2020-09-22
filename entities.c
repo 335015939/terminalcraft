@@ -43,11 +43,12 @@ void ai_none(int x){
     entityxy[x]=c;
 };
 void ai_snake(int x){
-    COORDS c=entityxy[x];
+    COORDS cstart,c=entityxy[x];
+    cstart=c;
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
     if(e.hp<=0) return;
-    
+    char restart=1;
     int movex=(c.x<player.c.x)-(c.x>player.c.x);
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
@@ -57,8 +58,8 @@ void ai_snake(int x){
         entityfall(&c);
         goto lbl_end;
     };
+    lbl_start:
     if(rand()%2){
-        lbl_movex:
         if(isinmap(movex+c.x,c.y)){
             if((getmaptiledata(c.x+movex, c.y).type!=TILE_TYPE_DOOR)&&
             getmaptiledata(c.x+movex, c.y).passable&&!getmaptile(c.x+movex, c.y).e.id){
@@ -68,7 +69,6 @@ void ai_snake(int x){
             };
         };
     }else{
-        lbl_movey:
         if(isinmap(c.x,movey+c.y)){
             if((getmaptiledata(c.x+movex, c.y).type!=TILE_TYPE_DOOR)&&
             getmaptiledata(c.x, c.y+movey).passable&&!getmaptile(c.x, c.y+movey).e.id){
@@ -79,6 +79,16 @@ void ai_snake(int x){
         };
     };
     lbl_end:
+    if(cstart.x==c.x && cstart.y==c.y && restart){
+        restart=0;
+        if(movey||movex){
+            movey=!movey;
+            movex=!movex;
+        }else{
+            movex=movey=(2*(rand()%2))-1;
+        };
+        goto lbl_start;
+    };
     if (nearplayer(c.x,c.y)) getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
 };
