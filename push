@@ -1,0 +1,2 @@
+#/bin/bash
+git push --repo=https://335015939:$1@github.com/335015939/terminalcraft

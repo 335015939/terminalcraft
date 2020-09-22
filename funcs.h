@@ -14,6 +14,8 @@
 #define getinvitem(x,y) (player.i[(x)][(y)])
 #define gethelditemdata() (ITEMS[player.i[0][player.holding].id])
 #define tiledatatostationname(x) (tiledatatostationname((x).type))
+#define onscreen(z,t) (((z)>=player.c.x-38) && ((z)<=player.c.x+38) && ((t)>=player.c.y-10) && ((t)<=player.c.y+10))
+#define nearplayer(z,t) (((z)>=player.c.x-100) && ((z)<=player.c.x+100) && ((t)>=player.c.y-100) && ((t)<=player.c.y+100))
 void myinit();
 void die();
 void entities();
