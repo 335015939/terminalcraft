@@ -22,17 +22,17 @@ COORDS randc(){
 };
 void entityfall(COORDS *c){
     if(isinmap(c->x, c->y+1)){
-        if(getmaptiledata(c->x, c->y).fallthrough&&getmaptiledata(c->x, c->y+1).fallthrough&&!getmaptile(c->x, c->y+1).e.id){
+        if((getmaptiledata(c->x, c->y).fallthrough&&getmaptiledata(c->x, c->y+1).fallthrough&&
+        !getmaptile(c->x, c->y+1).e.id)||(!(rand()%3))){
             c->y++;
         };
     };
 };
 COORDS spawnsnake(){
     COORDS c;
-    do{
-        c=randc();
-        if (c.y>=(MAP_H-1)) c.y--;
-    }while(getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough);
+    c=randc();
+    if (c.y>=(MAP_H-1)) c.y--;
+    if(getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough) return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
     return c;
 };
