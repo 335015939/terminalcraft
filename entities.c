@@ -20,6 +20,13 @@ COORDS randc(){
         ||(!getmaptiledata(x, y).passable)));
     return (COORDS){x,y};
 };
+void entityfall(COORDS *c){
+    if(isinmap(c->x, c->y+1)){
+        if(getmaptiledata(c->x, c->y).fallthrough&&getmaptiledata(c->x, c->y+1).fallthrough&&!getmaptile(c->x, c->y+1).e.id){
+            c->y++;
+        };
+    };
+};
 COORDS spawnsnake(){
     COORDS c;
     do{
@@ -40,17 +47,14 @@ void ai_snake(int x){
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
     if(e.hp<=0) return;
-    if(isinmap(c.x, c.y+1)){
-        if(getmaptiledata(c.x, c.y).fallthrough&&getmaptiledata(c.x, c.y+1).fallthrough&&!getmaptile(c.x, c.y+1).e.id){
-            c.y++;
-        };
-    };
+    
     int movex=(c.x<player.c.x)-(c.x>player.c.x);
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
         GOT_HIT_MSG="You were hit by snake";
         player.hp--;
+        entityfall(&c);
         goto lbl_end;
     };
     if(rand()%2){
@@ -59,6 +63,7 @@ void ai_snake(int x){
             if((getmaptiledata(c.x+movex, c.y).type!=TILE_TYPE_DOOR)&&
             getmaptiledata(c.x+movex, c.y).passable&&!getmaptile(c.x+movex, c.y).e.id){
                 c.x+=movex;
+                entityfall(&c);
                 goto lbl_end;
             };
         };
@@ -67,6 +72,7 @@ void ai_snake(int x){
         if(isinmap(c.x,movey+c.y)){
             if((getmaptiledata(c.x+movex, c.y).type!=TILE_TYPE_DOOR)&&
             getmaptiledata(c.x, c.y+movey).passable&&!getmaptile(c.x, c.y+movey).e.id){
+                entityfall(&c);
                 c.y+=movey;
                 goto lbl_end;
             };
