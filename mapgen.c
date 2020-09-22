@@ -2,6 +2,8 @@
 #include "funcs.h"
 #include "header.h"
 #include "vars.h"
+#include <string.h>
+
 
 struct {
     int sealvl;
@@ -224,7 +226,7 @@ COORDS genplains(COORDS c,int l){
         if(!(rand()%32)){
             mktree(c,TREE_OAK);
         };
-        if (!(rand()%7)){
+        if (!(rand()%6)){
             y=c.y;
             c.y+=(c.y<=(world.sealvl-2))-(c.y>=(world.sealvl+2));
             if(rand()%2 && y==c.y){
@@ -331,6 +333,8 @@ COORDS genmountains(COORDS c,int l){
 void mapgen(){
     world.sealvl=MAP_H/4;
     int x,y;
+    MAP=realloc(MAP,sizeof(MAPTILE)*MAP_W*MAP_H);
+    memset((char *)MAP,0,sizeof(MAPTILE)*MAP_W*MAP_H);
     COORDS c={0,world.sealvl+(random()%11)-6};
     COORDS (*genfuncs[4])(COORDS c,int l)={genplains,genhills,genforest,genmountains};
     clear();
