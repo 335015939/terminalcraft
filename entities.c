@@ -20,11 +20,17 @@ COORDS randc(){
         ||(!getmaptiledata(x, y).passable)));
     return (COORDS){x,y};
 };
+void entitymove(COORDS *old,COORDS c){
+    if(!isinmap(c.x, c.y))return;
+    if((getmaptiledata(c.x, c.y).type==TILE_TYPE_DOOR)||
+    (!getmaptiledata(c.x, c.y).passable)||(getmaptile(c.x, c.y).e.id))return;
+    *old=c;
+};
 void entityfall(COORDS *c){
     if(isinmap(c->x, c->y+1)){
         if((getmaptiledata(c->x, c->y).fallthrough&&getmaptiledata(c->x, c->y+1).fallthrough&&
         !getmaptile(c->x, c->y+1).e.id)){
-            c->y++;
+            entitymove(c,(COORDS){c->x,c->y+1});
         };
     };
 };
@@ -60,23 +66,13 @@ void ai_snake(int x){
     };
     lbl_start:
     if(rand()%2){
-        if(isinmap(movex+c.x,c.y)){
-            if((getmaptiledata(c.x+movex, c.y).type!=TILE_TYPE_DOOR)&&
-            getmaptiledata(c.x+movex, c.y).passable&&!getmaptile(c.x+movex, c.y).e.id){
-                c.x+=movex;
-                entityfall(&c);
-                goto lbl_end;
-            };
-        };
+        entitymove(&c,(COORDS){c.x+movex,c.y});
+        entityfall(&c);
+        goto lbl_end;
     }else{
-        if(isinmap(c.x,movey+c.y)){
-            if((getmaptiledata(c.x+movex, c.y).type!=TILE_TYPE_DOOR)&&
-            getmaptiledata(c.x, c.y+movey).passable&&!getmaptile(c.x, c.y+movey).e.id){
-                entityfall(&c);
-                c.y+=movey;
-                goto lbl_end;
-            };
-        };
+        entitymove(&c,(COORDS){c.x,c.y+movey});
+        entityfall(&c);
+        goto lbl_end;
     };
     lbl_end:
     if(cstart.x==c.x && cstart.y==c.y && restart){
