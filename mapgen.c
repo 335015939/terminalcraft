@@ -161,7 +161,8 @@ void mkores(){
 
 void mktree(COORDS c,int type){
     int height,trunk,leaf,i=0,j,x,y,leafheight;
-    if(getmaptiledata(c.x, c.y).type!=TILE_TYPE_DIRT) return;
+    if(!isinmap(c.x,c.y+1))return;
+    if(getmaptiledata(c.x, c.y+1).type!=TILE_TYPE_DIRT) return;
     switch(type){
         case TREE_OAK:
             trunk=TILE_OAK_TRUNK;

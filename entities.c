@@ -82,8 +82,8 @@ void ai_snake(int x){
     if(cstart.x==c.x && cstart.y==c.y && restart){
         restart=0;
         if(movey||movex){
-            movey=!movey;
-            movex=!movex;
+            movey=movey*-1;
+            movex=movex*-1;
         }else{
             movex=movey=(2*(rand()%2))-1;
         };
