@@ -12,16 +12,19 @@ COORDS randc(){
             x =rand()%MAP_W;
             y=rand()%MAP_H;
         }while(!isinmap(x, y));
-    }while(onscreen(x,y) && !nearplayer(x,y));
+    }while(onscreen(x,y) || !nearplayer(x,y) ||(
+        (getmaptiledata(x, y).type==TILE_TYPE_BACKGROUND_WALL)||
+        (getmaptiledata(x, y).type==TILE_TYPE_FURNACE)||
+        (getmaptiledata(x, y).type==TILE_TYPE_WORKBENCH)||
+        (getmaptiledata(x, y).type==TILE_TYPE_CHEST)
+        ||(!getmaptiledata(x, y).passable)));
     return (COORDS){x,y};
 };
 COORDS spawnsnake(){
     COORDS c;
     do{
-        do{
-            c=randc();
-            if (c.y>=(MAP_H-1)) c.y--;
-        }while((getmaptiledata(c.x, c.y).type==TILE_TYPE_BACKGROUND_WALL)||(!getmaptiledata(c.x, c.y).passable));
+        c=randc();
+        if (c.y>=(MAP_H-1)) c.y--;
     }while(getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough);
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
     return c;
