@@ -8,9 +8,11 @@ COORDS *entityxy=NULL;
 COORDS randc(){
     int x,y;
     do{
-        x =rand()%MAP_W;
-        y=rand()%MAP_H;
-    }while(!isinmap(x, y));
+        do{
+            x =rand()%MAP_W;
+            y=rand()%MAP_H;
+        }while(!isinmap(x, y));
+    }while(onscreen(x,y) && !nearplayer(x,y));
     return (COORDS){x,y};
 };
 COORDS spawnsnake(){
@@ -19,8 +21,8 @@ COORDS spawnsnake(){
         do{
             c=randc();
             if (c.y>=(MAP_H-1)) c.y--;
-        }while((getmaptiledata(c.x, c.y).type==TILE_TYPE_BACKGROUND_WALL)&&!getmaptiledata(c.x, c.y).passable);
-    }while(getmaptiledata(c.x, c.y+1).passable);
+        }while((getmaptiledata(c.x, c.y).type==TILE_TYPE_BACKGROUND_WALL)||(!getmaptiledata(c.x, c.y).passable));
+    }while(getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough);
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
     return c;
 };
@@ -68,7 +70,7 @@ void ai_snake(int x){
         };
     };
     lbl_end:
-    getmaptile(c.x, c.y).e=e;
+    if (nearplayer(c.x,c.y)) getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
 };
 void entities(){
