@@ -47,7 +47,7 @@ COORDS spawnsnake(){
     if((getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough)) return c;
     if(!getmaptiledata(c.x, c.y).passable) return c;
     if ((ENTITIES_IN_WORLD > 8) &&
-        (!(((WORLD.tick % 24) > 8) || ((WORLD.tick % 24) < 5))))
+        (!(isnight())))
       return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
     ENTITIES_IN_WORLD++;

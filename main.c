@@ -104,11 +104,14 @@ int main(){
                             stuffpertick();
                             break;
                         case ITEM_TYPE_WEAPON:
-                            if((ent=&getmaptile(player.c.x+player.facingx, player.c.y+player.facingy).e)->id!=0){
-                                HIT_MSG="You hit something";
-                                ent->hp-=gethelditemdata().damage;
+                            if(isinmap(player.c.x+player.facingx, player.c.y+player.facingy)){
+                                if((ent=&getmaptile(player.c.x+player.facingx, 
+                                player.c.y+player.facingy).e)->id!=0){
+                                    HIT_MSG="You hit something";
+                                    ent->hp-=gethelditemdata().damage;
+                                };
+                                stuffpertick();
                             };
-                            stuffpertick();
                             break;
                         case ITEM_TYPE_MAGIC_MIRROR:
                             gotospawn();
