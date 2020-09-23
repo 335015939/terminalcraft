@@ -5,6 +5,7 @@
 #include "vars.h"
 #define entity_none ((ENTITY){})
 COORDS *entityxy=NULL;
+int ENTITIES_IN_WORLD=0;
 COORDS randc(){
     int x,y;
     lbl_redo:
@@ -46,8 +47,9 @@ COORDS spawnsnake(){
     c=randc();
     if (c.y>=(MAP_H-1)) c.y--;
     if((getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough)||
-    !(rand()%(1+(1000*(!isnight()))))) return (COORDS){0,0};
+    ((ENTITIES_IN_WORLD>8)&&(!isnight()))) return (COORDS){0,0};
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
+    ENTITIES_IN_WORLD++;
     return c;
 };
 void ai_none(int x){
@@ -61,7 +63,10 @@ void ai_snake(int x){
     cstart=c;
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
-    if(e.hp<=0) return;
+    if(e.hp<=0 || !nearplayer(c.x,c.y)) {
+        ENTITIES_IN_WORLD--;
+        return;
+    };
     char restart=1;
     int movex=(c.x<player.c.x)-(c.x>player.c.x);
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
@@ -93,7 +98,7 @@ void ai_snake(int x){
         };
         goto lbl_start;
     };
-    if (nearplayer(c.x,c.y)) getmaptile(c.x, c.y).e=e;
+    getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
 };
 void entities(){
