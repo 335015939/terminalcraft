@@ -28,6 +28,16 @@ int main(){
             x=y=0;
             k=getch();
             switch(k){
+                case '\\':
+                case '/':
+                case '\b':
+                    if(gethelditemdata().id){
+                        if(dropitem(player.c.x+player.facingx,player.c.y+player.facingy
+                        ,player.i[0][player.holding])){
+                            player.i[0][player.holding]=(ITEM){0,0};
+                        };
+                    };
+                    break;
                 case 'k':
                 case 'K':
                     if(isinmap(player.c.x+player.facingx,player.c.y+player.facingy)){
