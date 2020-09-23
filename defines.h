@@ -13,4 +13,5 @@
 #define MAP (WORLD.map)
 #define ITEMNUM 35
 #define CRAFT_RECIPIE_NUM 30
+#define ENTITIES_IN_WORLD (WORLD.entitiesinworld)
 #endif

@@ -1,6 +1,7 @@
 #include "enum.h"
 #include "funcs.h"
 #include "header.h"
+#include "vars.h"
 char scanfortrunk(int x,int y){
     int i,j;
     for(i=0;i<5;i++){
@@ -54,6 +55,9 @@ void stuffperticknofall(){
     };
     if((rand()%100)<=player.regen && player.hp<player.maxhp) player.hp++; 
     entities();
+    if(SETTINGS.debugmode){
+        player.hp=player.maxhp;
+    };
 };
 void stuffpertick(){
     fall();

@@ -61,6 +61,7 @@ typedef struct {
     int height;
     int spawnx;
     int spawny;
+    int entitiesinworld;
 } _WORLD;
 typedef struct{
     int x;
