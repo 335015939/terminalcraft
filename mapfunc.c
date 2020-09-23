@@ -33,6 +33,17 @@ char drawent(int x,int y){
     addch(ENTITIES[id].t.c);
     return 1;
 };
+char drawdropitem(int x,int y){
+    int i=0;
+    for(i=0;i<5;i++){
+        if(getmaptile(x, y).dropped[i].id)
+            goto lbl_draw;
+    };
+    return 0;
+    lbl_draw:
+    dtile(ITEMS[getmaptile(x, y).dropped[i].id].t);
+    return 1;
+};
 void drawmap(int startx,int starty){
     int i,j=0,x,y;
     move(3,0);
@@ -40,7 +51,11 @@ void drawmap(int startx,int starty){
         for(i=0;i<79;i++){
             if((x=i+startx)>=0 && (y=j+starty)>=0){
                 if(x<MAP_W && y<MAP_H){
-                    if(!drawent(x,y)) dmaptile(i+startx,j+starty);
+                    if(!drawent(x,y)){
+                        if(!drawdropitem(x,y)){
+                            dmaptile(i+startx,j+starty);
+                        };
+                    };
                 }else{
                     dtile(TILES[0].t);
                 };

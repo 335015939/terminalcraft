@@ -76,6 +76,13 @@ int main(){
                 case ' ':
                     player.facingx=player.facingy=0;
                     break;
+                case 'l':
+                case 'L':
+                    if(hasdroppeditem(player.c.x+player.facingx,player.c.y+player.facingy)){
+                        pickupitem(player.c.x+player.facingx,player.c.y+player.facingy);
+                        stuffpertick();
+                    };
+                    break;
                 case 'j':
                 case 'J':
                     switch(gethelditemdata().type){

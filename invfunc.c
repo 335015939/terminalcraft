@@ -1,6 +1,36 @@
+#include "funcs.h"
 #include "header.h"
 #include "structs.h"
 #include <curses.h>
+char hasdroppeditem(int x,int y){
+    int i;
+    for(i=0;i<5;i++){
+        if(getmaptile(x, y).dropped[i].id) return 1;
+    };
+    return 0;
+};
+void pickupitem(int x,int y){
+    int i;
+    for(i=0;i<5;i++){
+        if(getmaptile(x, y).dropped[i].id){
+            if(invadditem(getmaptile(x, y).dropped[i])){
+                getmaptile(x, y).dropped[i]=(ITEM){0,0};
+            };
+        };
+    };
+};
+char dropitem(int x,int y,ITEM item){
+    int i;
+    if(isinmap(x,y)){
+        for(i=0;i<5;i++){
+            if(!getmaptile(x, y).dropped[i].id){
+                getmaptile(x, y).dropped[i]=item;
+                return 1;
+            };
+        };
+    };
+    return 0;
+};
 INV_SEARCH searchinv(int id){
     int i=0,j;
     for(;i<10;i++){
@@ -126,6 +156,13 @@ void inventory(){
             case 's':
             case KEY_DOWN:
                 c.y++;
+                break;
+            case '\b':
+            case '\\':
+            case '/':
+                if(dropitem(player.c.x, player.c.y, player.i[c.x][c.y])){
+                    player.i[c.x][c.y]=(ITEM){0,0};
+                };
                 break;
             case 'j':
             case 'J':

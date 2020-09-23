@@ -18,11 +18,14 @@
 #define onscreen(z,t) (((z)>=player.c.x-38) && ((z)<=player.c.x+38) && ((t)>=player.c.y-10) && ((t)<=player.c.y+10))
 #define nearplayer(z,t) (((z)>=player.c.x-100) && ((z)<=player.c.x+100) && ((t)>=player.c.y-100) && ((t)<=player.c.y+100))
 void myinit();
+char hasdroppeditem(int x,int y);
+char dropitem(int x,int y,ITEM item);
 void die();
 void entities();
 void savesettings();
 void loadsettings();
 void inventory();
+void pickupitem(int x,int y);
 char fall();
 void stuffpertick();
 void stuffperticknofall();
