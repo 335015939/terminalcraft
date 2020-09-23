@@ -12,7 +12,7 @@
 #define getmaptiledata(x,y) (TILES[getmapid(x,y)])
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
 #define getinvitem(x,y) (player.i[(x)][(y)])
-#define isnight() (((TICK%24)>20)||((TICK%24)<5))
+#define isnight() ((((TICK/60)%24)>20)||(((TICK/60)%24)<5))
 #define gethelditemdata() (ITEMS[player.i[0][player.holding].id])
 #define tiledatatostationname(x) (tiledatatostationname((x).type))
 #define onscreen(z,t) (((z)>=player.c.x-38) && ((z)<=player.c.x+38) && ((t)>=player.c.y-10) && ((t)<=player.c.y+10))

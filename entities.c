@@ -49,6 +49,7 @@ COORDS spawnsnake(){
     if ((ENTITIES_IN_WORLD > 8) &&
         (!(isnight())))
       return c;
+    if(getmaptile(c.x, c.y).e.id) return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
     ENTITIES_IN_WORLD++;
     return c;
