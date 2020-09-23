@@ -148,7 +148,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_IRON,0xdf,0xe9},
     {CP_TILE_WORKBENCH,0x5e,0x0},
     {CP_ITEM_WORKBENCH,0x5e,0xe9},
-    {CP_TILE_WOOD,0x5e,0x3a},
+    {CP_TILE_WOOD,0x3a,0x5e},
     {CP_TILE_FURNACE,0x01,0xf0},
     {CP_ITEM_FURNACE,0xf0,0xe9},
     {CP_ITEM_COPPER_PICKAXE,0xa6,0xe9},
@@ -158,9 +158,9 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DOOR,0x5e,0x0},
     {CP_ITEM_DOOR,0x5e,0xe9},
     {CP_ITEM_WOOD_WALL,0x5e,0x3a},
-    {CP_TILE_WOOD_WALL,0x3a,0x3a},
-    {CP_TILE_CHEST,0x5e,0x3a},
-    {CP_ITEM_CHEST,0x82,0x5e},
+    {CP_TILE_WOOD_WALL,0x3a,0xeb},
+    {CP_TILE_CHEST,0xe8,0x5e},
+    {CP_ITEM_CHEST,0xe8,0x5e},
     {CP_ITEM_MAGIC_MIRROR,0x33,0xe9},
     {CP_ITEM_SILVER,0xfe,0xe9},
     {CP_ITEM_GOLD,0x03,0xe9},
@@ -351,7 +351,7 @@ const TILEDATA TILES[TILE_NUM]={
         "Furnace"},
     {
         TILE_LADDER,1,1,0,0,0,
-        1,3,TILE_TYPE_NONE,
+        1,3,TILE_TYPE_LADDER,
         {'#',A_BOLD,0x0,CP_TILE_LADDER},
         {
             {ITEM_LADDER},
@@ -374,7 +374,7 @@ const TILEDATA TILES[TILE_NUM]={
     {
         TILE_WOOD_WALL,1,1,0,1,0,
         1,1,TILE_TYPE_BACKGROUND_WALL,
-        {' ',A_NORMAL,0x3a,CP_TILE_WOOD_WALL},
+        {' ',A_NORMAL,0xeb,CP_TILE_WOOD_WALL},
         {
             {ITEM_WOOD_WALL},
             {1},
