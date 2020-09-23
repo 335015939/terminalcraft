@@ -46,8 +46,8 @@ COORDS spawnsnake(){
     COORDS c;
     c=randc();
     if (c.y>=(MAP_H-1)) c.y--;
-    if((getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough)||
-    ((ENTITIES_IN_WORLD>8)&&(!isnight()))) return (COORDS){0,0};
+    if((getmaptiledata(c.x, c.y+1).fallthrough&&getmaptiledata(c.x, c.y).fallthrough)) return (COORDS){0,0};
+    if((ENTITIES_IN_WORLD>8)&&(!isnight())) return (COORDS){0,0};
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
     ENTITIES_IN_WORLD++;
     return c;
