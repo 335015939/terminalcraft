@@ -49,7 +49,6 @@ COORDS spawnbat(){
         if(ENTITIES_IN_WORLD>10) return c;
     };
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_BAT,3};
-    ENTITIES_IN_WORLD++;
     return c;
 };
 COORDS spawnzombie(){
@@ -57,7 +56,6 @@ COORDS spawnzombie(){
     if(!getmaptiledata(c.x, c.y).passable) return c;
     if(!isnight()) return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_ZOMBIE,10};
-    ENTITIES_IN_WORLD++;
     return c;
 };
 void ai_zombie(int x){
@@ -65,7 +63,6 @@ void ai_zombie(int x){
     cstart=c;
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
-    ENTITIES_IN_WORLD--;
     if(e.hp<=0 || !nearplayer(c.x,c.y)) {
         return;
     };
@@ -102,13 +99,11 @@ void ai_zombie(int x){
     };
     getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
-    ENTITIES_IN_WORLD++;
 };
 void ai_bat(int x){
     COORDS c=entityxy[x];
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
-    ENTITIES_IN_WORLD--;
     if(e.hp<=0 || !nearplayer(c.x,c.y)) {
         return;
     };
@@ -140,7 +135,6 @@ void ai_bat(int x){
     lbl_end:
     getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
-    ENTITIES_IN_WORLD++;
 };
 COORDS spawnsnake(){
     COORDS c;
@@ -153,14 +147,13 @@ COORDS spawnsnake(){
       return c;
     if(getmaptile(c.x, c.y).e.id) return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
-    ENTITIES_IN_WORLD++;
     return c;
 };
 void ai_none(int x){
     if(ENTITIES_IN_WORLD<MAX_ENTITY){
-        COORDS (*spawn[2])()={spawnsnake,spawnbat};
+        COORDS (*spawn[3])()={spawnsnake,spawnbat,spawnzombie};
         COORDS c;//=entityxy[x];
-        c=(*spawn[rand()%2])();
+        c=(*spawn[rand()%3])();
         entityxy[x]=c;
     };
 };
@@ -169,7 +162,6 @@ void ai_snake(int x){
     cstart=c;
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
-    ENTITIES_IN_WORLD--;
     if(e.hp<=0 || !nearplayer(c.x,c.y)) {
         return;
     };
@@ -206,12 +198,16 @@ void ai_snake(int x){
     };
     getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
-    ENTITIES_IN_WORLD++;
 };
 void entities(){
     int i;
-    void (*script[])(int x)={ai_none,ai_snake,ai_bat};
+    void (*script[])(int x)={ai_none,ai_snake,ai_bat,ai_zombie};
+    ENTITIES_IN_WORLD=0;
     for(i=0;i<MAX_ENTITY;i++){
         (*script[getmaptile(entityxy[i].x,entityxy[i].y).e.id])(i);
+        if(getmaptile(entityxy[i].x,entityxy[i].y).e.id){
+            ENTITIES_IN_WORLD++;
+        };
     };
+
 };
