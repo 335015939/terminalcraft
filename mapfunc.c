@@ -83,37 +83,5 @@ void drawmap(int startx,int starty){
     mvprintw(0,0,"x:%d y:%d %2d:%02d %c %d/%d       \n%s                          \n%s                         ",
         player.c.x,player.c.y,(TICK/60)%24,TICK%60,facing(),player.hp,getmaxhp(),HIT_MSG,GOT_HIT_MSG);
     };
-    switch((TICK/60)%24){
-        case 22 ... 23:
-        case 0 ... 3:
-            SETTINGS.skycolor=0x10;
-            break;
-        case 4:
-        case 21:
-            SETTINGS.skycolor=0x11;
-            break;
-        case 5:
-        case 20:
-            SETTINGS.skycolor=0x12;
-            break;
-        case 6:
-        case 19:
-            SETTINGS.skycolor=0x13;
-            break;
-        case 7:
-        case 18:
-            SETTINGS.skycolor=0x14;
-            break;
-        case 8:
-        case 17:
-            SETTINGS.skycolor=0x15;
-            break;
-        case 9 ... 16:
-            SETTINGS.skycolor=0x21;
-            break;
-    };
-    if(SETTINGS.oldskycolor!=SETTINGS.skycolor){
-        SETTINGS.oldskycolor=SETTINGS.skycolor;
-        initmycolorpairs();
-    };
+    updateskycolor();
 };

@@ -20,12 +20,14 @@ PLAYER player={{},0,0,0//coords,facingx,facingy,holding,hp
 _WORLD WORLD={NULL,6*60,3000,500};
 int main(){
     int x,k,y,tick=TICK;
-    ENTITY *ent;
+    //ENTITY *ent;
     myinit();
     lbl_start:
     titlescr();
-    clear();
     
+    clear();
+    updateskycolor();
+
     for(;;){
         while (TICK==tick){  
             drawmap(player.c.x-38,player.c.y-10);
@@ -108,14 +110,7 @@ int main(){
                             stuffpertick();
                             break;
                         case ITEM_TYPE_WEAPON:
-                            if(isinmap(player.c.x+player.facingx, player.c.y+player.facingy)){
-                                if((ent=&getmaptile(player.c.x+player.facingx, 
-                                player.c.y+player.facingy).e)->id!=0){
-                                    HIT_MSG="You hit something";
-                                    ent->hp-=gethelditemdata().damage;
-                                };
-                                stuffpertick();
-                            };
+                            playerattack();
                             break;
                         case ITEM_TYPE_MAGIC_MIRROR:
                             gotospawn();

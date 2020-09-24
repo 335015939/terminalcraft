@@ -8,6 +8,17 @@ void die(){
     addstr("You died!\nPress any key to continue");
     getch();
 };
+void playerattack(){
+    ENTITY *ent;
+    if(isinmap(player.c.x+player.facingx, player.c.y+player.facingy)){
+        if((ent=&getmaptile(player.c.x+player.facingx, 
+        player.c.y+player.facingy).e)->id!=0){
+            HIT_MSG="You hit something";
+            ent->hp-=gethelditemdata().damage;
+        };
+        stuffpertick();
+    };
+}
 void gotospawn(){
     player.c.x=WORLD.spawnx;
     player.c.y=WORLD.spawny;
@@ -157,3 +168,38 @@ void emptystorage(ITEM (*items)[10][10]){
         };
     };
 };
+void updateskycolor(){
+    switch((TICK/60)%24){
+        case 22 ... 23:
+        case 0 ... 3:
+            SETTINGS.skycolor=0x10;
+            break;
+        case 4:
+        case 21:
+            SETTINGS.skycolor=0x11;
+            break;
+        case 5:
+        case 20:
+            SETTINGS.skycolor=0x12;
+            break;
+        case 6:
+        case 19:
+            SETTINGS.skycolor=0x13;
+            break;
+        case 7:
+        case 18:
+            SETTINGS.skycolor=0x14;
+            break;
+        case 8:
+        case 17:
+            SETTINGS.skycolor=0x15;
+            break;
+        case 9 ... 16:
+            SETTINGS.skycolor=0x21;
+            break;
+    };
+    if(SETTINGS.oldskycolor!=SETTINGS.skycolor){
+        SETTINGS.oldskycolor=SETTINGS.skycolor;
+        initmycolorpairs();
+    };
+}

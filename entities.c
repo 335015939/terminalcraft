@@ -40,6 +40,10 @@ void entityfall(COORDS *c){
         };
     };
 };
+COORDS spawnbat(){
+    COORDS c=randc();
+    if(!getmaptiledata(c.x, c.y).passable) return c;
+};
 COORDS spawnsnake(){
     COORDS c;
     c=randc();

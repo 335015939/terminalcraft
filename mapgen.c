@@ -18,7 +18,6 @@ void mksinglechest(COORDS c){
     putmapid(c.x, c.y,TILE_CHEST);
     for(i=0;i<10;i++){
         for(j=0;j<10;j++){
-            //if((i+(10*j))>num) return;
             which=rand()%num;
             if((rand()%500)<=chance[which]){
                 getmaptile(c.x,c.y).storage[i][j].id=itemsid[which];
