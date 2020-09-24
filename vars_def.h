@@ -16,7 +16,49 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
         {'s',A_BOLD,0x28,CP_ENTITY_SNAKE}}
 };
 const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
-    {
+    {//workbench
+        {ITEM_WORKBENCH,1},
+        1,
+        {
+            {ITEM_WOOD,4}
+        },
+        TILE_TYPE_NONE},
+    {//furnace
+        {ITEM_FURNACE,1},
+        1,
+        {
+            {ITEM_STONE,10},
+        },
+        TILE_TYPE_WORKBENCH},
+    {//chest
+        {ITEM_CHEST,1},
+        1,
+        {
+            {ITEM_WOOD,10}
+        },
+        TILE_TYPE_WORKBENCH},
+    {//wood walls
+        {ITEM_WOOD_WALL,2},
+        1,
+        {
+            {ITEM_WOOD,1}
+        },
+        TILE_TYPE_WORKBENCH},
+    {//ladder
+        {ITEM_LADDER,2},
+        1,
+        {
+            {ITEM_WOOD,3}
+        },
+        TILE_TYPE_WORKBENCH},
+    {//door
+        {ITEM_DOOR,1},
+        0,
+        {
+            {ITEM_WOOD,1}
+        },
+        TILE_TYPE_WORKBENCH},
+    {//copper bar
         {ITEM_COPPER,1},//result after crafting
         2,//number of different items needed
         {//list of items (less than 5)
@@ -24,7 +66,7 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_COAL,2},
         },
         TILE_TYPE_FURNACE},//crafting station needed
-    {
+    {//iron bar
         {ITEM_IRON,1},
         2,
         {
@@ -32,38 +74,24 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_COAL,2},
         },
         TILE_TYPE_NONE},
-    {
+    {//silver bat
         {ITEM_SILVER,1},
         2,{
             {ITEM_SILVER_ORE,4},
             {ITEM_COAL,2}
         },TILE_TYPE_FURNACE},
-    {
+    {//gold bar
         {ITEM_GOLD,1},
         2,{
             {ITEM_GOLD_ORE,4},
             {ITEM_COAL,2}
         },TILE_TYPE_FURNACE},
-    {
-        {ITEM_WORKBENCH,1},
-        1,
-        {
-            {ITEM_WOOD,4}
-        },
-        TILE_TYPE_NONE},
-    {
-        {ITEM_FURNACE,1},
-        1,
-        {
-            {ITEM_STONE,10},
-        },
-        TILE_TYPE_WORKBENCH},
-    {
+    {//wood pickaxe
         {ITEM_WOOD_PICKAXE,1},
         1,{
             {ITEM_WOOD,6}
         },TILE_TYPE_WORKBENCH},
-    {
+    {//copper pickaxe
         {ITEM_COPPER_PICKAXE,1},
         2,
         {
@@ -71,7 +99,7 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_WOOD,2}
         },
         TILE_TYPE_WORKBENCH},
-    {
+    {//iron pickaxe
         {ITEM_IRON_PICKAXE,1},
         2,
         {
@@ -79,39 +107,23 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_WOOD,2}
         },
         TILE_TYPE_WORKBENCH},
-    {
+    {//wood sword
         {ITEM_WOOD_SWORD,1},
         1,{
             {ITEM_WOOD,6}
         },TILE_TYPE_WORKBENCH},
-    {
-        {ITEM_LADDER,2},
-        1,
-        {
-            {ITEM_WOOD,3}
-        },
-        TILE_TYPE_WORKBENCH},
-    {
-        {ITEM_DOOR,1},
-        0,
-        {
-            {ITEM_WOOD,1}
-        },
-        TILE_TYPE_WORKBENCH},
-    {
-        {ITEM_WOOD_WALL,2},
-        1,
-        {
-            {ITEM_WOOD,1}
-        },
-        TILE_TYPE_WORKBENCH},
-    {
-        {ITEM_CHEST,1},
-        1,
-        {
-            {ITEM_WOOD,10}
-        },
-        TILE_TYPE_WORKBENCH},
+    {//copper sword
+        {ITEM_COPPER_SWORD,1},
+        2,{
+            {ITEM_COPPER,6},
+            {ITEM_WOOD,2}
+        },TILE_TYPE_WORKBENCH},
+    {//iron sword
+        {ITEM_IRON_SWORD,1},
+        2,{
+            {ITEM_IRON,6},
+            {ITEM_WOOD,2}
+        },TILE_TYPE_WORKBENCH}
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_TILE_DIRT,0x5e,0x5e},
@@ -164,7 +176,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_MAGIC_MIRROR,0x33,0xe9},
     {CP_ITEM_SILVER,0xfe,0xe9},
     {CP_ITEM_GOLD,0x03,0xe9},
-    {CP_ITEM_WOOD_SWORD,0x5e,0xe9}
+    {CP_ITEM_WOOD_SWORD,0x5e,0xe9},
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -453,7 +465,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
     {
         ITEM_IRON_ORE,99,ITEM_TYPE_PLACABLE,
         TILE_IRON_ORE,0,0,0,
-        {'#',A_NORMAL,0x0,CP_TILE_IRON_ORE},
+        {'#',A_NORMAL,0x0,CP_ITEM_IRON_ORE},
         "Iron Ore"},
     {
         ITEM_SILVER_ORE,99,ITEM_TYPE_PLACABLE,
@@ -504,7 +516,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
         ITEM_IRON_PICKAXE,1,ITEM_TYPE_PICKAXE,
         TILE_AIR,8,3,0,
         {'T',A_BOLD,0x0,CP_ITEM_IRON_PICKAXE},
-        "Iron pckaxe"},
+        "Iron pickaxe"},
     {
         ITEM_LADDER,99,ITEM_TYPE_PLACABLE,
         TILE_LADDER,0,0,0,
@@ -554,6 +566,16 @@ const ITEMDATA ITEMS[ITEMNUM]={
         ITEM_PINE_SAPLING,10,ITEM_TYPE_PLACABLE,
         TILE_PINE_SAPLING,0,0,0,
         {'Y',A_BOLD,0x0,CP_ITEM_PINE_SAPLING},
-        "Pine sapling"}
+        "Pine sapling"},
+    {
+        ITEM_COPPER_SWORD,1,ITEM_TYPE_WEAPON,
+        TILE_AIR,0,0,3,
+        {'/',A_BOLD,0x0,CP_ITEM_COPPER_SWORD},
+        "Copper sword"},
+    {
+        ITEM_IRON_SWORD,1,ITEM_TYPE_WEAPON,
+        TILE_AIR,0,0,3,
+        {'/',A_BOLD,0x0,CP_ITEM_IRON_SWORD},
+        "Iron sword"}
 };
 #endif
