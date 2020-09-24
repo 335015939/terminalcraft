@@ -26,11 +26,12 @@ COORDS randc(){
         (getmaptiledata(x, y).type==TILE_TYPE_LADDER)));
     return (COORDS){x,y};
 };
-void entitymove(COORDS *old,COORDS c){
-    if(!isinmap(c.x, c.y))return;
+char entitymove(COORDS *old,COORDS c){
+    if(!isinmap(c.x, c.y))return 0;
     if((getmaptiledata(c.x, c.y).type==TILE_TYPE_DOOR)||
-    (!getmaptiledata(c.x, c.y).passable)||(getmaptile(c.x, c.y).e.id))return;
+    (!getmaptiledata(c.x, c.y).passable)||(getmaptile(c.x, c.y).e.id))return 0;
     *old=c;
+    return 1;
 };
 void entityfall(COORDS *c){
     if(isinmap(c->x, c->y+1)){
@@ -43,6 +44,49 @@ void entityfall(COORDS *c){
 COORDS spawnbat(){
     COORDS c=randc();
     if(!getmaptiledata(c.x, c.y).passable) return c;
+    if(!isnight()) return c;
+    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_BAT,3};
+    ENTITIES_IN_WORLD++;
+    return c;
+};
+void ai_bat(int x){
+    COORDS cstart,c=entityxy[x];
+    cstart=c;
+    ENTITY e=getmaptile(c.x, c.y).e;
+    getmaptile(c.x, c.y).e=entity_none;
+    ENTITIES_IN_WORLD--;
+    if(e.hp<=0 || !nearplayer(c.x,c.y)) {
+        return;
+    };
+    int movex=(c.x<player.c.x)-(c.x>player.c.x);
+    int movey=(c.y<player.c.y)-(c.y>player.c.y);
+    if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
+    (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
+        GOT_HIT_MSG="You were hit by bat";
+        player.hp--;
+        entityfall(&c);
+        goto lbl_end;
+    };
+    if(isnight()){
+        if(!entitymove(&c,(COORDS){c.x+movex,c.y+movey})){
+            if(movex&&movey){
+                if(rand()%2){
+                    entitymove(&c,(COORDS){c.x,c.y+movey});
+                }else{
+                    entitymove(&c,(COORDS){c.x+movex,c.y});
+                };
+            }else{
+                entitymove(&c,(COORDS){c.x-movex,c.y-movey});
+            };
+        };
+    }else{
+        entitymove(&c,(COORDS){c.x-movex,c.y-movey});
+        if(!onscreen(c.x, c.y)) return;
+    };
+    lbl_end:
+    getmaptile(c.x, c.y).e=e;
+    entityxy[x]=c;
+    ENTITIES_IN_WORLD++;
 };
 COORDS spawnsnake(){
     COORDS c;
@@ -60,9 +104,9 @@ COORDS spawnsnake(){
 };
 void ai_none(int x){
     if(ENTITIES_IN_WORLD<MAX_ENTITY){
-        COORDS (*spawn[1])()={spawnsnake};
+        COORDS (*spawn[2])()={spawnsnake,spawnbat};
         COORDS c;//=entityxy[x];
-        c=(*spawn[rand()%1])();
+        c=(*spawn[rand()%2])();
         entityxy[x]=c;
     };
 };
@@ -112,7 +156,7 @@ void ai_snake(int x){
 };
 void entities(){
     int i;
-    void (*script[])(int x)={ai_none,ai_snake};
+    void (*script[])(int x)={ai_none,ai_snake,ai_bat};
     for(i=0;i<MAX_ENTITY;i++){
         (*script[getmaptile(entityxy[i].x,entityxy[i].y).e.id])(i);
     };
