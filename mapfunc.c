@@ -81,7 +81,7 @@ void drawmap(int startx,int starty){
         ,facing(),ENTITIES_IN_WORLD,HIT_MSG,GOT_HIT_MSG);
     }else{
     mvprintw(0,0,"x:%d y:%d %2d:%02d %c %d/%d       \n%s                          \n%s                         ",
-        player.c.x,player.c.y,(TICK/60)%24,TICK%60,facing(),player.hp,player.maxhp,HIT_MSG,GOT_HIT_MSG);
+        player.c.x,player.c.y,(TICK/60)%24,TICK%60,facing(),player.hp,getmaxhp(),HIT_MSG,GOT_HIT_MSG);
     };
     switch((TICK/60)%24){
         case 22 ... 23:

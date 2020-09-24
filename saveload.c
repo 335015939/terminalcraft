@@ -1,6 +1,43 @@
 #include "funcs.h"
 #include "header.h"
 #include "vars.h"
+#include <curses.h>
+#include <string.h>
+void save(){
+    clear();
+    attr_set(0,0,NULL);
+    addstr("Saving player...");
+    refresh();
+    saveplayer();
+    mvprintw(0, 0, "Saving World.");
+    refresh();
+    saveworld();
+    clear();
+};
+void load(){
+    clear();
+    attr_set(0,0,NULL);
+    addstr("Loading player...");
+    refresh();
+    memset(&player,0,sizeof(PLAYER));
+    memset(MAP,0,sizeof(MAPTILE)*MAP_W*MAP_H);
+    if(!loadplayer()){
+        player=(PLAYER){{},0,0,0//coords,facingx,facingy,holding,hp
+        ,20,{},{},{}//recipies found,inventory,equipped stuff
+        ,0,0,0,0,0,0,0,0,//added attributes from equipment
+        0,0,15,20//base stats
+        ,0,0//can fly,fall damage
+        };
+        invadditem((ITEM){ITEM_WOOD_SWORD,1});
+        invadditem((ITEM){ITEM_WOOD_PICKAXE,1});
+    };
+    mvprintw(0, 0, "Loading World.");
+    refresh();
+    if(!loadworld()){
+        mapgen();
+    };
+    clear();
+};
 void savesettings(){
     int i;
     system("mkdir -p ./terminal_craft");
@@ -29,6 +66,7 @@ char saveplayer(){
     int i;
     sprintf(fname,"./terminal_craft/player%d",CHOSEN_PLAYER);
     FILE *f=fopen(fname,"w");
+    if(!f) return 0;
     char *m=(char *)&player;
     for(i=0;i<sizeof(PLAYER);i++){
         fputc(m[i],f);
@@ -42,6 +80,7 @@ char loadplayer(){
     char *fname=malloc_throw(26);
     sprintf(fname,"./terminal_craft/player%d",CHOSEN_PLAYER);
     FILE *f=fopen(fname,"r+");
+    if(!f) return 0;
     char *m=(char *)&player;
     for(i=0;i<(sizeof(PLAYER));i++){
         m[i]=fgetc(f);
@@ -55,11 +94,10 @@ char loadworld(){
     char *fname=malloc_throw(28);
     clear();
     attr_set(A_NORMAL,0,NULL);
-    addstr("Loading...");
-    refresh();
-
+    
     sprintf(fname,"./terminal_craft/world%d",CHOSEN_WORLD);
     FILE *f=fopen(fname,"r+");
+    if(!f) return 0;
 
     char *m=(char *)MAP;
     fread(m,MAP_W*MAP_H*sizeof(MAPTILE),1,f);
@@ -93,9 +131,6 @@ char saveworld(){
     FILE *f=fopen(fname,"w");
 
     char *m=(char *)MAP;
-    clear();
-    addstr("Saving...");
-    refresh();
     fwrite(m, (MAP_W*MAP_H*sizeof(MAPTILE)),1,f);
     
     char *w=(char *)&WORLD;

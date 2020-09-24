@@ -67,16 +67,60 @@ typedef struct{
     int x;
     int y;
 } COORDS;
+typedef struct {
+    int headid;//armor
+    int bodyid;
+    int legid;
+
+    int neckid;//random stuff
+    int backid;
+    int cloakid;
+    int feetid;
+    int gloveid;
+    int lhandid;
+    int wristid;
+} EQUIPDATA;
+typedef struct{
+    int position;
+    char canfly;
+    char falldmg;
+    int dmgmulti;
+    int defmulti;
+    int regenmulti;
+    int maxhpmulti;
+    int dmgplus;
+    int defplus;
+    int regenplus;
+    int maxhpplus;
+} EQUIPMENT;
 typedef struct{
     COORDS c;
     char facingx;
     char facingy;
-    ITEM i[10][10];
     int holding;
-    int recipies_found[CRAFT_RECIPIE_NUM];
     int hp;
-    int maxhp;
-    int regen;
+    
+    int recipies_found[CRAFT_RECIPIE_NUM];
+
+    ITEM i[10][10];
+    EQUIPDATA eqiup;
+    
+    int dmgmulti;//stats from equipped stuff
+    int defmulti;
+    int regenmulti;
+    int maxhpmulti;
+    int dmgplus;
+    int defplus;
+    int regenplus;
+    int maxhpplus;
+
+    int basedef;//base stats
+    int basedmg;
+    int baseregen;
+    int basemaxhp;
+
+    char canfly;//attributes
+    char falldmg;
 } PLAYER;
 typedef struct {
     int id;

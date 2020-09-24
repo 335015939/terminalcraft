@@ -1,3 +1,4 @@
+#include "enum.h"
 #include "funcs.h"
 #include "header.h"
 #include "structs.h"
@@ -127,6 +128,25 @@ void drawinv(COORDS c,COORDS s,char f){
     };
 
 };
+char *getitemtypename(int type){
+    switch(type){
+        case ITEM_TYPE_PLACABLE: return "placable";
+        case ITEM_TYPE_FOOD: return "food";
+        case ITEM_TYPE_NONE: return "none";
+        case ITEM_TYPE_PICKAXE: return "pickaxe";
+        case ITEM_TYPE_WEAPON: return "weapon";
+        case ITEM_TYPE_OTHER: return "unknown type";
+        default: return "unknown";
+    }
+};
+void dispiteminfo(ITEM item){
+    ITEMDATA itemdata=ITEMS[item.id];
+    clear();
+    printw("Name:%s   in this stack:%d\ntype:%s",
+    itemdata.name,item.num,getitemtypename(itemdata.type));
+    
+    getch();
+};
 void inventory(){
     int k;
     static COORDS c={};
@@ -163,6 +183,10 @@ void inventory(){
                 if(dropitem(player.c.x, player.c.y, player.i[c.x][c.y])){
                     player.i[c.x][c.y]=(ITEM){0,0};
                 };
+                break;
+            case 'l':
+            case 'L':
+                dispiteminfo(player.i[c.x][c.y]);
                 break;
             case 'j':
             case 'J':

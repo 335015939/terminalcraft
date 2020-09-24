@@ -26,9 +26,7 @@ char pause(){
                 return 1;
             case 's':
             case 'S':
-                saveworld();
-                saveplayer();
-                clear();
+                save();
                 addstr("Saved!");
                 getch();
                 break;

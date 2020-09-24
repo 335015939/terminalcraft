@@ -53,10 +53,10 @@ void stuffperticknofall(){
                 break;
         };
     };
-    if((rand()%100)<=player.regen && player.hp<player.maxhp) player.hp++; 
+    if((rand()%100)<=getregen() && player.hp<getmaxhp()) player.hp++; 
     entities();
     if(SETTINGS.debugmode){
-        player.hp=player.maxhp;
+        player.hp=getmaxhp();
     };
 };
 void stuffpertick(){

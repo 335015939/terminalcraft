@@ -10,6 +10,10 @@
 #define getmaptile(x,y) (WORLD.map[(x)+(MAP_W*(y))])
 #define putmapid(x,y,z) (WORLD.map[(x)+(MAP_W*(y))].id=(z))
 #define getmaptiledata(x,y) (TILES[getmapid(x,y)])
+#define getmaxhp() (player.basemaxhp+player.maxhpplus+(player.basemaxhp*(player.maxhpmulti)))
+#define getregen() (player.baseregen+player.regenplus+(player.baseregen*(player.regenmulti)))
+#define getdmg() (player.basedmg+player.dmgplus+(player.basedmg*(player.dmgmulti)))
+#define getdef() (player.basedef+player.defplus+(player.basedef*(player.defmulti)))
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
 #define getinvitem(x,y) (player.i[(x)][(y)])
 #define isnight() ((((TICK/60)%24)>20)||(((TICK/60)%24)<5))
@@ -18,6 +22,8 @@
 #define onscreen(z,t) (((z)>=player.c.x-38) && ((z)<=player.c.x+38) && ((t)>=player.c.y-10) && ((t)<=player.c.y+10))
 #define nearplayer(z,t) (((z)>=player.c.x-100) && ((z)<=player.c.x+100) && ((t)>=player.c.y-100) && ((t)<=player.c.y+100))
 void myinit();
+void load();
+void save();
 char hasdroppeditem(int x,int y);
 char dropitem(int x,int y,ITEM item);
 void die();
