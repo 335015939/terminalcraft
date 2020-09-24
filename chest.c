@@ -23,6 +23,36 @@ void putchestitem(COORDS c,ITEM i){
         (*cheststorage)[c.x-10][c.y]=i;
     };
 };
+char additemtochest(ITEM item){
+    int j,i=0,x,maxstack;
+    unsigned char freespace=0;
+    maxstack=ITEMS[item.id].maxstack;
+    for(;i<10;i++){
+        for(j=0;j<10;j++){
+            if (!(*cheststorage)[i][j].id){
+                freespace++;
+            }else if((*cheststorage)[i][j].id==item.id){
+                if((x=(*cheststorage)[i][j].num+item.num)>maxstack){
+                    item.num-=(maxstack-(*cheststorage)[i][j].num);
+                    (*cheststorage)[i][j].num=maxstack;
+                }else{
+                    (*cheststorage)[i][j].num+=item.num;
+                    return 1;
+                };
+            };
+        };
+    };
+    if(!freespace) return 0;
+    for(i=0;i<10;i++){
+        for(j=0;j<10;j++){
+            if (!(*cheststorage)[i][j].id){
+                (*cheststorage)[i][j]=item;
+                return 1;
+            };
+        };
+    };
+    return 0;
+};
 void drawchest(COORDS s,COORDS c,char f){
     int i,j;
     ITEM item;
@@ -104,6 +134,20 @@ void chest(int x,int y){
                 }else{
                     oldselected=selected;
                     isselected=1;
+                };
+                break;
+            case 'k':
+            case 'K':
+                if(selected.x>=10){
+                    if(invadditem((*cheststorage)[selected.x-10][selected.y])){
+                        (*cheststorage)[selected.x-10][selected.y]=(ITEM){};
+                        clear();
+                        getch();
+                    };
+                }else{
+                    if(additemtochest(player.i[selected.x][selected.y])){
+                        player.i[selected.x][selected.y]=(ITEM){};
+                    };
                 };
                 break;
             case 'q':

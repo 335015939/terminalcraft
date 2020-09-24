@@ -142,9 +142,17 @@ char *getitemtypename(int type){
 void dispiteminfo(ITEM item){
     ITEMDATA itemdata=ITEMS[item.id];
     clear();
-    printw("Name:%s   in this stack:%d\ntype:%s",
+    attr_set(0,0,NULL);
+    printw("Name:%s   in this stack:%d\ntype:%s\n\n",
     itemdata.name,item.num,getitemtypename(itemdata.type));
-    
+    switch(itemdata.type){
+        case ITEM_TYPE_WEAPON:
+            printw("Damage:%d",itemdata.damage);
+            break;
+        case ITEM_TYPE_PICKAXE:
+            printw("Pickaxe level:%d\nPickaxe power:%d",itemdata.minelvl,itemdata.minepower);
+            break;
+    };
     getch();
 };
 void inventory(){
