@@ -76,27 +76,39 @@ void ai_zombie(int x){
         entityfall(&c);
         goto lbl_end;
     };
-    lbl_start:
-    if(rand()%2){
-        entitymove(&c,(COORDS){c.x+movex,c.y});
-        entityfall(&c);
-        goto lbl_end;
-    }else{
-        entityfall(&c);
-        entitymove(&c,(COORDS){c.x,c.y+movey});
-        goto lbl_end;
-    };
-    lbl_end:
-    if(cstart.x==c.x && cstart.y==c.y && restart){
-        restart=0;
-        if(movey||movex){
-            movey=movey*-1;
-            movex=movex*-1;
+    if(isnight()){
+        lbl_start:
+        if(rand()%2){
+            entitymove(&c,(COORDS){c.x+movex,c.y});
+            entityfall(&c);
+            goto lbl_end;
         }else{
-            movex=movey=(2*(rand()%2))-1;
+            entityfall(&c);
+            entitymove(&c,(COORDS){c.x,c.y+movey});
+            goto lbl_end;
         };
-        goto lbl_start;
-    };
+        lbl_end:
+        if(cstart.x==c.x && cstart.y==c.y && restart){
+            restart=0;
+            if(movey||movex){
+                movey=movey*-1;
+                movex=movex*-1;
+            }else{
+                movex=movey=(2*(rand()%2))-1;
+            };
+            goto lbl_start;
+        };
+    }else{
+        if(!entitymove(&c,(COORDS){c.x-movex,c.y-movey})){
+            if(rand()%2){
+                entitymove(&c,(COORDS){c.x-movex,c.y-movey});
+            }else{
+                entitymove(&c,(COORDS){c.x-movex,c.y-movey});
+            };  
+        };
+        entityfall(&c);
+        if(!onscreen(c.x, c.y)) return;
+    }
     getmaptile(c.x, c.y).e=e;
     entityxy[x]=c;
 };
@@ -129,7 +141,13 @@ void ai_bat(int x){
             };
         };
     }else{
-        entitymove(&c,(COORDS){c.x-movex,c.y-movey});
+        if(!entitymove(&c,(COORDS){c.x-movex,c.y-movey})){
+            if(rand()%2){
+                entitymove(&c,(COORDS){c.x-movex,c.y-movey});
+            }else{
+                entitymove(&c,(COORDS){c.x-movex,c.y-movey});
+            };
+        };
         if(!onscreen(c.x, c.y)) return;
     };
     lbl_end:
