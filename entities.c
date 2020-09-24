@@ -44,14 +44,68 @@ void entityfall(COORDS *c){
 COORDS spawnbat(){
     COORDS c=randc();
     if(!getmaptiledata(c.x, c.y).passable) return c;
-    if(!isnight()) return c;
+    if(!isnight()&&c.y<=(MAP_H/4)) return c;
+    if(!isnight()){
+        if(ENTITIES_IN_WORLD>10) return c;
+    };
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_BAT,3};
     ENTITIES_IN_WORLD++;
     return c;
 };
-void ai_bat(int x){
+COORDS spawnzombie(){
+    COORDS c=randc();
+    if(!getmaptiledata(c.x, c.y).passable) return c;
+    if(!isnight()) return c;
+    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_ZOMBIE,10};
+    ENTITIES_IN_WORLD++;
+    return c;
+};
+void ai_zombie(int x){
     COORDS cstart,c=entityxy[x];
     cstart=c;
+    ENTITY e=getmaptile(c.x, c.y).e;
+    getmaptile(c.x, c.y).e=entity_none;
+    ENTITIES_IN_WORLD--;
+    if(e.hp<=0 || !nearplayer(c.x,c.y)) {
+        return;
+    };
+    char restart=1;
+    int movex=(c.x<player.c.x)-(c.x>player.c.x);
+    int movey=(c.y<player.c.y)-(c.y>player.c.y);
+    if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
+    (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
+        GOT_HIT_MSG="You were hit by zombie";
+        player.hp-=5;
+        entityfall(&c);
+        goto lbl_end;
+    };
+    lbl_start:
+    if(rand()%2){
+        entitymove(&c,(COORDS){c.x+movex,c.y});
+        entityfall(&c);
+        goto lbl_end;
+    }else{
+        entityfall(&c);
+        entitymove(&c,(COORDS){c.x,c.y+movey});
+        goto lbl_end;
+    };
+    lbl_end:
+    if(cstart.x==c.x && cstart.y==c.y && restart){
+        restart=0;
+        if(movey||movex){
+            movey=movey*-1;
+            movex=movex*-1;
+        }else{
+            movex=movey=(2*(rand()%2))-1;
+        };
+        goto lbl_start;
+    };
+    getmaptile(c.x, c.y).e=e;
+    entityxy[x]=c;
+    ENTITIES_IN_WORLD++;
+};
+void ai_bat(int x){
+    COORDS c=entityxy[x];
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
     ENTITIES_IN_WORLD--;
@@ -63,11 +117,11 @@ void ai_bat(int x){
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
         GOT_HIT_MSG="You were hit by bat";
-        player.hp--;
+        player.hp-=2;
         entityfall(&c);
         goto lbl_end;
     };
-    if(isnight()){
+    if(isnight()||c.y>(MAP_H/4)){
         if(!entitymove(&c,(COORDS){c.x+movex,c.y+movey})){
             if(movex&&movey){
                 if(rand()%2){
