@@ -2,6 +2,7 @@
 #define FUNCS_H_INCLUDED
 #include "structs.h"
 #define mvdtile(y,x,t) move((y),(x));dtile(t)
+#define xytocoords(x,y) ((COORDS){(x),(y)})
 #define dtiledata(z) dtile((z).t)
 #define mvdtiledata(y,x,z) move((y),(x));dtile((z).t)
 #define dmaptile(x,y) dtile(TILES[getmapid(x,y)].t)
@@ -22,12 +23,13 @@
 #define onscreen(z,t) (((z)>=player.c.x-38) && ((z)<=player.c.x+38) && ((t)>=player.c.y-10) && ((t)<=player.c.y+10))
 #define nearplayer(z,t) (((z)>=player.c.x-100) && ((z)<=player.c.x+100) && ((t)>=player.c.y-100) && ((t)<=player.c.y+100))
 void updateskycolor();
+char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst);
+char dropitem(int x,int y,ITEM item);
 void playerattack();
 void myinit();
 void load();
 void save();
 char hasdroppeditem(int x,int y);
-char dropitem(int x,int y,ITEM item);
 void die();
 void entities();
 void savesettings();

@@ -13,7 +13,8 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
         {' ',A_NORMAL,0x0,0}},
     {
         ENTITY_SNAKE,
-        {'s',A_BOLD,0x28,CP_ENTITY_SNAKE}},
+        {'s',A_BOLD,0x28,CP_ENTITY_SNAKE},
+        {}},
     {
         ENTITY_BAT,
         {'v',A_BOLD,0xeb,CP_ENTITY_BAT}},

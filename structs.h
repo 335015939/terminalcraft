@@ -132,6 +132,7 @@ typedef struct {
     int damage;
     TILE t;
     char *name;
+    int equipid;
 }ITEMDATA;
 typedef struct {
     ITEM result;
@@ -147,5 +148,6 @@ typedef struct {
 typedef struct {
     int id;
     TILE t;
+    DROPITEMDATA d;
 } ENTITY_DEF;
 #endif

@@ -1,7 +1,30 @@
-#include "enum.h"
 #include "funcs.h"
 #include "header.h"
-#include <curses.h>
+
+char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst){
+    int x,y,z;
+    ITEM item;
+    for(x=0;x<5;x++){
+        if(!drops.id[x]) break;
+        if((z=((drops.max[x])-(drops.low[x])))){
+            y=(rand()% z ) + (drops.low[x]);
+        }else {
+            y=drops.low[x];
+        }
+        if((rand()%100)<=drops.chance[x]){
+            item.id=drops.id[x];
+            item.num=y;
+            if(putininvfirst){
+                if(!invadditem(item)){
+                    dropitem(c.x,c.y,item);
+                };
+            }else{
+                dropitem(c.x,c.y,item);
+            };
+        };
+    };
+    return 1;
+};
 void die(){
     clear();
     attr_set(0,0,NULL);
@@ -106,8 +129,7 @@ char fall(){
     return 0;
 };
 void mineblock(){
-    ITEM item;
-    int x=player.facingx+player.c.x,y=player.facingy+player.c.y,z,health,i,k;
+    int x=player.facingx+player.c.x,y=player.facingy+player.c.y,health,i,k;
     if(!isinmap(x, y)) return;
     if(fall()) return;
     TILEDATA t=getmaptiledata(x,y);
@@ -134,19 +156,20 @@ void mineblock(){
         if(health<=0 || SETTINGS.debugmode)putmapid(x, y, 0);
     };
     emptystorage(&(getmaptile(x, y).storage));
-    for(x=0;x<5;x++){
-        if(!t.drops.id[x]) break;
-        if((z=((t.drops.max[x])-(t.drops.low[x])))){
-            y=(rand()% z ) + (t.drops.low[x]);
-        }else {
-            y=t.drops.low[x];
-        }
-        if((rand()%100)<=t.drops.chance[x]){
-            item.id=t.drops.id[x];
-            item.num=y;
-            invadditem(item);
-        };
-    };
+    // for(x=0;x<5;x++){
+    //     if(!t.drops.id[x]) break;
+    //     if((z=((t.drops.max[x])-(t.drops.low[x])))){
+    //         y=(rand()% z ) + (t.drops.low[x]);
+    //     }else {
+    //         y=t.drops.low[x];
+    //     }
+    //     if((rand()%100)<=t.drops.chance[x]){
+    //         item.id=t.drops.id[x];
+    //         item.num=y;
+    //         invadditem(item);
+    //     };
+    // };
+    dropitems(t.drops,(COORDS){x,y},1);
     mvprintw(2,0,"                           ");
 };
 void moveplayer(int x,int y){

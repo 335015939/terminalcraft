@@ -5,6 +5,13 @@
 #include "vars.h"
 #define entity_none ((ENTITY){})
 COORDS *entityxy=NULL;
+char entitydie(int x,int y,ENTITY e){
+    if(e.hp<=0){
+        dropitems(ENTITIES[e.id].d,xytocoords(x, y),0);
+        return 1;
+    };
+    return 0;
+};
 COORDS randc(){
     int x,y;
     lbl_redo:
@@ -63,7 +70,7 @@ void ai_zombie(int x){
     cstart=c;
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
-    if(e.hp<=0 || !nearplayer(c.x,c.y)) {
+    if(entitydie(c.x,c.y,e) || !nearplayer(c.x,c.y)) {
         return;
     };
     char restart=1;
@@ -116,7 +123,7 @@ void ai_bat(int x){
     COORDS c=entityxy[x];
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
-    if(e.hp<=0 || !nearplayer(c.x,c.y)) {
+    if(entitydie(c.x,c.y,e) || !nearplayer(c.x,c.y)) {
         return;
     };
     int movex=(c.x<player.c.x)-(c.x>player.c.x);
@@ -180,7 +187,7 @@ void ai_snake(int x){
     cstart=c;
     ENTITY e=getmaptile(c.x, c.y).e;
     getmaptile(c.x, c.y).e=entity_none;
-    if(e.hp<=0 || !nearplayer(c.x,c.y)) {
+    if(entitydie(c.x,c.y,e)|| !nearplayer(c.x,c.y)) {
         return;
     };
     char restart=1;
