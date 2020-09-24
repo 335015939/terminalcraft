@@ -141,8 +141,6 @@ void chest(int x,int y){
                 if(selected.x>=10){
                     if(invadditem((*cheststorage)[selected.x-10][selected.y])){
                         (*cheststorage)[selected.x-10][selected.y]=(ITEM){};
-                        clear();
-                        getch();
                     };
                 }else{
                     if(additemtochest(player.i[selected.x][selected.y])){
