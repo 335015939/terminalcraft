@@ -61,6 +61,7 @@ COORDS spawnbat(){
     if(!isnight()){
         if(ENTITIES_IN_WORLD>10) return c;
     };
+    if(rand()%6) return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_BAT,3};
     return c;
 };
@@ -68,6 +69,10 @@ COORDS spawnzombie(){
     COORDS c=randc();
     if(!getmaptiledata(c.x, c.y).passable) return c;
     if(!isnight()) return c;
+    if(c.y<MAP_H-1){
+        if(getmaptiledata(c.x, c.y).fallthrough&&
+        getmaptiledata(c.x, c.y+1).fallthrough) return c;
+    };
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_ZOMBIE,10};
     return c;
 };
