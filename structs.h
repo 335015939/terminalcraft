@@ -43,6 +43,7 @@ typedef struct {
     int oldskycolor;
     char autosave;
     char debugmode;
+    char autopickup;
 } _SETTINGS;
 typedef struct {
     int id;

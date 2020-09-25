@@ -16,7 +16,13 @@ const EQUIPMENTDATA EQUIPMENT[]={
         EQUIPMENT_WOOD_HEMLET,ITEM_WOOD_HELMET,
         BODY_HEAD,0,1,
         0,0,0,0,
-        0,1,0,0}
+        0,1,0,0},
+    {
+        EQUIPMENT_SNAKE_SKIN_CLOAK,ITEM_SNAKE_SKIN_CLOAK,
+        BODY_CLOAK,0,1,
+        5,5,5,5,
+        0,1,0,0,
+    }
 };
 const ENTITY_DEF ENTITIES[ENTITY_NUM]={
     {
@@ -25,7 +31,12 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
     {
         ENTITY_SNAKE,
         {'s',A_BOLD,0x28,CP_ENTITY_SNAKE},
-        {}},
+        {
+            {ITEM_SNAKE_SKIN},
+            {1},
+            {1},
+            {10}
+        }},
     {
         ENTITY_BAT,
         {'v',A_BOLD,0xeb,CP_ENTITY_BAT}},
@@ -142,10 +153,15 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_IRON,6},
             {ITEM_WOOD,2}
         },TILE_TYPE_WORKBENCH},
-    {
+    {//wood helmet
         {ITEM_WOOD_HELMET,1},
         1,{
             {ITEM_WOOD,5}
+        },TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_SNAKE_SKIN_CLOAK,1},
+        1,{
+            {ITEM_SNAKE_SKIN,10}
         },TILE_TYPE_WORKBENCH}
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
@@ -200,6 +216,7 @@ const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
     {CP_ITEM_SILVER,0xfe,0xe9},
     {CP_ITEM_GOLD,0x03,0xe9},
     {CP_ITEM_WOOD_SWORD,0x5e,0xe9},
+    {CP_ITEM_SNAKE_SKIN,0x12,0xe9}
 };
 const TILEDATA TILES[TILE_NUM]={
     {
@@ -604,6 +621,16 @@ const ITEMDATA ITEMS[ITEMNUM]={
         ITEM_WOOD_HELMET,1,ITEM_TYPE_EQUIPABLE,
         TILE_AIR,0,0,0,
         {'^',A_BOLD,0x0,CP_ITEM_WOOD_HELMET},
-        "Wooden helmet",EQUIPMENT_WOOD_HEMLET}
+        "Wooden helmet",EQUIPMENT_WOOD_HEMLET},
+    {
+        ITEM_SNAKE_SKIN,10,ITEM_TYPE_OTHER,
+        TILE_AIR,0,0,0,
+        {'S',A_BOLD,0x0,CP_ITEM_SNAKE_SKIN},
+        "Snakeskin"},
+    {
+        ITEM_SNAKE_SKIN_CLOAK,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'$',A_BOLD,0x0,CP_ITEM_SNAKE_SKIN_CLOAK},
+        "Snakeskin cloak",EQUIPMENT_SNAKE_SKIN_CLOAK}
 };
 #endif

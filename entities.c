@@ -61,7 +61,7 @@ COORDS spawnbat(){
     if(!isnight()){
         if(ENTITIES_IN_WORLD>10) return c;
     };
-    if(rand()%6) return c;
+    if(rand()%30) return c;
     getmaptile(c.x, c.y).e=(ENTITY){ENTITY_BAT,3};
     return c;
 };

@@ -156,20 +156,7 @@ void mineblock(){
         if(health<=0 || SETTINGS.debugmode)putmapid(x, y, 0);
     };
     emptystorage(&(getmaptile(x, y).storage));
-    // for(x=0;x<5;x++){
-    //     if(!t.drops.id[x]) break;
-    //     if((z=((t.drops.max[x])-(t.drops.low[x])))){
-    //         y=(rand()% z ) + (t.drops.low[x]);
-    //     }else {
-    //         y=t.drops.low[x];
-    //     }
-    //     if((rand()%100)<=t.drops.chance[x]){
-    //         item.id=t.drops.id[x];
-    //         item.num=y;
-    //         invadditem(item);
-    //     };
-    // };
-    dropitems(t.drops,(COORDS){x,y},1);
+    dropitems(t.drops,(COORDS){x,y},0);
     mvprintw(2,0,"                           ");
 };
 void moveplayer(int x,int y){
@@ -225,4 +212,4 @@ void updateskycolor(){
         SETTINGS.oldskycolor=SETTINGS.skycolor;
         initmycolorpairs();
     };
-}
+};

@@ -5,10 +5,10 @@ int CHOSEN_WORLD=0;
 int CHOSEN_PLAYER=0;
 #define OP_TYPE_INT 1
 #define OP_TYPE_BOOL 2
-int optionstatus[4]={};
-const int optiontype[4]={OP_TYPE_INT,             OP_TYPE_INT              ,OP_TYPE_BOOL  ,OP_TYPE_BOOL};
+int optionstatus[5]={};
+const int optiontype[5]={OP_TYPE_INT,             OP_TYPE_INT              ,OP_TYPE_BOOL  ,OP_TYPE_BOOL,OP_TYPE_BOOL};
 void drawopt(int i){
-    const char *options[4]={"Map height(Crashes if changed)","Map width(Crashes if changed)","Autosave","Debug mode"};
+    const char *options[5]={"Map height(Crashes if changed)","Map width(Crashes if changed)","Autosave","Debug mode","Auto pickup"};
     const char*tf[2]={"Off","On"};
     addstr(options[i]);
     if(optiontype[i]==OP_TYPE_BOOL){
@@ -25,10 +25,11 @@ void options(){
         optionstatus[1]=MAP_W;
         optionstatus[2]=SETTINGS.autosave;
         optionstatus[3]=SETTINGS.debugmode;
+        optionstatus[4]=SETTINGS.autopickup;
         clear();
         attr_set(A_NORMAL,0,NULL);
         addstr("Options\n\n");
-        for(i=0;i<4;i++){
+        for(i=0;i<5;i++){
             drawopt(i);
         };
         move(selected+2,0);
@@ -48,7 +49,7 @@ void options(){
             case 's':
             case 'S':
             case KEY_DOWN:
-                selected +=(selected<3);
+                selected +=(selected<4);
                 break;
             case 'a':
             case 'A':
@@ -70,6 +71,7 @@ void options(){
         MAP_W=optionstatus[1];
         SETTINGS.autosave=optionstatus[2];
         SETTINGS.debugmode=optionstatus[3];
+        SETTINGS.autopickup=optionstatus[4];
     };
 };
 int _titlescr();

@@ -7,7 +7,7 @@
 
 //MAPTILE *map=NULL;
 _SETTINGS SETTINGS={
-    3000,500,0x21,0x21,1,0
+    3000,500,0x21,0x21,1,0,1
 };
 char *GOT_HIT_MSG=" ";
 char *HIT_MSG=" ";
@@ -150,6 +150,11 @@ int main(){
         if(player.hp<=0){
             die();
             goto lbl_start;
+        };
+        if(SETTINGS.autopickup){
+            if(hasdroppeditem(player.c.x,player.c.y)){
+                pickupitem(player.c.x, player.c.y);
+            };
         };
         tick=TICK;
     };
