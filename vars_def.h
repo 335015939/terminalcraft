@@ -12,6 +12,11 @@ const EQUIPMENTDATA EQUIPMENT[]={
         BODY_HEAD,0,1,//position, can fly, fall damage
         0,0,0,0,//multipliers:damage, defence, regen, max health
         0,0,0,0},//bonus stat
+    {
+        EQUIPMENT_WOOD_HEMLET,
+        BODY_HEAD,0,1,
+        0,0,0,0,
+        0,1,0,0}
 };
 const ENTITY_DEF ENTITIES[ENTITY_NUM]={
     {
@@ -136,6 +141,11 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
         2,{
             {ITEM_IRON,6},
             {ITEM_WOOD,2}
+        },TILE_TYPE_WORKBENCH},
+    {
+        {ITEM_WOOD_HELMET,1},
+        1,{
+            {ITEM_WOOD,5}
         },TILE_TYPE_WORKBENCH}
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
@@ -589,6 +599,11 @@ const ITEMDATA ITEMS[ITEMNUM]={
         ITEM_IRON_SWORD,1,ITEM_TYPE_WEAPON,
         TILE_AIR,0,0,3,
         {'/',A_BOLD,0x0,CP_ITEM_IRON_SWORD},
-        "Iron sword"}
+        "Iron sword"},
+    {
+        ITEM_WOOD_HELMET,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'^',A_BOLD,0x0,CP_ITEM_WOOD_HELMET},
+        "Wooden helmet",EQUIPMENT_WOOD_HEMLET}
 };
 #endif

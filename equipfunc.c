@@ -1,6 +1,8 @@
 #include "enum.h"
+#include "funcs.h"
 #include "header.h"
 #include "structs.h"
+#include "vars.h"
 #define BODY_PARTS 10
 const struct{
     const char *name;
@@ -43,9 +45,9 @@ void reloadstats(){
         player.regenplus+=e.regenplus;
         player.maxhpplus+=e.maxhpplus;
     };
+    player.hp=player.hp%(getmaxhp());
 };
 char unequipitem(int part){
-    const int zero=0;
     if(!invadditem((ITEM){(*bodypart[part].id),1})){
         return 0;
     }else{
@@ -53,7 +55,10 @@ char unequipitem(int part){
         return 1;
     };
 };
-char equipitem(ITEM item,int part){
+char equipitem(ITEM item){
+    int x;
+    if(!(x=ITEMS[item.id].equipid)) return 0;
+    int part=EQUIPMENT[x].position;
     if(ITEMS[item.id].equipid){
         if(unequipitem(part)){
             *bodypart[part].id=item.id;
@@ -62,22 +67,78 @@ char equipitem(ITEM item,int part){
     };
     return 0;
 };
-void equipdraw(){
+unsigned char CURRENT_ATTR_TO_DRAW=0;
+void drawattr(int x){
+    const char* names[8]={
+        "Defence",
+        "Damage",
+        "Regeneration",
+        "Max health",
+        "Defence",
+        "Damage",
+        "Regeneration",
+        "Max health"
+    };
+    char *str;
+    int values[8]={
+        EQUIPMENT[*bodypart[x].id].defmulti,
+        EQUIPMENT[*bodypart[x].id].dmgmulti,
+        EQUIPMENT[*bodypart[x].id].regenmulti,
+        EQUIPMENT[*bodypart[x].id].maxhpmulti,
+        EQUIPMENT[*bodypart[x].id].defplus,
+        EQUIPMENT[*bodypart[x].id].dmgplus,
+        EQUIPMENT[*bodypart[x].id].regenplus,
+        EQUIPMENT[*bodypart[x].id].maxhpplus,
+    };
+    const char ismultiplier[]={1,1,1,1,0,0,0,0};
+    if(ismultiplier[x]){
+        str="%s multiplier:+%d%%";
+    }else{
+        str="%s:%d";
+    };
+    //if(values[x]){
+        mvprintw(CURRENT_ATTR_TO_DRAW+2,20,str,names[x],values[x]);printw("  %d",*bodypart[x].id);
+        CURRENT_ATTR_TO_DRAW++;
+    //};
+};
+void equipdraw(int x){
     clear();
     int i;
+    CURRENT_ATTR_TO_DRAW=0;
+    attr_set(0,0,NULL);
     addstr("Equipment\n\n");
     for(i=0;i<BODY_PARTS;i++){
         printw("%s:%s\n",bodypart[i].name,ITEMS[(int)(*bodypart[i].id)].name);
     };
+    for(i=0;i<8;i++){
+        drawattr(i);
+    };
+    attron(A_REVERSE);
+    mvprintw(x+2,0,"%s:%s",bodypart[x].name,ITEMS[(int)(*bodypart[x].id)].name);
 };
 void equip(){
+    static int selected=0;
     for(;;){
-        equipdraw();
+        equipdraw(selected);
         switch(getch()){
             case 'q':
             case 'Q':
                 goto lbl_end;
-
+            case 's':
+            case 'S':
+            case KEY_DOWN:
+                selected +=(selected<(BODY_PARTS-1));
+                break;
+            case 'w':
+            case 'W':
+            case KEY_UP:
+                selected-=(selected>0);
+                break;
+            case 'j':
+            case 'J':
+            case '\n':
+                unequipitem(selected);
+                break;
         };
     };
     lbl_end:

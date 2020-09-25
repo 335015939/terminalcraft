@@ -185,6 +185,12 @@ void inventory(){
             case KEY_DOWN:
                 c.y++;
                 break;
+            case 'e':
+            case 'E':
+                if(equipitem(player.i[c.x][c.y])){
+                    player.i[c.x][c.y]=(ITEM){};
+                };
+                break;
             case '\b':
             case '\\':
             case '/':
