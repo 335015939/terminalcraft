@@ -26,6 +26,7 @@ void updateskycolor();
 char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst);
 char dropitem(int x,int y,ITEM item);
 void playerattack();
+void entityattack(int dmg,char *entitymsg);
 void myinit();
 void entityattack(int dmg,char *entitymsg);
 char equipitem(ITEM item);

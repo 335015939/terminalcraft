@@ -1,5 +1,6 @@
 #include "funcs.h"
 #include "header.h"
+#include "vars.h"
 
 char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst){
     int x,y,z;
@@ -121,9 +122,15 @@ unsigned int facing(){
 char fall(){
     if(isinmap(player.c.x,player.c.y+1)){
         if(getmaptiledata(player.c.x,player.c.y+1).fallthrough && getmaptiledata(player.c.x,player.c.y).fallthrough
-         && !SETTINGS.debugmode){
+         && (!SETTINGS.debugmode || player.canfly)){
             player.c.y++;
+            DISTANCE_FALLEN++;
             return 1;
+        }else{
+            if(!SETTINGS.debugmode && player.falldmg){
+                entityattack((DISTANCE_FALLEN-3),"");
+            };
+            DISTANCE_FALLEN=0;
         };
     };
     return 0;
