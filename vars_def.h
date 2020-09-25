@@ -21,8 +21,8 @@ const EQUIPMENTDATA EQUIPMENT[]={
         EQUIPMENT_SNAKE_SKIN_CLOAK,ITEM_SNAKE_SKIN_CLOAK,
         BODY_CLOAK,0,1,
         5,5,5,5,
-        0,1,0,0,
-    }
+        0,1,0,0},
+
 };
 const ENTITY_DEF ENTITIES[ENTITY_NUM]={
     {
@@ -103,7 +103,7 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
             {ITEM_COAL,2},
         },
         TILE_TYPE_NONE},
-    {//silver bat
+    {//silver bar
         {ITEM_SILVER,1},
         2,{
             {ITEM_SILVER_ORE,4},
@@ -158,7 +158,12 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
         1,{
             {ITEM_WOOD,5}
         },TILE_TYPE_WORKBENCH},
-    {
+    {//wood breastplate
+        {ITEM_WOOD_BREASTEPLATE,1},
+        1,{
+            {ITEM_WOOD,9}
+        },TILE_TYPE_WORKBENCH},
+    {//snakeskin cloak
         {ITEM_SNAKE_SKIN_CLOAK,1},
         1,{
             {ITEM_SNAKE_SKIN,10}
@@ -631,6 +636,12 @@ const ITEMDATA ITEMS[ITEMNUM]={
         ITEM_SNAKE_SKIN_CLOAK,1,ITEM_TYPE_EQUIPABLE,
         TILE_AIR,0,0,0,
         {'$',A_BOLD,0x0,CP_ITEM_SNAKE_SKIN_CLOAK},
-        "Snakeskin cloak",EQUIPMENT_SNAKE_SKIN_CLOAK}
+        "Snakeskin cloak",EQUIPMENT_SNAKE_SKIN_CLOAK},
+    {
+        ITEM_WOOD_BREASTEPLATE,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'%',A_BOLD,0x0,CP_ITEM_WOOD_BREASTPLATE},
+        "Wood breastplate",EQUIPMENT_WOOD_BREASTPLATE},
+
 };
 #endif
