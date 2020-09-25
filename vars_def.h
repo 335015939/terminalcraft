@@ -6,7 +6,13 @@
 #include "structs.h"
 #include "enum.h"
 const unsigned char SPIN[4]={'|','/','-','\\'};
-
+const EQUIPMENTDATA EQUIPMENT[]={
+    {
+        EQUIPMENT_NONE,//id
+        BODY_HEAD,0,1,//position, can fly, fall damage
+        0,0,0,0,//multipliers:damage, defence, regen, max health
+        0,0,0,0},//bonus stat
+};
 const ENTITY_DEF ENTITIES[ENTITY_NUM]={
     {
         ENTITY_NONE,

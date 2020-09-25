@@ -35,6 +35,10 @@ int main(){
             x=y=0;
             k=getch();
             switch(k){
+                case 'E':
+                case 'e':
+                    equip();
+                    break;
                 case '\\':
                 case '/':
                 case '\b':

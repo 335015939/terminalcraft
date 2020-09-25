@@ -81,6 +81,7 @@ typedef struct {
     int wristid;
 } EQUIPDATA;
 typedef struct{
+    int id;
     int position;
     char canfly;
     char falldmg;
@@ -92,7 +93,7 @@ typedef struct{
     int defplus;
     int regenplus;
     int maxhpplus;
-} EQUIPMENT;
+} EQUIPMENTDATA;
 typedef struct{
     COORDS c;
     char facingx;
