@@ -18,6 +18,11 @@ const EQUIPMENTDATA EQUIPMENT[]={
         0,0,0,0,
         0,1,0,0},
     {
+        EQUIPMENT_WOOD_BREASTPLATE,ITEM_WOOD_BREASTEPLATE,
+        BODY_BODY,0,1,
+        0,0,0,0,
+        0,1,0,0},
+    {
         EQUIPMENT_SNAKE_SKIN_CLOAK,ITEM_SNAKE_SKIN_CLOAK,
         BODY_CLOAK,0,1,
         5,5,5,5,
