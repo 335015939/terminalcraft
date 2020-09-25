@@ -70,7 +70,7 @@ char equipitem(ITEM item){
     return 0;
 };
 unsigned char CURRENT_ATTR_TO_DRAW=0;
-void drawattr(int x){
+void drawattr(int y,int x){
     const char* names[8]={
         "Defence",
         "Damage",
@@ -82,15 +82,15 @@ void drawattr(int x){
         "Max health"
     };
     char *str;
-    int values[8]={
-        EQUIPMENT[*bodypart[x].id].defmulti,
-        EQUIPMENT[*bodypart[x].id].dmgmulti,
-        EQUIPMENT[*bodypart[x].id].regenmulti,
-        EQUIPMENT[*bodypart[x].id].maxhpmulti,
-        EQUIPMENT[*bodypart[x].id].defplus,
-        EQUIPMENT[*bodypart[x].id].dmgplus,
-        EQUIPMENT[*bodypart[x].id].regenplus,
-        EQUIPMENT[*bodypart[x].id].maxhpplus,
+    const int values[8]={
+        EQUIPMENT[y].defmulti,
+        EQUIPMENT[y].dmgmulti,
+        EQUIPMENT[y].regenmulti,
+        EQUIPMENT[y].maxhpmulti,
+        EQUIPMENT[y].defplus,
+        EQUIPMENT[y].dmgplus,
+        EQUIPMENT[y].regenplus,
+        EQUIPMENT[y].maxhpplus,
     };
     const char ismultiplier[]={1,1,1,1,0,0,0,0};
     if(ismultiplier[x]){
@@ -98,10 +98,10 @@ void drawattr(int x){
     }else{
         str="%s:%d";
     };
-    //if(values[x]){
-        mvprintw(CURRENT_ATTR_TO_DRAW+2,20,str,names[x],values[x]);printw("  %d",*bodypart[x].id);
+    if(values[x]){
+        mvprintw(CURRENT_ATTR_TO_DRAW+2,20,str,names[x],values[x]);
         CURRENT_ATTR_TO_DRAW++;
-    //};
+    };
 };
 void equipdraw(int x){
     clear();
@@ -113,10 +113,10 @@ void equipdraw(int x){
         printw("%s:%s\n",bodypart[i].name,ITEMS[(int)(EQUIPMENT[*bodypart[i].id].itemid)].name);
     };
     for(i=0;i<8;i++){
-        drawattr(i);
+        drawattr(*bodypart[x].id,i);
     };
     attron(A_REVERSE);
-    mvprintw(x+2,0,"%s:%s",bodypart[x].name,ITEMS[(int)(EQUIPMENT[*bodypart[i].id].itemid)].name);
+    mvprintw(x+2,0,"%s:%s",bodypart[x].name,ITEMS[(int)(EQUIPMENT[*bodypart[x].id].itemid)].name);
 };
 void equip(){
     static int selected=0;
