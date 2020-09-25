@@ -8,12 +8,12 @@
 const unsigned char SPIN[4]={'|','/','-','\\'};
 const EQUIPMENTDATA EQUIPMENT[]={
     {
-        EQUIPMENT_NONE,//id
+        EQUIPMENT_NONE,ITEM_NONE,//id,coreesponding item id
         BODY_HEAD,0,1,//position, can fly, fall damage
         0,0,0,0,//multipliers:damage, defence, regen, max health
         0,0,0,0},//bonus stat
     {
-        EQUIPMENT_WOOD_HEMLET,
+        EQUIPMENT_WOOD_HEMLET,ITEM_WOOD_HELMET,
         BODY_HEAD,0,1,
         0,0,0,0,
         0,1,0,0}

@@ -149,6 +149,9 @@ int main(){
         };
         if(player.hp<=0){
             die();
+            clear();
+            printw("%d",getmaxhp());
+            getch();
             goto lbl_start;
         };
         tick=TICK;

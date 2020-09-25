@@ -45,10 +45,12 @@ void reloadstats(){
         player.regenplus+=e.regenplus;
         player.maxhpplus+=e.maxhpplus;
     };
-    player.hp=player.hp%(getmaxhp());
+    if(player.hp>getmaxhp()){
+        player.hp=getmaxhp();
+    };
 };
 char unequipitem(int part){
-    if(!invadditem((ITEM){(*bodypart[part].id),1})){
+    if(!invadditem((ITEM){(EQUIPMENT[*bodypart[part].id].itemid),1})){
         return 0;
     }else{
         *bodypart[part].id=0;
@@ -61,7 +63,7 @@ char equipitem(ITEM item){
     int part=EQUIPMENT[x].position;
     if(ITEMS[item.id].equipid){
         if(unequipitem(part)){
-            *bodypart[part].id=item.id;
+            *bodypart[part].id=x;
             return 1;
         };
     };
@@ -108,13 +110,13 @@ void equipdraw(int x){
     attr_set(0,0,NULL);
     addstr("Equipment\n\n");
     for(i=0;i<BODY_PARTS;i++){
-        printw("%s:%s\n",bodypart[i].name,ITEMS[(int)(*bodypart[i].id)].name);
+        printw("%s:%s\n",bodypart[i].name,ITEMS[(int)(EQUIPMENT[*bodypart[i].id].itemid)].name);
     };
     for(i=0;i<8;i++){
         drawattr(i);
     };
     attron(A_REVERSE);
-    mvprintw(x+2,0,"%s:%s",bodypart[x].name,ITEMS[(int)(*bodypart[x].id)].name);
+    mvprintw(x+2,0,"%s:%s",bodypart[x].name,ITEMS[(int)(EQUIPMENT[*bodypart[i].id].itemid)].name);
 };
 void equip(){
     static int selected=0;

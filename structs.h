@@ -82,6 +82,7 @@ typedef struct {
 } EQUIPDATA;
 typedef struct{
     int id;
+    int itemid;
     int position;
     char canfly;
     char falldmg;
