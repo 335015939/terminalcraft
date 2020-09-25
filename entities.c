@@ -5,6 +5,12 @@
 #include "vars.h"
 #define entity_none ((ENTITY){})
 COORDS *entityxy=NULL;
+void entityattack(int dmg,char *entitymsg){
+    dmg-=getdef();
+    if(dmg<0)dmg=0;
+    player.hp-=dmg;
+    GOT_HIT_MSG=entitymsg;
+};
 char entitydie(int x,int y,ENTITY e){
     if(e.hp<=0){
         dropitems(ENTITIES[e.id].d,xytocoords(x, y),0);
@@ -78,8 +84,7 @@ void ai_zombie(int x){
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
-        GOT_HIT_MSG="You were hit by zombie";
-        player.hp-=5;
+        entityattack(5,"You got hit by zombie");
         entityfall(&c);
         goto lbl_end;
     };
@@ -130,8 +135,7 @@ void ai_bat(int x){
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
-        GOT_HIT_MSG="You were hit by bat";
-        player.hp-=2;
+        entityattack(2,"You got hit by bat");
         entityfall(&c);
         goto lbl_end;
     };
@@ -195,8 +199,7 @@ void ai_snake(int x){
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
-        GOT_HIT_MSG="You were hit by snake";
-        player.hp--;
+        entityattack(1,"You got hit by snake");
         entityfall(&c);
         goto lbl_end;
     };

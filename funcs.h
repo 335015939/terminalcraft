@@ -27,6 +27,7 @@ char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst);
 char dropitem(int x,int y,ITEM item);
 void playerattack();
 void myinit();
+void entityattack(int dmg,char *entitymsg);
 char equipitem(ITEM item);
 void equip();
 void load();
