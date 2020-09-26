@@ -22,11 +22,11 @@ void load(){
     memset(&player,0,sizeof(PLAYER));
     memset(MAP,0,sizeof(MAPTILE)*MAP_W*MAP_H);
     if(!loadplayer()){
-        player=(PLAYER){{},0,0,0//coords,facingx,facingy,holding
-        ,100,{},{},{}//hp,recipies found,inventory,equipped stuff
-        ,0,0,0,0,0,0,0,0,//added attributes from equipment
-        0,0,5,100//base stats
-        ,0,1//can fly,fall damage
+        player=(PLAYER){{},0,0,0,50,
+            0,1,{},{},{},
+            0,0,0,0,0,0,0,0,
+            0,0,5,50,
+            0,1
         };
         invadditem((ITEM){ITEM_WOOD_SWORD,1});
         invadditem((ITEM){ITEM_WOOD_PICKAXE,1});

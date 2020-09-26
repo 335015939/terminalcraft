@@ -11,9 +11,11 @@
 #define getmaptile(x,y) (WORLD.map[(x)+(MAP_W*(y))])
 #define putmapid(x,y,z) (WORLD.map[(x)+(MAP_W*(y))].id=(z))
 #define getmaptiledata(x,y) (TILES[getmapid(x,y)])
+#define getexpneeded() ((int)(100*pow(player.lvl,1.3)))
 #define getmaxhp() ((player.basemaxhp+player.maxhpplus)+((player.basemaxhp*player.maxhpmulti)/100))
 #define getregen() (player.baseregen+player.regenplus+((player.baseregen*player.regenmulti)/100))
-#define getbasedmg() (player.basedmg+player.dmgplus+((player.basedmg*player.dmgmulti)/100))
+#define getdmg(x) ((player.basedmg+(x))+player.dmgplus+(((player.basedmg+(x))*player.dmgmulti)/100))
+#define getbasedmg() ((player.basedmg)+player.dmgplus+(((player.basedmg)*player.dmgmulti)/100))
 #define getdef() (player.basedef+player.defplus+((player.basedef*player.defmulti)/100))
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
 #define getinvitem(x,y) (player.i[(x)][(y)])
@@ -26,6 +28,7 @@ void showplayerstats();
 void updateskycolor();
 char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst);
 char dropitem(int x,int y,ITEM item);
+void lvlup();
 void playerattack();
 void entityattack(int dmg,char *entitymsg);
 void myinit();

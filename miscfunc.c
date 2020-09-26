@@ -1,11 +1,34 @@
 #include "funcs.h"
 #include "header.h"
 #include "vars.h"
+void lvlup(){
+    struct{
+        int *dest;
+        int increaseby;
+        char *name;
+    }attrs[4]={
+        {&player.basedef,1,"Base defence"},
+        {&player.basedmg,1,"Base damage"},
+        {&player.basemaxhp,3,"Max hp"},
+        {&player.baseregen,2,"Base regen"}
+    };
+    int x;
+    for(;;){
+        if(player.exp<getexpneeded()) return;
 
+        clear();
+        x=rand()%4;
+        *attrs[x].dest+=attrs[x].increaseby;
+        printw("You leveled up!\nlvl %d-->lvl %d\nYour %s increase by %d",player.lvl,player.lvl+1,
+        attrs[x].name,attrs[x].increaseby);
+        player.lvl++;
+        getch();
+    };
+};
 void showplayerstats(){
     clear();
-    printw("Your stats\n\nHealth:%d/%d\nDefence:%d\nBase damage:%d\nRegen chance:%d%%",
-    player.hp,getmaxhp(),getdef(),getbasedmg(),getregen());
+    printw("Your stats\n\nHealth:%d/%d\nLevel:%d(%d/%d)\nDefence:%d\nBase damage:%d\nRegen chance:%d%%\n",
+    player.hp,getmaxhp(),player.lvl,player.exp,getexpneeded(),getdef(),getbasedmg(),getregen());
     getch();
     clear();
 };
@@ -45,7 +68,7 @@ void playerattack(){
         if((ent=&getmaptile(player.c.x+player.facingx, 
         player.c.y+player.facingy).e)->id!=0){
             HIT_MSG="You hit something";
-            ent->hp-=gethelditemdata().damage;
+            ent->hp-=getdmg(gethelditemdata().damage);
         };
         stuffpertick();
     };

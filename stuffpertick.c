@@ -18,7 +18,7 @@ char scanfortrunk(int x,int y){
 void stuffperticknofall(){
     int x,y,i;
     TICK++;
-    for(i=0;i<((MAP_W*MAP_H)/1000);i++){
+    for(i=0;i<((MAP_W*MAP_H)/2000);i++){
         do{
             x=rand()%MAP_W;
             y=rand()%MAP_H;
@@ -54,6 +54,7 @@ void stuffperticknofall(){
         };
     };
     if((rand()%100)<=getregen() && player.hp<getmaxhp()) player.hp++; 
+    lvlup();
     entities();
     if(SETTINGS.debugmode){
         player.hp=getmaxhp();

@@ -14,6 +14,7 @@ void entityattack(int dmg,char *entitymsg){
 char entitydie(int x,int y,ENTITY e){
     if(e.hp<=0){
         dropitems(ENTITIES[e.id].d,xytocoords(x, y),0);
+        player.exp+=ENTITIES[e.id].xp;
         return 1;
     };
     return 0;

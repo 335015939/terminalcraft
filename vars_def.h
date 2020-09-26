@@ -59,7 +59,7 @@ const EQUIPMENTDATA EQUIPMENT[]={
 const ENTITY_DEF ENTITIES[ENTITY_NUM]={
     {
         ENTITY_NONE,
-        {' ',A_NORMAL,0x0,0}},
+        {' ',A_NORMAL,0x0,0},{},0},
     {
         ENTITY_SNAKE,
         {'s',A_BOLD,0x28,CP_ENTITY_SNAKE},
@@ -68,7 +68,7 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
             {1,2},
             {1,10},
             {10,100}
-        }},
+        },4},
     {
         ENTITY_BAT,
         {'v',A_BOLD,0xeb,CP_ENTITY_BAT},
@@ -77,7 +77,7 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
             {6,1},
             {20,1},
             {100,5},
-        }},
+        },12},
     {
         ENTITY_ZOMBIE,
         {'@',A_BOLD,0x1c,CP_ENTITY_ZOMBIE},
@@ -86,7 +86,7 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
             {25,1},
             {75,2},
             {100,10}
-        }}
+        },30}
 };
 const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
     {//copper coin

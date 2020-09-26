@@ -103,10 +103,13 @@ typedef struct{
     int holding;
     int hp;
     
+    int exp;
+    int lvl;
+
     int recipies_found[CRAFT_RECIPIE_NUM];
 
     ITEM i[10][10];
-    EQUIPDATA eqiup;
+    EQUIPDATA equip;
     
     int dmgmulti;//stats from equipped stuff
     int defmulti;
@@ -152,5 +155,6 @@ typedef struct {
     int id;
     TILE t;
     DROPITEMDATA d;
+    int xp;
 } ENTITY_DEF;
 #endif

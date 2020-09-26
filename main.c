@@ -12,12 +12,7 @@ _SETTINGS SETTINGS={
 char *GOT_HIT_MSG=" ";
 char *HIT_MSG=" ";
 int DISTANCE_FALLEN=0;
-PLAYER player={{},0,0,0//coords,facingx,facingy,holding,hp
-,20,{},{},{}//recipies found,inventory,equipped stuff
-,0,0,0,0,0,0,0,0,//added attributes from equipment
-0,0,15,20//base stats
-,0,0//can fly,fall damage
-};
+PLAYER player={};
 _WORLD WORLD={NULL,6*60,3000,500};
 int main(){
     int x,k,y,tick=TICK;

@@ -8,16 +8,16 @@ const struct{
     const char *name;
     int *id;
 }bodypart[BODY_PARTS]={
-    {"Head",&player.eqiup.headid},
-    {"Torso",&player.eqiup.bodyid},
-    {"Legs",&player.eqiup.legid},
-    {"Feet",&player.eqiup.feetid},
-    {"Neck",&player.eqiup.neckid},
-    {"Back",&player.eqiup.backid},
-    {"Cloak",&player.eqiup.cloakid},
-    {"Gloves",&player.eqiup.gloveid},
-    {"Left Hand",&player.eqiup.lhandid},
-    {"Wrist",&player.eqiup.wristid},
+    {"Head",&player.equip.headid},
+    {"Torso",&player.equip.bodyid},
+    {"Legs",&player.equip.legid},
+    {"Feet",&player.equip.feetid},
+    {"Neck",&player.equip.neckid},
+    {"Back",&player.equip.backid},
+    {"Cloak",&player.equip.cloakid},
+    {"Gloves",&player.equip.gloveid},
+    {"Left Hand",&player.equip.lhandid},
+    {"Wrist",&player.equip.wristid},
 };
 void reloadstats(){
     int i;
@@ -64,6 +64,7 @@ char equipitem(ITEM item){
     if(ITEMS[item.id].equipid){
         if(unequipitem(part)){
             *bodypart[part].id=x;
+            reloadstats();
             return 1;
         };
     };
