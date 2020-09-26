@@ -11,10 +11,6 @@ typedef struct {
     int high;
 } FILLCHESTCONTENT;
 void mksinglechest(COORDS c,const FILLCHESTCONTENT* content,int num){
-    // const int itemsid[]={ITEM_MAGIC_MIRROR,ITEM_DIRT,ITEM_STONE,ITEM_COAL,ITEM_DIAMOND_ORE,ITEM_WOOD};
-    // const int chance[]= {3,36,23,9,1,45};
-    // const int low[]=    {1,1,1,1,1,3};
-    // const int high[]=   {1,6,5,2,1,8};
     int i,j,which;
     if(!isinmap(c.x,c.y)) return;
     putmapid(c.x, c.y,TILE_CHEST);
@@ -107,20 +103,47 @@ void mkchests(){
         mksinglechest((COORDS){x,y},content_underground,7);
     };
 };
-void mksinglestructure(COORDS c,int h,int w){
-    if(
+void mksinglestructure(const COORDS c,const int h,const int w){
+    FILLCHESTCONTENT (*chestcontent);
+    int contentnum;
+    if(//check if all points are inside map
         !isinmap(c.x,c.y)||
         !isinmap(c.x+w-1,c.y)||
         !isinmap(c.x,c.y+h-1)||
         !isinmap(c.x+h-1,c.y+h-1)
     )return;
-    int centery=(c.y+h-1)/2,centerx=(c.x+w-1)/2,i,j;
-    for(i=0;i<w;i++){
+
+    int i,j;
+
+    for(i=0;i<w;i++){//fill with wood walls
         for(j=0;j<h;j++){
             putmapid(c.x+i, c.y+j, TILE_WOOD_WALL);
         };
     };
-    if(rand()%2){
+
+    for(i=0;i<w;i++){//put walls
+        putmapid(c.x+i,c.y,TILE_WOOD);
+        putmapid(c.x+i, c.y+h-1,TILE_WOOD);
+    };
+    for(j=0;j<h;j++){
+        putmapid(c.x,c.y+j,TILE_WOOD);
+        putmapid(c.x+w-1, c.y+j,TILE_WOOD);
+    };
+    if(c.y<((MAP_H)/4)+20){//decide what to put into chest
+        chestcontent=(FILLCHESTCONTENT[]){
+            {ITEM_DIRT,20,1,5}
+        };
+        contentnum=1;
+    }else{
+        chestcontent=(FILLCHESTCONTENT[]){
+            {ITEM_STONE,20,1,5}
+        };
+        contentnum=1;
+    };
+
+    mksinglechest((COORDS){c.x+(w-1)/2,c.y+h-2},chestcontent,contentnum);//create chest
+
+    if(rand()%2){//put doors
         putmapid(c.x, c.y+h-2,TILE_DOOR);
         putmapid(c.x+w-1, c.y+h-2,TILE_DOOR);
     }else{
@@ -134,21 +157,26 @@ void mksinglestructure(COORDS c,int h,int w){
 };
 void mkstructures(){
     int i,w,h,x,y;
-    COORDS c;
-    for(i=0;i<(MAP_W/600);i++){
-        printw("Generating structures...1/2 %d%%",(100*i)/(MAP_W/600));
+    for(i=0;i<(MAP_W/300);i++){
+        clear();
+        printw("Generating structures...1/2 %d%%",(100*i)/(MAP_W/300));
         refresh();
         h=3+rand()%3;
-        w=4+rand()%2;
+        w=4+rand()%4;
         do{
             do{
-                x=rand()%MAP_W;
-                y=rand()%MAP_H;
-            }while(!isinmap(x,y)||!isinmap(x+w,y+h));
+                do{
+                    x=rand()%MAP_W;
+                    y=rand()%MAP_H;
+                }while(!isinmap(x-1,y)||!isinmap(x+w,y+h));
+            }while((getmaptiledata(x, y+h).passable) || (getmaptiledata(x+w-1, y+h).passable));//make sure its on solid ground
         }while(
-0
+            !(getmaptiledata(x-1, y).passable) || !(getmaptiledata(x+w, y).passable)//make sure can get in
         );
+        mksinglestructure((COORDS){x,y},h,w);
     };
+    printw("\n%d %d",x,y);
+    getch();
 };
 void mksinglecave(COORDS c){
     char direction;
