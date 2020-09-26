@@ -57,10 +57,19 @@ char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst){
     return 1;
 };
 void die(){
-    clear();
-    attr_set(0,0,NULL);
-    addstr("You died!\nPress any key to continue");
-    getch();
+    if(player.hp<=0){
+        player.lvl=1;
+        player.exp=0;
+        player.baseregen=0;
+        player.basedef=0;
+        player.basedmg=0;
+        player.basemaxhp=0;
+        gotospawn();
+        clear();
+        attr_set(0,0,NULL);
+        addstr("You died!\nPress any key to continue");
+        getch();
+    };
 };
 void playerattack(){
     ENTITY *ent;

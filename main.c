@@ -156,10 +156,6 @@ int main(){
             };
             if(x || y) moveplayer(x,y);
         };
-        if(player.hp<=0){
-            die();
-            goto lbl_start;
-        };
         tick=TICK;
     };
     //lbl_end:
