@@ -190,7 +190,7 @@ void mkstructures(){
             do{
                 do{
                     x=rand()%MAP_W;
-                    y=rand()%MAP_H;
+                    y=rand()%(MAP_H/4);
                 }while(!isinmap(x-1,y)||!isinmap(x+w,y+h));
             }while((getmaptiledata(x, y+h).passable) || (getmaptiledata(x+w-1, y+h).passable));//make sure its on solid ground
         }while(
@@ -198,8 +198,24 @@ void mkstructures(){
         );
         mksinglestructure((COORDS){x,y},h,w);
     };
-    printw("\n%d %d",x,y);
-    getch();
+    for(i=0;i<(MAP_W/600);i++){
+        clear();
+        printw("Generating structures...2/2 %d%%",(100*i)/(MAP_W/600));
+        refresh();
+        h=3+rand()%3;
+        w=4+rand()%4;
+        do{
+            do{
+                do{
+                    x=rand()%MAP_W;
+                    y=(MAP_H/4)+(rand()%(3*(MAP_H/4)));
+                }while(!isinmap(x-1,y)||!isinmap(x+w,y+h));
+            }while((getmaptiledata(x, y+h).passable) || (getmaptiledata(x+w-1, y+h).passable));//make sure its on solid ground
+        }while(
+            !(getmaptiledata(x-1, y).passable) || !(getmaptiledata(x+w, y).passable)//make sure can get in
+        );
+        mksinglestructure((COORDS){x,y},h,w);
+    };
 };
 void mksinglecave(COORDS c){
     char direction;
