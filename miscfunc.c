@@ -2,6 +2,13 @@
 #include "header.h"
 #include "vars.h"
 
+void showplayerstats(){
+    clear();
+    printw("Your stats\n\nHealth:%d/%d\nDefence:%d\nBase damage:%d\nRegen chance:%d%%",
+    player.hp,getmaxhp(),getdef(),getbasedmg(),getregen());
+    getch();
+    clear();
+};
 char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst){
     int x,y,z;
     ITEM item;

@@ -64,19 +64,51 @@ const ENTITY_DEF ENTITIES[ENTITY_NUM]={
         ENTITY_SNAKE,
         {'s',A_BOLD,0x28,CP_ENTITY_SNAKE},
         {
-            {ITEM_SNAKE_SKIN},
-            {1},
-            {1},
-            {10}
+            {ITEM_SNAKE_SKIN,ITEM_COIN_COPPER},
+            {1,2},
+            {1,10},
+            {10,100}
         }},
     {
         ENTITY_BAT,
-        {'v',A_BOLD,0xeb,CP_ENTITY_BAT}},
+        {'v',A_BOLD,0xeb,CP_ENTITY_BAT},
+        {
+            {ITEM_COIN_COPPER,ITEM_COIN_SILVER},
+            {6,1},
+            {20,1},
+            {100,5},
+        }},
     {
         ENTITY_ZOMBIE,
-        {'@',A_BOLD,0x1c,CP_ENTITY_ZOMBIE}}
+        {'@',A_BOLD,0x1c,CP_ENTITY_ZOMBIE},
+        {
+            {ITEM_COIN_COPPER,ITEM_COIN_SILVER},
+            {25,1},
+            {75,2},
+            {100,10}
+        }}
 };
 const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
+    {//copper coin
+        {ITEM_COIN_COPPER,1000},
+        1,{
+            {ITEM_COIN_SILVER,1}
+        },TILE_TYPE_NONE},
+    {//silver coin
+        {ITEM_COIN_SILVER,1},
+        1,{
+            {ITEM_COIN_COPPER,1000}
+        },TILE_TYPE_NONE},
+    {//silver coin 2
+        {ITEM_COIN_SILVER,1000},
+        1,{
+            {ITEM_COIN_GOLD,1}
+        },TILE_TYPE_NONE},
+    {//gold coin
+        {ITEM_COIN_GOLD,1},
+        1,{
+            {ITEM_COIN_SILVER,1000}
+        },TILE_TYPE_NONE},
     {//workbench
         {ITEM_WORKBENCH,1},
         1,
@@ -714,6 +746,21 @@ const ITEMDATA ITEMS[ITEMNUM]={
         TILE_AIR,0,0,0,
         {'^',A_BOLD,0x0,CP_ITEM_COPPER_BOOTS},
         "Copper boots",EQUIPMENT_COPPER_BOOTS},
-
+    {
+        ITEM_COIN_COPPER,1000,ITEM_TYPE_COIN,
+        TILE_AIR,0,0,0,
+        {'0',A_BOLD,0x0,CP_ITEM_COIN_COPPER},
+        "Copper coin"},
+    {
+        ITEM_COIN_SILVER,1000,ITEM_TYPE_COIN,
+        TILE_AIR,0,0,0,
+        {'0',A_BOLD,0x0,CP_ITEM_COIN_SILVER},
+        "Silver coin"},
+    {
+        ITEM_COIN_GOLD,1000,ITEM_TYPE_COIN,
+        TILE_AIR,0,0,0,
+        {'0',A_BOLD,0x0,CP_ITEM_COIN_GOLD},
+        "Gold coin"},
+    
 };
 #endif

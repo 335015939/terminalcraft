@@ -62,7 +62,7 @@ COORDS spawnbat(){
         if(ENTITIES_IN_WORLD>10) return c;
     };
     if(rand()%30) return c;
-    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_BAT,3};
+    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_BAT,4+(rand()%2)};
     return c;
 };
 COORDS spawnzombie(){
@@ -73,7 +73,7 @@ COORDS spawnzombie(){
         if(getmaptiledata(c.x, c.y).fallthrough&&
         getmaptiledata(c.x, c.y+1).fallthrough) return c;
     };
-    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_ZOMBIE,10};
+    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_ZOMBIE,28+(rand()%4)};
     return c;
 };
 void ai_zombie(int x){
@@ -89,7 +89,7 @@ void ai_zombie(int x){
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
-        entityattack(5,"You got hit by zombie");
+        entityattack(12+(rand()%2),"You got hit by zombie");
         entityfall(&c);
         goto lbl_end;
     };
@@ -140,7 +140,7 @@ void ai_bat(int x){
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
-        entityattack(2,"You got hit by bat");
+        entityattack(4+(rand()%2),"You got hit by bat");
         entityfall(&c);
         goto lbl_end;
     };
@@ -180,7 +180,7 @@ COORDS spawnsnake(){
         (!(isnight())))
       return c;
     if(getmaptile(c.x, c.y).e.id) return c;
-    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,2};
+    getmaptile(c.x, c.y).e=(ENTITY){ENTITY_SNAKE,4};
     return c;
 };
 void ai_none(int x){
@@ -204,7 +204,7 @@ void ai_snake(int x){
     int movey=(c.y<player.c.y)-(c.y>player.c.y);
     if((c.x==player.c.x && (c.y<=(player.c.y+1)&&c.y>=(player.c.y-1))) || 
     (c.y==player.c.y && (c.x<=(player.c.x+1)&&c.x>=(player.c.x-1)))){
-        entityattack(1,"You got hit by snake");
+        entityattack(2,"You got hit by snake");
         entityfall(&c);
         goto lbl_end;
     };
@@ -242,5 +242,4 @@ void entities(){
             ENTITIES_IN_WORLD++;
         };
     };
-
 };

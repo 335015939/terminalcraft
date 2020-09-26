@@ -36,6 +36,10 @@ int main(){
             x=y=0;
             k=getch();
             switch(k){
+                case 't':
+                case 'T':
+                    showplayerstats();
+                    break;
                 case 'E':
                 case 'e':
                     equip();

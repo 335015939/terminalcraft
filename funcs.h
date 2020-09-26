@@ -13,7 +13,7 @@
 #define getmaptiledata(x,y) (TILES[getmapid(x,y)])
 #define getmaxhp() ((player.basemaxhp+player.maxhpplus)+((player.basemaxhp*player.maxhpmulti)/100))
 #define getregen() (player.baseregen+player.regenplus+((player.baseregen*player.regenmulti)/100))
-#define getdmg() (player.basedmg+player.dmgplus+((player.basedmg*player.dmgmulti)/100))
+#define getbasedmg() (player.basedmg+player.dmgplus+((player.basedmg*player.dmgmulti)/100))
 #define getdef() (player.basedef+player.defplus+((player.basedef*player.defmulti)/100))
 #define isinmap(x,y) (((x)>=0)&&((y)>=0)&&((x)<MAP_W)&&((y)<MAP_H))
 #define getinvitem(x,y) (player.i[(x)][(y)])
@@ -22,6 +22,7 @@
 #define tiledatatostationname(x) (tiledatatostationname((x).type))
 #define onscreen(z,t) (((z)>=player.c.x-38) && ((z)<=player.c.x+38) && ((t)>=player.c.y-10) && ((t)<=player.c.y+10))
 #define nearplayer(z,t) (((z)>=player.c.x-100) && ((z)<=player.c.x+100) && ((t)>=player.c.y-100) && ((t)<=player.c.y+100))
+void showplayerstats();
 void updateskycolor();
 char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst);
 char dropitem(int x,int y,ITEM item);
