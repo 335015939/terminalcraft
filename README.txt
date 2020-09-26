@@ -17,4 +17,5 @@ controls:
     k:interact with block
     / or \:drop item
     l:pick up item
-    e:open equip menu (may not yet be implemented)
+    e:open equip menu
+    t:open player stats
