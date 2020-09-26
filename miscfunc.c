@@ -57,18 +57,22 @@ char dropitems(DROPITEMDATA drops,COORDS c,char putininvfirst){
     return 1;
 };
 void die(){
-    if(player.hp<=0){
+    int k;
+    if(player.hp<1){
         player.lvl=1;
         player.exp=0;
         player.baseregen=0;
         player.basedef=0;
         player.basedmg=0;
-        player.basemaxhp=0;
+        player.basemaxhp=50;
+        player.hp=player.basemaxhp;
         gotospawn();
         clear();
         attr_set(0,0,NULL);
-        addstr("You died!\nPress any key to continue");
-        getch();
+        addstr("You died!\nPress [ENTER] or 'Q' to continue");
+        do{
+            k=getch();
+        }while(k!='\n'&&k!='q'&&k!='Q');
     };
 };
 void playerattack(){

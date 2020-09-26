@@ -59,6 +59,7 @@ void stuffperticknofall(){
     if(SETTINGS.debugmode){
         player.hp=getmaxhp();
     };
+    die();
     if(SETTINGS.autopickup){
         if(hasdroppeditem(player.c.x,player.c.y)){
             pickupitem(player.c.x, player.c.y);
