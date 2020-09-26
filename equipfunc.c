@@ -100,7 +100,7 @@ void drawattr(int y,int x){
         str="%s:%d";
     };
     if(values[x]){
-        mvprintw(CURRENT_ATTR_TO_DRAW+2,20,str,names[x],values[x]);
+        mvprintw(CURRENT_ATTR_TO_DRAW+2,25,str,names[x],values[x]);
         CURRENT_ATTR_TO_DRAW++;
     };
 };
