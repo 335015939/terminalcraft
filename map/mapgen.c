@@ -295,7 +295,6 @@ void mkcaves(){
     for(i=0;i<(MAP_W)/300;i++){
         mvprintw(0,0,"Generating caves:%d%% ",(25*i)/(MAP_W/300));
         refresh();
-        //getch();
         do{
             do{
                 x=rand()%MAP_W;
@@ -304,8 +303,8 @@ void mkcaves(){
         }while(getmapid(x, y)!=TILE_GRASS);
         mksinglecave((COORDS){x,y});
     };
-    for(;i<4*((MAP_W*MAP_H)/600);i++){
-        mvprintw(0,0,"Generating caves:%d%% ",(25*i)/(4*((MAP_W*MAP_H)/600)));
+    for(;i<4*((MAP_W*MAP_H)/20000);i++){
+        mvprintw(0,0,"Generating caves:%d%% ",(25*i)/(4*((MAP_W*MAP_H)/20000)));
         refresh();
         //getch();
         do{
