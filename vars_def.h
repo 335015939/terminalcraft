@@ -52,6 +52,26 @@ const EQUIPMENTDATA EQUIPMENT[]={
         BODY_FEET,0,1,
         0,0,0,0,
         0,1,0,0},
+    {
+        EQUIPMENT_IRON_HELMET,ITEM_IRON_HELMET,
+        BODY_HEAD,0,1,
+        0,0,0,0,
+        0,3,0,0},
+    {
+        EQUIPMENT_IRON_BREASTPLATE,ITEM_IRON_BREASTPLATE,
+        BODY_BODY,0,1,
+        0,0,0,0,
+        0,6,0,0},
+    {
+        EQUIPMENT_IRON_GREAVES,ITEM_IRON_GREAVES,
+        BODY_LEG,0,1,
+        0,0,0,0,
+        0,3,0,0},
+    {
+        EQUIPMENT_IRON_BOOTS,ITEM_IRON_BOOTS,
+        BODY_FEET,0,1,
+        0,0,0,0,
+        0,2,0,0},
     
 
 
@@ -182,13 +202,13 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
     {//wood pickaxe
         {ITEM_WOOD_PICKAXE,1},
         1,{
-            {ITEM_WOOD,6}
+            {ITEM_WOOD,10}
         },TILE_TYPE_WORKBENCH},
     {//copper pickaxe
         {ITEM_COPPER_PICKAXE,1},
         2,
         {
-            {ITEM_COPPER,5},
+            {ITEM_COPPER,8},
             {ITEM_WOOD,2}
         },
         TILE_TYPE_WORKBENCH},
@@ -196,61 +216,81 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
         {ITEM_IRON_PICKAXE,1},
         2,
         {
-            {ITEM_IRON,5},
+            {ITEM_IRON,8},
             {ITEM_WOOD,2}
         },
         TILE_TYPE_WORKBENCH},
     {//wood sword
         {ITEM_WOOD_SWORD,1},
         1,{
-            {ITEM_WOOD,6}
+            {ITEM_WOOD,12}
         },TILE_TYPE_WORKBENCH},
     {//copper sword
         {ITEM_COPPER_SWORD,1},
         2,{
-            {ITEM_COPPER,6},
+            {ITEM_COPPER,10},
             {ITEM_WOOD,2}
         },TILE_TYPE_WORKBENCH},
     {//iron sword
         {ITEM_IRON_SWORD,1},
         2,{
-            {ITEM_IRON,6},
+            {ITEM_IRON,10},
             {ITEM_WOOD,2}
         },TILE_TYPE_WORKBENCH},
     {//wood helmet
         {ITEM_WOOD_HELMET,1},
         1,{
-            {ITEM_WOOD,5}
+            {ITEM_WOOD,6}
         },TILE_TYPE_WORKBENCH},
     {//wood breastplate
         {ITEM_WOOD_BREASTEPLATE,1},
         1,{
-            {ITEM_WOOD,9}
+            {ITEM_WOOD,15}
         },TILE_TYPE_WORKBENCH},
     {//copper helm
         {ITEM_COPPER_HELMET,1},
         1,{
-            {ITEM_COPPER,5}
+            {ITEM_COPPER,6}
         },TILE_TYPE_WORKBENCH},
     {//copper breastplate
         {ITEM_COPPER_BREASTPLATE,1},
         1,{
-            {ITEM_COPPER,10}
+            {ITEM_COPPER,15}
         },TILE_TYPE_WORKBENCH},
     {//copper greaves
         {ITEM_COPPER_GREAVES,1},
         1,{
-            {ITEM_COPPER,8}
+            {ITEM_COPPER,10}
         },TILE_TYPE_WORKBENCH},
     {//copper boots
         {ITEM_COPPER_BOOTS,1},
         1,{
-            {ITEM_COPPER,4}
+            {ITEM_COPPER,6}
+        },TILE_TYPE_WORKBENCH},
+    {//iron helm
+        {ITEM_IRON_HELMET,1},
+        1,{
+            {ITEM_IRON,6}
+        },TILE_TYPE_WORKBENCH},
+    {//iron breastplate
+        {ITEM_IRON_BREASTPLATE,1},
+        1,{
+            {ITEM_IRON,15}
+        },TILE_TYPE_WORKBENCH},
+    {//iron greaves
+        {ITEM_IRON_GREAVES,1},
+        1,{
+            {ITEM_IRON,10}
+        },TILE_TYPE_WORKBENCH},
+    {//iron boots
+        {ITEM_IRON_BOOTS,1},
+        1,{
+            {ITEM_IRON,6}
         },TILE_TYPE_WORKBENCH},
     {//snakeskin cloak
         {ITEM_SNAKE_SKIN_CLOAK,1},
         1,{
-            {ITEM_SNAKE_SKIN,10}
+            {ITEM_SNAKE_SKIN,50}
         },TILE_TYPE_WORKBENCH}
 };
 const COLOR_PAIR_DEF MY_COLOR_PAIRS[COLOR_NUM]={
@@ -712,7 +752,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
         {'^',A_BOLD,0x0,CP_ITEM_WOOD_HELMET},
         "Wooden helmet",EQUIPMENT_WOOD_HEMLET},
     {
-        ITEM_SNAKE_SKIN,10,ITEM_TYPE_OTHER,
+        ITEM_SNAKE_SKIN,9,ITEM_TYPE_OTHER,
         TILE_AIR,0,0,0,
         {'S',A_BOLD,0x0,CP_ITEM_SNAKE_SKIN},
         "Snakeskin"},
@@ -761,6 +801,25 @@ const ITEMDATA ITEMS[ITEMNUM]={
         TILE_AIR,0,0,0,
         {'0',A_BOLD,0x0,CP_ITEM_COIN_GOLD},
         "Gold coin"},
-    
+    {
+        ITEM_IRON_HELMET,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'^',A_BOLD,0x0,CP_ITEM_IRON},
+        "Iron helmet",EQUIPMENT_IRON_HELMET},
+    {
+        ITEM_IRON_BREASTPLATE,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'%',A_BOLD,0x0,CP_ITEM_IRON},
+        "Iron breastplate",EQUIPMENT_IRON_BREASTPLATE},
+    {
+        ITEM_IRON_GREAVES,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'!',A_BOLD,0x0,CP_ITEM_IRON},
+        "Iron greaves",EQUIPMENT_IRON_GREAVES},
+    {
+        ITEM_IRON_BOOTS,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'"',A_BOLD,0x0,CP_ITEM_IRON},
+        "Iron boots",EQUIPMENT_IRON_BOOTS},
 };
 #endif
