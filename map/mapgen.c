@@ -130,15 +130,38 @@ void mksinglestructure(const COORDS c,const int h,const int w){
         putmapid(c.x+w-1, c.y+j,TILE_WOOD);
     };
     if(c.y<((MAP_H)/4)+20){//decide what to put into chest
-        chestcontent=(FILLCHESTCONTENT[]){
-            {ITEM_DIRT,20,1,5}
+        chestcontent=(FILLCHESTCONTENT[10]){
+            {ITEM_DIRT,20,1,5},
+            {ITEM_WOOD,80,3,10},
+            {ITEM_WOOD_BREASTPLATE,20,1,1},
+            {ITEM_WOOD_PICKAXE,45,1,1},
+            {ITEM_COPPER_PICKAXE,30,1,1},
+            {ITEM_COPPER_SWORD,30,1,1},
+            {ITEM_WOOD_SWORD,50,1,1},
+            {ITEM_COPPER,40,1,4},
+            {ITEM_IRON,30,2,3},
+            {ITEM_MAGIC_MIRROR,10,1,1}
         };
-        contentnum=1;
+        contentnum=10;
     }else{
-        chestcontent=(FILLCHESTCONTENT[]){
-            {ITEM_STONE,20,1,5}
+        chestcontent=(FILLCHESTCONTENT[15]){
+            {ITEM_STONE,60,1,5},
+            {ITEM_COPPER,60,1,12},
+            {ITEM_IRON,63,1,16},
+            {ITEM_SILVER,37,1,10},
+            {ITEM_GOLD,30,1,7},
+            {ITEM_DIAMOND_ORE,9,1,1},
+            {ITEM_LADDER,90,3,32},
+            {ITEM_WOOD,60,1,18},
+            {ITEM_COPPER_ORE,75,2,20},
+            {ITEM_IRON_ORE,62,2,10},
+            {ITEM_SILVER_ORE,38,1,8},
+            {ITEM_GOLD_ORE,34,1,6},
+            {ITEM_IRON_PICKAXE,45,1,1},
+            {ITEM_COPPER_PICKAXE,55,1,1},
+            {ITEM_MAGIC_MIRROR,24,1,1},
         };
-        contentnum=1;
+        contentnum=15;
     };
 
     mksinglechest((COORDS){c.x+(w-1)/2,c.y+h-2},chestcontent,contentnum);//create chest
