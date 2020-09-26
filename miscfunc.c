@@ -61,7 +61,7 @@ void die(){
     if(player.hp<1){
         player.lvl=1;
         player.exp=0;
-        player.baseregen=0;
+        player.baseregen=5;
         player.basedef=0;
         player.basedmg=0;
         player.basemaxhp=50;
