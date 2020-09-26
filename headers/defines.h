@@ -1,7 +1,6 @@
 #ifndef DEFINES_H_INCLUDED
 #define DEFINES_H_INCLUDED
 #define COLOR_NUM 60
-//#define MAX_ENTITY ((MAP_W*MAP_H)/3000)
 #define MAX_ENTITY 50
 #define ENTITY_NUM 4
 #define TILE_NUM 35

@@ -19,3 +19,6 @@ controls:
     l:pick up item
     e:open equip menu
     t:open player stats
+
+
+tested and compiled and coded with Gitpod

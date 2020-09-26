@@ -1,5 +1,6 @@
 #ifndef FUNCS_H_INCLUDED
 #define FUNCS_H_INCLUDED
+#include "structs.h"
 #define mvdtile(y,x,t) move((y),(x));dtile(t)
 #define xytocoords(x,y) ((COORDS){(x),(y)})
 #define dtiledata(z) dtile((z).t)
@@ -10,6 +11,7 @@
 #define getmaptile(x,y) (WORLD.map[(x)+(MAP_W*(y))])
 #define putmapid(x,y,z) (WORLD.map[(x)+(MAP_W*(y))].id=(z))
 #define getmaptiledata(x,y) (TILES[getmapid(x,y)])
+#define putmapcheckid(x,y,z) if isinmap((x),(y)) {putmapid((x),(y),(z));}
 #define getexpneeded() ((int)(100*pow(player.lvl,1.3)))
 #define getmaxhp() ((player.basemaxhp+player.maxhpplus)+((player.basemaxhp*player.maxhpmulti)/100))
 #define getregen() (player.baseregen+player.regenplus+((player.baseregen*player.regenmulti)/100))
