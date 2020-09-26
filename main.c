@@ -125,6 +125,15 @@ int main(){
                             gotospawn();
                             stuffpertick();
                             break;
+                        case ITEM_TYPE_FOOD:
+                            if(player.hp<getmaxhp()){
+                                player.hp+=gethelditemdata().damage;
+                                if(player.hp>getmaxhp()){
+                                    player.hp=getmaxhp();
+                                };
+                                stuffpertick();
+                            };
+                            break;
                     };
                     break;
                 case 'i':
@@ -155,11 +164,6 @@ int main(){
         if(player.hp<=0){
             die();
             goto lbl_start;
-        };
-        if(SETTINGS.autopickup){
-            if(hasdroppeditem(player.c.x,player.c.y)){
-                pickupitem(player.c.x, player.c.y);
-            };
         };
         tick=TICK;
     };

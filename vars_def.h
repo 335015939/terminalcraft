@@ -573,7 +573,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
         "Wood"},
     {
         ITEM_APPLE,99,ITEM_TYPE_FOOD,
-        TILE_AIR,0,0,0,
+        TILE_AIR,0,0,5,
         {'o',A_BOLD,0x0,CP_ITEM_APPLE},
         "Apple"},
     {
