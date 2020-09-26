@@ -1,6 +1,5 @@
 #include "../header.h"
 #include <string.h>
-
 struct {
     int sealvl;
 } world;
@@ -10,6 +9,43 @@ typedef struct {
     int low;
     int high;
 } FILLCHESTCONTENT;
+int findnextgrass(int x){
+    int y;
+    for(y=MAP_H;y>=0;y--){
+        if(isinmap(x,y)){
+            if(getmapid(x, y)==TILE_GRASS) break;
+        };
+    };
+    return y;
+};
+void gentrees(){
+    int x,y;
+    const int treetypes[]={TREE_OAK,TREE_PINE};
+    clear();
+    for(x=0;x<MAP_W;x++){
+        mvprintw(0,0,"Generating trees...%d%%",(100*x)/MAP_W);
+        refresh();
+        if((y=findnextgrass(x))==-1) continue;
+        if(!(rand()%5)){
+            mktree((COORDS){x,y},treetypes[rand()%2]);
+        };
+    };
+};
+void smoothworld(){
+    clear();
+    int x;
+    for(x=1;x<MAP_W;x++){
+        mvprintw(0,0,"Smoothing world...%d%%",(100*x)/MAP_W);
+        refresh();
+        /*
+        copy chunk of grass placement data starting from x to buffer
+        check if dramatic changes in grass placement
+        check if horizontal blocks
+        some stuff goes down
+        update map based on whats in buffer
+        */
+    };
+};
 void mksinglechest(COORDS c,const FILLCHESTCONTENT* content,int num){
     int i,j,which;
     if(!isinmap(c.x,c.y)) return;
@@ -334,7 +370,6 @@ void mkores(){
         mkorevein(c,20,id);
     };
 };
-
 void mktree(COORDS c,int type){
     int height,trunk,leaf,i=0,j,x,y,leafheight;
     if(!isinmap(c.x,c.y+1))return;
@@ -378,7 +413,6 @@ void mktree(COORDS c,int type){
         };
     };
 };
-
 void mkunder(COORDS c,int dirt_len){
     int l=c.y+dirt_len;
     c.y++;
@@ -529,6 +563,8 @@ void mapgen(){
     mkcaves();
     mkstructures();
     mkchests();
+    smoothworld();
+    gentrees();
     x=MAP_W/2;
     for(y=0;isinmap(x,y+1);y++){
       if (!TILES[getmapid(x, y+1)].passable)
