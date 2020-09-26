@@ -1,1 +1,1 @@
-clang ./equipfunc.c ./chest.c ./stuffpertick.c ./main.c ./craft.c ./init.c ./draw.c ./mapgen.c ./miscfunc.c ./mapfunc.c ./invfunc.c ./saveload.c ./titlescr.c ./entities.c -o./terminalcraft -lncurses -Wall -lm
+clang ./inventory/equipfunc.c ./inventory/chest.c ./maingame/stuffpertick.c ./maingame/main.c ./inventory/craft.c ./misc/init.c ./misc/draw.c ./map/mapgen.c ./misc/miscfunc.c ./map/mapfunc.c ./inventory/invfunc.c ./misc/saveload.c ./misc/titlescr.c ./maingame/entities.c -o./terminalcraft -lncurses -Wall -lm

@@ -752,7 +752,7 @@ const ITEMDATA ITEMS[ITEMNUM]={
         {'^',A_BOLD,0x0,CP_ITEM_WOOD_HELMET},
         "Wooden helmet",EQUIPMENT_WOOD_HEMLET},
     {
-        ITEM_SNAKE_SKIN,9,ITEM_TYPE_OTHER,
+        ITEM_SNAKE_SKIN,99,ITEM_TYPE_OTHER,
         TILE_AIR,0,0,0,
         {'S',A_BOLD,0x0,CP_ITEM_SNAKE_SKIN},
         "Snakeskin"},

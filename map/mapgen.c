@@ -1,9 +1,5 @@
-#include "enum.h"
-#include "funcs.h"
-#include "header.h"
-#include "vars.h"
+#include "../header.h"
 #include <string.h>
-
 
 struct {
     int sealvl;

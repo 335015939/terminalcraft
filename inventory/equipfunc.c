@@ -1,8 +1,4 @@
-#include "enum.h"
-#include "funcs.h"
-#include "header.h"
-#include "structs.h"
-#include "vars.h"
+#include "../header.h"
 #define BODY_PARTS 10
 const struct{
     const char *name;

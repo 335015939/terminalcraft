@@ -1,10 +1,4 @@
-#include "defines.h"
-#include "enum.h"
-#include "funcs.h"
-#include "header.h"
-#include "structs.h"
-#include "vars.h"
-#include <curses.h>
+#include "../header.h"
 int CURRENT_STATION=TILE_TYPE_NONE;
 void recipiescan(){
     int i=0,j,yes;

@@ -1,6 +1,4 @@
-#include "header.h"
-#include "vars.h"
-#include <curses.h>
+#include "../header.h"
 int CHOSEN_WORLD=0;
 int CHOSEN_PLAYER=0;
 #define OP_TYPE_INT 1

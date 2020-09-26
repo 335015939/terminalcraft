@@ -1,7 +1,4 @@
-#include "funcs.h"
-#include "header.h"
-#include "vars.h"
-#include <curses.h>
+#include "../header.h"
 #include <string.h>
 void save(){
     clear();

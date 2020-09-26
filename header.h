@@ -6,9 +6,9 @@
 #include <math.h>
 #define HEADER_H_INCLUDED
 
-#include "defines.h"
-#include "structs.h"
-#include "enum.h"
-#include "funcs.h"
-#include "vars.h"
+#include "headers/defines.h"
+#include "headers/structs.h"
+#include "headers/enum.h"
+#include "headers/funcs.h"
+#include "headers/vars.h"
 #endif

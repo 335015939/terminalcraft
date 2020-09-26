@@ -1,6 +1,4 @@
-#include "funcs.h"
-#include "header.h"
-#include "vars.h"
+#include "../header.h"
 void lvlup(){
     struct{
         int *dest;

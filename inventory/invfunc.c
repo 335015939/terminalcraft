@@ -1,8 +1,4 @@
-#include "enum.h"
-#include "funcs.h"
-#include "header.h"
-#include "structs.h"
-#include <curses.h>
+#include "../header.h"
 char hasdroppeditem(int x,int y){
     int i;
     for(i=0;i<5;i++){

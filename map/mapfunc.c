@@ -1,7 +1,4 @@
-#include "defines.h"
-#include "funcs.h"
-#include "header.h"
-#include "vars.h"
+#include "../header.h"
 
 char placeblock(){
     int x=player.facingx+player.c.x,y=player.facingy+player.c.y;

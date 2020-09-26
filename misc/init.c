@@ -1,6 +1,4 @@
-#include "header.h"
-#include "vars.h"
-#include <curses.h>
+#include "../header.h"
 
 void _myexit(){
     free(MAP);

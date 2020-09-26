@@ -1,9 +1,5 @@
-#include "enum.h"
-#include "funcs.h"
-#include "header.h"
-#include "vars.h"
-#include "vars_def.h"
-#include <curses.h>
+#include "../header.h"
+#include "../headers/vars_def.h"
 
 //MAPTILE *map=NULL;
 _SETTINGS SETTINGS={

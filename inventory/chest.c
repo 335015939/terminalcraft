@@ -1,6 +1,4 @@
-#include "header.h"
-#include <string.h>
-#include <curses.h>
+#include "../header.h"
 #define ditem(x) dtile(ITEMS[(x).id].t)
 ITEM (*cheststorage)[10][10]=NULL;
 ITEM getchestitem(COORDS c){

@@ -1,8 +1,4 @@
-#include "defines.h"
-#include "enum.h"
-#include "funcs.h"
-#include "header.h"
-#include "vars.h"
+#include "../header.h"
 #define entity_none ((ENTITY){})
 COORDS *entityxy=NULL;
 void entityattack(int dmg,char *entitymsg){

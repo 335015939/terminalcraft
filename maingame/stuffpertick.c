@@ -1,7 +1,4 @@
-#include "enum.h"
-#include "funcs.h"
-#include "header.h"
-#include "vars.h"
+#include "../header.h"
 char scanfortrunk(int x,int y){
     int i,j;
     for(i=0;i<5;i++){

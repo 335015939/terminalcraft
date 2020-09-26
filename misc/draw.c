@@ -1,5 +1,4 @@
-#include "funcs.h"
-#include "header.h"
+#include "../header.h"
 
 void dtile(TILE t){
     attr_set(t.a,t.cp,NULL);
