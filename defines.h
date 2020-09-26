@@ -11,7 +11,7 @@
 #define SKYCOLOR SETTINGS.skycolor
 #define ERR_OUT_OF_MEM 3950
 #define MAP (WORLD.map)
-#define ITEMNUM 35
+#define ITEMNUM 50
 #define CRAFT_RECIPIE_NUM 30
 #define ENTITIES_IN_WORLD (WORLD.entitiesinworld)
 #endif

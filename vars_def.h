@@ -27,6 +27,33 @@ const EQUIPMENTDATA EQUIPMENT[]={
         BODY_CLOAK,0,1,
         5,5,5,5,
         0,1,0,0},
+    {
+        EQUIPMENT_BATWINGS,0,
+        BODY_BACK,1,0,
+        1,0,10,0,
+        0,0,1,0},
+    {
+        EQUIPMENT_COPPER_HELMET,ITEM_COPPER_HELMET,
+        BODY_HEAD,0,1,
+        0,0,0,0,
+        0,2,0,0},
+    {
+        EQUIPMENT_COPPER_BREASTPLATE,ITEM_COPPER_BREASTPLATE,
+        BODY_BODY,0,1,
+        0,0,0,0,
+        0,4,0,0},
+    {
+        EQUIPMENT_COPPER_GREAVES,ITEM_COPPER_GREAVES,
+        BODY_LEG,0,1,
+        0,0,0,0,
+        0,2,0,0},
+    {
+        EQUIPMENT_COPPER_BOOTS,ITEM_COPPER_BOOTS,
+        BODY_FEET,0,1,
+        0,0,0,0,
+        0,1,0,0},
+    
+
 
 };
 const ENTITY_DEF ENTITIES[ENTITY_NUM]={
@@ -167,6 +194,26 @@ const _CRAFT_RECIPIE CRAFT_RECIPIE[CRAFT_RECIPIE_NUM]={
         {ITEM_WOOD_BREASTEPLATE,1},
         1,{
             {ITEM_WOOD,9}
+        },TILE_TYPE_WORKBENCH},
+    {//copper helm
+        {ITEM_COPPER_HELMET,1},
+        1,{
+            {ITEM_COPPER,5}
+        },TILE_TYPE_WORKBENCH},
+    {//copper breastplate
+        {ITEM_COPPER_BREASTPLATE,1},
+        1,{
+            {ITEM_COPPER,10}
+        },TILE_TYPE_WORKBENCH},
+    {//copper greaves
+        {ITEM_COPPER_GREAVES,1},
+        1,{
+            {ITEM_COPPER,8}
+        },TILE_TYPE_WORKBENCH},
+    {//copper boots
+        {ITEM_COPPER_BOOTS,1},
+        1,{
+            {ITEM_COPPER,4}
         },TILE_TYPE_WORKBENCH},
     {//snakeskin cloak
         {ITEM_SNAKE_SKIN_CLOAK,1},
@@ -647,6 +694,26 @@ const ITEMDATA ITEMS[ITEMNUM]={
         TILE_AIR,0,0,0,
         {'%',A_BOLD,0x0,CP_ITEM_WOOD_BREASTPLATE},
         "Wood breastplate",EQUIPMENT_WOOD_BREASTPLATE},
+    {
+        ITEM_COPPER_HELMET,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'^',A_BOLD,0x0,CP_ITEM_COPPER_HELMET},
+        "Copper helmet",EQUIPMENT_COPPER_HELMET},
+    {
+        ITEM_COPPER_BREASTPLATE,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'^',A_BOLD,0x0,CP_ITEM_COPPER_BREASTPLATE},
+        "Copper breastplate",EQUIPMENT_COPPER_BREASTPLATE},
+    {
+        ITEM_COPPER_GREAVES,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'^',A_BOLD,0x0,CP_ITEM_COPPER_GREAVES},
+        "Copper greaves",EQUIPMENT_COPPER_GREAVES},
+    {
+        ITEM_COPPER_BOOTS,1,ITEM_TYPE_EQUIPABLE,
+        TILE_AIR,0,0,0,
+        {'^',A_BOLD,0x0,CP_ITEM_COPPER_BOOTS},
+        "Copper boots",EQUIPMENT_COPPER_BOOTS},
 
 };
 #endif
